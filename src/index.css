@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Palette teal/ambre pour le mode clair */
+    --background: 180 33% 98%;
+    --foreground: 200 50% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 200 50% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 50% 15%;
+    --primary: 184 85% 43%;
+    --primary-foreground: 180 20% 99%;
+    --secondary: 35 92% 95%;
+    --secondary-foreground: 35 80% 40%;
+    --muted: 180 20% 95%;
+    --muted-foreground: 200 30% 40%;
+    --accent: 35 92% 51%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 185 50% 90%;
+    --input: 185 50% 90%;
+    --ring: 184 85% 43%;
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    /* Palette indigo/rose pour le mode sombre */
+    --background: 230 25% 10%;
+    --foreground: 220 10% 95%;
+    --card: 230 25% 13%;
+    --card-foreground: 220 10% 95%;
+    --popover: 230 25% 13%;
+    --popover-foreground: 220 10% 95%;
+    --primary: 240 84% 67%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 30% 20%;
+    --secondary-foreground: 220 10% 95%;
+    --muted: 240 30% 20%;
+    --muted-foreground: 240 10% 75%;
+    --accent: 330 79% 62%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 30% 30%;
+    --input: 240 30% 30%;
+    --ring: 240 84% 67%;
+  }
+}
+
+html, body {
+  transition: background-color 0.5s ease, color 0.5s ease;
+  scroll-behavior: smooth;
+}
+
+/* Transition styles for theme switching */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color;
+  transition-timing-function: ease;
+  transition-duration: 250ms;
+}
+
+/* Classes for card-like elements across themes */
+.card-base {
+  @apply bg-white dark:bg-slate-900 border border-teal-200 dark:border-indigo-900 rounded-lg;
+  @apply shadow-sm;
+}
+
+.text-base {
+  @apply text-slate-900 dark:text-slate-100;
+}
+
+.text-subtle {
+  @apply text-slate-700 dark:text-slate-300;
+}
+
+/* Utility classes for new color scheme */
+.text-accent {
+  @apply text-amber-500 dark:text-rose-400;
+}
+
+.bg-accent {
+  @apply bg-amber-500 dark:bg-rose-500;
+}
+
+.border-accent {
+  @apply border-amber-500 dark:border-rose-500;
+}
+
+.hover-accent {
+  @apply hover:text-amber-600 dark:hover:text-rose-500;
+}
+
+/* Button styles using new colors */
+.btn-primary {
+  @apply bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-md transition-colors dark:bg-indigo-500 dark:hover:bg-indigo-600;
+}
+
+.btn-secondary {
+  @apply bg-amber-400 hover:bg-amber-500 text-white px-4 py-2 rounded-md transition-colors dark:bg-rose-500 dark:hover:bg-rose-600;
+}
+
+.btn-outline {
+  @apply border border-teal-500 text-teal-600 hover:bg-teal-50 px-4 py-2 rounded-md transition-colors 
+         dark:border-indigo-400 dark:text-indigo-300 dark:hover:bg-indigo-950;
+}
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(10px, 10px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}

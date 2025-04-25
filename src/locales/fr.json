@@ -1,0 +1,33 @@
+{
+  "hero": {
+    "title": "Développement Créatif avec des Animations Interactives",
+    "subtitle": "Interface moderne et personnalisable avec des animations fluides.",
+    "skills": "Expertise en",
+    "cta": {
+      "primary": "Explorer les exemples",
+      "secondary": "Voir le code source"
+    },
+    "animationControls": {
+      "title": "Changer d'animation",
+      "particles": "Particules",
+      "matrix": "Matrix",
+      "waves": "Vagues",
+      "stars": "Étoiles",
+      "showCode": "Voir le code de l'animation de fond",
+      "hideCode": "Masquer le code d'animation"
+    }
+  },
+  "theme": {
+    "toggle": "Changer de thème",
+    "light": "Mode clair",
+    "dark": "Mode sombre"
+  },
+  "fullStack": "Full Stack",
+  "interactiveBackground": "Fond Interactif",
+  "particleSystem": "Système de particules animées en arrière-plan",
+  "codeDemos": "Démos de Code",
+  "reactExamples": "Exemples de code React interactifs",
+  "preview": "Aperçu :",
+  "techStack": "React + TypeScript",
+  "nextExample": "Exemple suivant"
+} 
