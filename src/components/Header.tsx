@@ -63,7 +63,7 @@ export function Header() {
               </button>
               
               <a 
-                href="https://github.com/yourusername" 
+                href="https://github.com/HeedzZ" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-full bg-white/90 hover:bg-emerald-50 dark:bg-white/5 dark:hover:bg-blue-900/20 text-gray-700 hover:text-emerald-800 dark:text-gray-300 dark:hover:text-blue-300 transition-all border border-gray-300 dark:border-white/10 shadow-sm"
@@ -72,7 +72,7 @@ export function Header() {
                 <Github className="w-5 h-5" />
               </a>
               <a 
-                href="https://linkedin.com/in/yourusername" 
+                href="https://www.linkedin.com/in/yann-mostowski-485833271/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-full bg-white/90 hover:bg-emerald-50 dark:bg-white/5 dark:hover:bg-blue-900/20 text-gray-700 hover:text-emerald-800 dark:text-gray-300 dark:hover:text-blue-300 transition-all border border-gray-300 dark:border-white/10 shadow-sm"
@@ -81,9 +81,10 @@ export function Header() {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a 
-                href="mailto:your.email@example.com"
+                href="#contact"
+                onClick={() => setIsMenuOpen(false)}
                 className="p-2.5 rounded-full bg-white/90 hover:bg-emerald-50 dark:bg-white/5 dark:hover:bg-blue-900/20 text-gray-700 hover:text-emerald-800 dark:text-gray-300 dark:hover:text-blue-300 transition-all border border-gray-300 dark:border-white/10 shadow-sm"
-                aria-label="Email"
+                aria-label="Contact"
               >
                 <Mail className="w-5 h-5" />
               </a>

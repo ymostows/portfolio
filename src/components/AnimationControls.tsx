@@ -8,7 +8,7 @@ interface AnimationControlsProps {
 }
 
 export function AnimationControls({ onSelectAnimation }: AnimationControlsProps) {
-  const [selectedAnimation, setSelectedAnimation] = useState<AnimationType>('flow');
+  const [selectedAnimation, setSelectedAnimation] = useState<AnimationType>('squares');
   const { t } = useLanguage();
 
   const animations: {
@@ -17,8 +17,8 @@ export function AnimationControls({ onSelectAnimation }: AnimationControlsProps)
     icon: React.ReactNode;
   }[] = [
     { 
-      type: 'flow', 
-      name: 'Flow',
+      type: 'squares', 
+      name: 'Carrés',
       icon: <Waves className="w-4 h-4" />
     },
     { 
@@ -28,12 +28,12 @@ export function AnimationControls({ onSelectAnimation }: AnimationControlsProps)
     },
     { 
       type: 'waves', 
-      name: 'Waves',
+      name: 'Vagues',
       icon: <Waves className="w-4 h-4" />
     },
     { 
       type: 'stars', 
-      name: 'Stars',
+      name: 'Particules',
       icon: <Sparkles className="w-4 h-4" />
     }
   ];

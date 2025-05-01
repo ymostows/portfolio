@@ -24,11 +24,11 @@ const skills: SkillCategory[] = [
     key: 'frontEnd',
     icon: <Code className="w-5 h-5 text-white" />,
     techs: [
-      { name: "TypeScript", experience: "I built a web app using it.", level: 2 },
-      { name: "JavaScript", experience: "I mostly use it on the backend with Node.js and Next.js, but I know the language.", level: 2 },
-      { name: "React", experience: "All my recent projects, including this portfolio, are built with it.", level: 3 },
-      { name: "HTML/CSS", experience: "I learned it in college and still apply these concepts today.", level: 3 },
-      { name: "TailwindCSS", experience: "I use it in all my web projects and find it very useful.", level: 3 },      
+      { name: "TypeScript", experience: "J'ai construit une application web avec cette technologie.", level: 2 },
+      { name: "JavaScript", experience: "Je l'utilise principalement avec Node.js et Next.js, mais je connais bien le langage.", level: 2 },
+      { name: "React", experience: "Tous mes projets récents, y compris ce portfolio, sont construits avec.", level: 3 },
+      { name: "HTML/CSS", experience: "Je l'ai appris à l'école et j'applique ces concepts quotidiennement.", level: 3 },
+      { name: "TailwindCSS", experience: "Je l'utilise dans tous mes projets web et le trouve très utile.", level: 3 },      
     ],
     lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
     darkGradient: "from-blue-700 to-indigo-800",
@@ -39,9 +39,9 @@ const skills: SkillCategory[] = [
     key: 'backEnd',
     icon: <Server className="w-5 h-5 text-white" />,
     techs: [
-      { name: "Node.js", experience: "I've built a web app using it.", level: 2 },
-      { name: "Next.js", experience: "I use it for all my web projects and find it very useful.", level: 2 },
-      { name: "Python", experience: "I've learned it in college and i've done a lot of projects with it but nothing related to web development.", level: 3 }
+      { name: "Node.js", experience: "J'ai construit une application web avec cette technologie.", level: 2 },
+      { name: "Next.js", experience: "Je l'utilise pour tous mes projets web et le trouve très utile.", level: 2 },
+      { name: "Python", experience: "Je l'ai appris à l'école et j'ai fait beaucoup de projets avec, mais rien lié au développement web.", level: 3 }
     ],
     lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
     darkGradient: "from-blue-700 to-indigo-800",
@@ -52,8 +52,8 @@ const skills: SkillCategory[] = [
     key: 'lowLevelLanguages',
     icon: <Cpu className="w-5 h-5 text-white" />,
     techs: [
-      { name: "C", experience: "It's the first language we learn at 42 school and there is a lot of projects that use it.", level: 3 },
-      { name: "C++", experience: "It's the second language we learn at 42 school and there is a lot of projects that use it.", level: 3 }
+      { name: "C", experience: "C'est le premier langage que nous apprenons à l'école 42 et il y a beaucoup de projets qui l'utilisent.", level: 3 },
+      { name: "C++", experience: "C'est le deuxième langage que nous apprenons à l'école 42 et il y a beaucoup de projets qui l'utilisent.", level: 3 }
     ],
     lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
     darkGradient: "from-blue-700 to-indigo-800",
@@ -64,9 +64,9 @@ const skills: SkillCategory[] = [
     key: 'devOps',
     icon: <Layers className="w-5 h-5 text-white" />,
     techs: [
-      { name: "Docker", experience: "Used in 2 projects and i really like it.", level: 2 },
-      { name: "Git", experience: "Since i'm at 42 school, i use it for all my projects.", level: 3 },
-      { name: "Linux", experience: "I like this OS and i use it a lot.", level: 3 }
+      { name: "Docker", experience: "Utilisé dans 2 projets et je l'apprécie beaucoup.", level: 2 },
+      { name: "Git", experience: "Depuis que je suis à l'école 42, je l'utilise pour tous mes projets.", level: 3 },
+      { name: "Linux", experience: "J'aime ce système d'exploitation et je l'utilise beaucoup.", level: 3 }
     ],
     lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
     darkGradient: "from-blue-700 to-indigo-800",
@@ -77,8 +77,8 @@ const skills: SkillCategory[] = [
     key: 'databases',
     icon: <Database className="w-5 h-5 text-white" />,
     techs: [
-      { name: "SQLite", experience: "Used in a lot of my projects.", level: 2 },
-      { name: "MariaDB", experience: "Used in 1 project.", level: 1 }
+      { name: "SQLite", experience: "Utilisé dans beaucoup de mes projets.", level: 2 },
+      { name: "MariaDB", experience: "Utilisé dans 1 projet.", level: 1 }
     ],
     lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
     darkGradient: "from-blue-700 to-indigo-800",
@@ -89,8 +89,8 @@ const skills: SkillCategory[] = [
     key: 'tools',
     icon: <Terminal className="w-5 h-5 text-white" />,
     techs: [
-      { name: "Bash", experience: "I use it for all my projects.", level: 3 },
-      { name: "n8n", experience: "I've used it a few times recently in my web projects.", level: 1 }
+      { name: "Bash", experience: "Je l'utilise pour tous mes projets.", level: 3 },
+      { name: "n8n", experience: "Je l'ai utilisé quelques fois récemment dans mes projets web.", level: 1 }
     ],
     lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
     darkGradient: "from-blue-700 to-indigo-800",
@@ -375,7 +375,7 @@ export function About() {
               <div className={`mt-6 pt-5 border-t ${isDark ? 'border-gray-700/50' : 'border-gray-200'}`}>
                 <div className={`text-sm font-medium ${isDark ? 'text-blue-400' : 'text-emerald-600'} mb-2`}>Objectifs professionnels</div>
                 <p className={`text-xs ${isDark ? 'text-white/80' : 'text-gray-600'}`}>
-                  Développer mes compétences en développement full-stack et participer à des projets innovants.
+                  Développer mes compétences en développement full-stack, être polyvalent et m'adapter à des nouvelles technologies puis par la suite me spécialiser dans un domaine.
                 </p>
               </div>
             </div>
@@ -397,14 +397,22 @@ export function About() {
         <div className="mb-8">
           <AnimatedElement>
             {/* Conteneur principal */}
-            <div className="rounded-xl overflow-hidden shadow-lg">
+            <div className={`rounded-xl overflow-hidden shadow-lg ${
+              isDark 
+                ? 'bg-gray-900/50 border border-gray-800/50 backdrop-blur-sm'
+                : 'bg-white/50 border border-gray-200/50 backdrop-blur-sm'
+            }`}>
               {/* Barre de navigation des catégories */}
-              <div className={`flex flex-wrap ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border rounded-t-xl p-1.5`}>
+              <div className={`flex flex-wrap ${
+                isDark 
+                  ? 'bg-gray-800/80 border-gray-700/50'
+                  : 'bg-white/80 border-gray-200/50'
+              } border rounded-t-xl p-1.5`}>
                 {skills.map((skill) => {
                   const isSelected = expandedCategory === skill.key;
                   return (
                     <button
-              key={skill.key} 
+                      key={skill.key} 
                       ref={el => categoryRefs.current[skill.key] = el}
                       className={`flex items-center gap-2 px-4 py-2.5 rounded-lg m-1 transition-all ${
                         isSelected
@@ -412,8 +420,8 @@ export function About() {
                             ? `bg-gradient-to-r ${skill.darkGradient} text-white shadow-md` 
                             : `bg-gradient-to-r ${skill.lightGradient} text-white shadow-md`
                           : isDark 
-                            ? 'hover:bg-gray-700 text-gray-300'
-                            : 'hover:bg-gray-100 text-gray-700'
+                            ? 'hover:bg-gray-700/50 text-gray-300'
+                            : 'hover:bg-gray-100/50 text-gray-700'
                       }`}
                       onClick={() => toggleCategory(skill.key)}
                     >
@@ -438,15 +446,11 @@ export function About() {
               {/* Zone de contenu */}
               <div 
                 ref={contentRef}
-                className={`border border-t-0 ${isDark ? 'border-gray-700' : 'border-gray-200'} rounded-b-xl overflow-hidden ${
-                  expandedCategory 
-                    ? isDark 
-                      ? 'bg-gradient-to-br from-gray-800 to-gray-900'
-                      : 'bg-gradient-to-br from-white to-gray-100'
-                    : isDark
-                      ? 'bg-gray-800'
-                      : 'bg-white'
-                }`}
+                className={`border border-t-0 ${
+                  isDark 
+                    ? 'border-gray-800/50 bg-gray-900/30'
+                    : 'border-gray-200/50 bg-white/30'
+                } rounded-b-xl overflow-hidden backdrop-blur-sm`}
               >
                 {expandedCategory && selectedCategory ? (
                   <div className="p-6 md:p-8">
@@ -500,37 +504,64 @@ export function About() {
                             </div>
                             <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} mb-4`}>{tech.experience}</p>
                             
-                            {/* Barre de progression avec contexte */}
+                            {/* Description de l'expérience */}
                             <div className="space-y-2">
-                              <div className="flex justify-between items-center text-xs">
-                                <span className={`${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Niveau de maîtrise</span>
-                                <span className={`font-medium ${
-                                  isDark 
-                                    ? 'text-blue-300' 
-                                    : 'text-emerald-600'
-                                }`}>
-                                  {Math.round((tech.level / 5) * 100)}%
-                                </span>
-                              </div>
-                              <div className={`relative h-2 w-full ${isDark ? 'bg-gray-700' : 'bg-gray-200'} rounded-full overflow-hidden`}>
-                                <div 
-                                  className={`absolute top-0 left-0 h-full rounded-full ${
-                                    isDark 
-                                      ? `bg-gradient-to-r ${selectedCategory.darkGradient}` 
-                                      : `bg-gradient-to-r ${selectedCategory.lightGradient}`
-                                  }`}
-                                  style={{ 
-                                    width: `${(tech.level / 5) * 100}%`,
-                                    animation: `growWidth 1.5s cubic-bezier(0.26, 0.86, 0.44, 0.985) forwards ${0.3 + i * 0.1}s`,
-                                  }}
-                                />
-                              </div>
-                              
-                              {/* Échelle de compétence */}
-                              <div className="flex justify-between pt-1 px-1">
-                                <span className={`text-[10px] ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Débutant</span>
-                                <span className={`text-[10px] ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Intermédiaire</span>
-                                <span className={`text-[10px] ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Maîtrise</span>
+                              <div className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                                {tech.level === 1 && (
+                                  <div className="flex items-start gap-2">
+                                    <div className={`w-2 h-2 rounded-full mt-2 ${
+                                      isDark ? 'bg-blue-400' : 'bg-emerald-500'
+                                    }`} />
+                                    <div>
+                                      <span className="font-medium">Exploration</span>
+                                      <p className="text-xs mt-1">Je découvre cette technologie et commence à l'utiliser dans des projets simples.</p>
+                                    </div>
+                                  </div>
+                                )}
+                                {tech.level === 2 && (
+                                  <div className="flex items-start gap-2">
+                                    <div className={`w-2 h-2 rounded-full mt-2 ${
+                                      isDark ? 'bg-blue-400' : 'bg-emerald-500'
+                                    }`} />
+                                    <div>
+                                      <span className="font-medium">Pratique régulière</span>
+                                      <p className="text-xs mt-1">Je l'utilise activement dans mes projets et peux résoudre les problèmes courants.</p>
+                                    </div>
+                                  </div>
+                                )}
+                                {tech.level === 3 && (
+                                  <div className="flex items-start gap-2">
+                                    <div className={`w-2 h-2 rounded-full mt-2 ${
+                                      isDark ? 'bg-blue-400' : 'bg-emerald-500'
+                                    }`} />
+                                    <div>
+                                      <span className="font-medium">Expérience solide</span>
+                                      <p className="text-xs mt-1">Je maîtrise les concepts avancés et peux implémenter des solutions complexes.</p>
+                                    </div>
+                                  </div>
+                                )}
+                                {tech.level === 4 && (
+                                  <div className="flex items-start gap-2">
+                                    <div className={`w-2 h-2 rounded-full mt-2 ${
+                                      isDark ? 'bg-blue-400' : 'bg-emerald-500'
+                                    }`} />
+                                    <div>
+                                      <span className="font-medium">Expertise confirmée</span>
+                                      <p className="text-xs mt-1">Je peux optimiser les performances et partager mes connaissances avec d'autres.</p>
+                                    </div>
+                                  </div>
+                                )}
+                                {tech.level === 5 && (
+                                  <div className="flex items-start gap-2">
+                                    <div className={`w-2 h-2 rounded-full mt-2 ${
+                                      isDark ? 'bg-blue-400' : 'bg-emerald-500'
+                                    }`} />
+                                    <div>
+                                      <span className="font-medium">Maîtrise approfondie</span>
+                                      <p className="text-xs mt-1">Je peux innover et créer des solutions avancées dans ce domaine.</p>
+                                    </div>
+                                  </div>
+                                )}
                               </div>
                             </div>
                           </div>

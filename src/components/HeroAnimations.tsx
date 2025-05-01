@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
 import React from 'react';
 
-export type AnimationType = 'matrix' | 'waves' | 'stars' | 'flow';
+export type AnimationType = 'matrix' | 'waves' | 'stars' | 'squares';
 
 interface AnimationProps {
   type: AnimationType;
@@ -281,8 +281,8 @@ export function BackgroundAnimation({ type }: AnimationProps) {
           'linear-gradient(to bottom, #f0f9ff, #e0f2fe)'
       };
       break;
-    case 'flow':
-      backgroundClass = 'bg-flow';
+    case 'squares':
+      backgroundClass = 'bg-squares';
       backgroundStyle = {
         position: 'fixed',
         top: 0,
@@ -885,7 +885,7 @@ export function BackgroundAnimation({ type }: AnimationProps) {
   
   // Animation du flux courbe organique
   useEffect(() => {
-    if (type !== 'flow' || !flowRef.current) return;
+    if (type !== 'squares' || !flowRef.current) return;
     
     const container = flowRef.current;
     
@@ -1054,7 +1054,7 @@ export function BackgroundAnimation({ type }: AnimationProps) {
       {type === 'matrix' && <div ref={matrixRef} className="fixed inset-0 overflow-hidden" />}
       {type === 'waves' && <div ref={wavesRef} className="fixed inset-0 overflow-hidden" />}
       {type === 'stars' && <div ref={starsRef} className="fixed inset-0 overflow-hidden" />}
-      {type === 'flow' && <div ref={flowRef} className="fixed inset-0 overflow-hidden" />}
+      {type === 'squares' && <div ref={flowRef} className="fixed inset-0 overflow-hidden" />}
     </div>
   );
 }
@@ -1196,11 +1196,11 @@ function animate() {
 animate();`;
 
     case 'waves':
-      return `// Animation de vagues
+      return `// Wave animation
 const waveCount = 3;
 const waves = [];
 
-// Définir les paramètres des vagues
+// Define wave parameters
 for (let i = 0; i < waveCount; i++) {
   waves.push({
     amplitude: 35 - i * 5,
@@ -1216,7 +1216,7 @@ const waveSpread = 40;
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   
-  // Dessiner les vagues
+  // Draw waves
   for (let i = 0; i < waves.length; i++) {
     const wave = waves[i];
     const time = Date.now() * 0.001;
@@ -1224,7 +1224,7 @@ function animate() {
     ctx.beginPath();
     ctx.moveTo(0, waveHeight + i * waveSpread);
     
-    // Dessiner la courbe
+    // Draw the curve
     for (let x = 0; x < canvas.width; x += 5) {
       const dx = x / wave.wavelength;
       const y = waveHeight + i * waveSpread +
@@ -1232,12 +1232,12 @@ function animate() {
       ctx.lineTo(x, y);
     }
     
-    // Compléter le chemin
+    // Complete the path
     ctx.lineTo(canvas.width, canvas.height);
     ctx.lineTo(0, canvas.height);
     ctx.closePath();
     
-    // Remplir avec dégradé
+    // Fill with gradient
     const gradient = ctx.createLinearGradient(0, waveHeight - wave.amplitude, 0, canvas.height);
     const baseColor = isDark 
       ? \`rgba(\${99 - i * 10}, \${102 - i * 10}, 241, \${0.4 - i * 0.05})\`
@@ -1255,12 +1255,12 @@ function animate() {
 animate();`;
 
     case 'stars':
-      return `// Animation de particules lumineuses avec traînées
+      return `// Luminous particles animation with trails
 const particles = [];
-const particleCount = 50; // Plus de particules
-const trailLength = 20; // Traînées plus longues
+const particleCount = 50; // More particles
+const trailLength = 20; // Longer trails
 
-// Créer les particules
+// Create particles
 for (let i = 0; i < particleCount; i++) {
   const baseHue = isDark ? 240 : 180;
   const hueVariation = 40;
@@ -1283,7 +1283,7 @@ for (let i = 0; i < particleCount; i++) {
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   
-  // Dessiner le fond
+  // Draw background
   const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
   if (isDark) {
     gradient.addColorStop(0, 'rgba(15, 23, 42, 1)');
@@ -1295,14 +1295,14 @@ function animate() {
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   
-  // Mettre à jour et dessiner chaque particule
+  // Update and draw each particle
   for (const p of particles) {
-    // Mettre à jour la position
+    // Update position
     p.x += p.vx;
     p.y += p.vy;
     p.life++;
     
-    // Ajouter à la traînée plus fréquemment
+    // Add to trail more frequently
     if (p.life % 1 === 0) {
       p.trail.push({x: p.x, y: p.y, size: p.size * 1.2});
       
@@ -1311,10 +1311,10 @@ function animate() {
       }
     }
     
-    // Calculer l'opacité
+    // Calculate opacity
     const opacity = 1 - p.life / p.maxLife;
     
-    // Dessiner la traînée avec effet de dégradé
+    // Draw trail with gradient effect
     p.trail.forEach((point, index) => {
       const trailOpacity = (index / p.trail.length) * opacity * 0.9;
       const pointSize = point.size * (index / p.trail.length);
@@ -1328,7 +1328,7 @@ function animate() {
       ctx.shadowBlur = 0;
     });
     
-    // Dessiner la particule
+    // Draw particle
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
     ctx.shadowBlur = p.size * 6;
@@ -1337,11 +1337,11 @@ function animate() {
     ctx.fill();
     ctx.shadowBlur = 0;
     
-    // Rebond sur les bords
+    // Bounce off edges
     if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
     if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
     
-    // Réinitialiser si nécessaire
+    // Reset if necessary
     if (p.life >= p.maxLife) {
       p.x = Math.random() * canvas.width;
       p.y = Math.random() * canvas.height;
@@ -1350,7 +1350,7 @@ function animate() {
     }
   }
   
-  // Effet de lueur globale pour le mode sombre
+  // Global glow effect for dark mode
   if (isDark) {
     ctx.globalCompositeOperation = 'lighter';
     ctx.filter = 'blur(6px)';
@@ -1373,8 +1373,8 @@ function animate() {
 
 animate();`;
       
-    case 'flow':
-      return `// Animation de formes géométriques carrées
+    case 'squares':
+      return `// Square geometric shapes animation
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
 document.body.appendChild(canvas);
@@ -1382,11 +1382,11 @@ document.body.appendChild(canvas);
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// Paramètres pour l'animation
+// Animation parameters
 const boxCount = 30;
 const boxes = [];
 
-// Définir les couleurs basées sur le thème
+// Define colors based on theme
 const fillColors = isDark 
   ? ['rgba(99, 102, 241, 0.2)', 'rgba(79, 70, 229, 0.15)', 'rgba(67, 56, 202, 0.1)']
   : ['rgba(20, 184, 166, 0.2)', 'rgba(16, 148, 136, 0.15)', 'rgba(15, 118, 110, 0.1)'];
@@ -1395,7 +1395,7 @@ const borderColors = isDark
   ? ['rgba(139, 142, 245, 0.4)', 'rgba(119, 110, 233, 0.35)', 'rgba(107, 96, 212, 0.3)']
   : ['rgba(45, 212, 191, 0.4)', 'rgba(36, 168, 156, 0.35)', 'rgba(35, 138, 130, 0.3)'];
 
-// Créer les formes carrées
+// Create square shapes
 for (let i = 0; i < boxCount; i++) {
   const isSmall = Math.random() > 0.7;
   const size = isSmall 
@@ -1420,7 +1420,7 @@ for (let i = 0; i < boxCount; i++) {
   });
 }
 
-// Fonction pour dessiner un carré avec rotation
+// Function to draw a square with rotation
 function drawSquare(x, y, size, angle, fillColor, borderColor, borderWidth, borderOnly) {
   ctx.save();
   ctx.translate(x, y);
@@ -1442,23 +1442,23 @@ function drawSquare(x, y, size, angle, fillColor, borderColor, borderWidth, bord
 }
 
 function animate() {
-  // Effacer le canvas
+  // Clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   
-  // Mettre à jour et dessiner chaque carré
+  // Update and draw each square
   boxes.forEach(box => {
-    // Mettre à jour la position
+    // Update position
     box.x += box.speedX;
     box.y += box.speedY;
     box.angle += box.rotationSpeed;
     
-    // Vérifier les bords et rebondir si nécessaire
+    // Check edges and bounce if necessary
     if (box.x < -box.size/2) box.x = canvas.width + box.size/2;
     if (box.x > canvas.width + box.size/2) box.x = -box.size/2;
     if (box.y < -box.size/2) box.y = canvas.height + box.size/2;
     if (box.y > canvas.height + box.size/2) box.y = -box.size/2;
     
-    // Dessiner le carré
+    // Draw square
     drawSquare(
       box.x, 
       box.y, 

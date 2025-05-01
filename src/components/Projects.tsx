@@ -38,7 +38,7 @@ const projects: ProjectType[] = [
     title: "invoicecreator",
     owner: "yourusername",
     description: "InvoiceCreator is a personal project built with React to practice and learn modern web development concepts. It connects to a n8n workflow to fetch invoice information and generates a PDF invoice automatically.",
-    tech: ["React", "Workflow n8n", "Tailwind CSS"],
+    tech: ["React", "Workflow n8n", "Tailwind CSS"," NextJS"],
     github: "https://github.com/HeedzZ/invoicecreactor",
     isPublic: true,
     language: "React",

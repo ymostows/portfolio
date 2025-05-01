@@ -37,6 +37,14 @@ const translations: TranslationMap = {
   },
   
   // Hero
+  'welcome': {
+    en: 'Welcome to my portfolio',
+    fr: 'Bienvenue sur mon portfolio'
+  },
+  'iAmA': {
+    en: 'I\'m a',
+    fr: 'Je suis'
+  },
   'developer': {
     en: 'Developer',
     fr: 'Développeur'
@@ -46,8 +54,76 @@ const translations: TranslationMap = {
     fr: 'Full-Stack'
   },
   'heroDescription': {
-    en: 'Passionate developer creating elegant solutions with modern technologies.',
-    fr: 'Développeur passionné créant des solutions élégantes avec des technologies modernes.'
+    en: 'I\'m a full-stack developer with a passion for creating interactive and user-friendly web applications.',
+    fr: 'Je suis un développeur full-stack passionné par la création d\'applications web interactives et conviviales.'
+  },
+  'iCode': {
+    en: 'I code',
+    fr: 'Je code'
+  },
+  'interactiveBackground': {
+    en: 'Interactive Background',
+    fr: 'Fond Interactif'
+  },
+  'animatedNetwork': {
+    en: 'Animated network system in background',
+    fr: 'Système de réseau animé en arrière-plan'
+  },
+  'codeDemos': {
+    en: 'Code Demos',
+    fr: 'Démos de Code'
+  },
+  'interactiveReact': {
+    en: 'Interactive React code examples',
+    fr: 'Exemples de code React interactifs'
+  },
+  'exploreExamples': {
+    en: 'Explore Examples',
+    fr: 'Explorer les Exemples'
+  },
+  'viewSourceCode': {
+    en: 'View Source Code',
+    fr: 'Voir le Code Source'
+  },
+  'preview': {
+    en: 'Preview',
+    fr: 'Aperçu'
+  },
+  'animationControls': {
+    en: 'Animation Controls',
+    fr: 'Contrôles d\'Animation'
+  },
+  'animatedSquares': {
+    en: 'Animated squares',
+    fr: 'Carrés animés'
+  },
+  'squares': {
+    en: 'Squares',
+    fr: 'Carrés'
+  },
+  'matrixRain': {
+    en: 'Matrix-style character rain',
+    fr: 'Pluie de caractères style Matrix'
+  },
+  'matrix': {
+    en: 'Matrix',
+    fr: 'Matrix'
+  },
+  'fluidWaves': {
+    en: 'Fluid waves',
+    fr: 'Vagues fluides'
+  },
+  'waves': {
+    en: 'Waves',
+    fr: 'Vagues'
+  },
+  'luminousParticles': {
+    en: 'Luminous particles',
+    fr: 'Particules lumineuses'
+  },
+  'particles': {
+    en: 'Particles',
+    fr: 'Particules'
   },
   'myProjects': {
     en: 'My projects',
@@ -92,8 +168,8 @@ const translations: TranslationMap = {
     fr: 'Technologies maîtrisées'
   },
   'aboutDescription': {
-    en: 'Here’s an overview of my skills. I’d like to point out that the skill bars are more for visual style than accuracy. I mainly wanted to use this design, and I just tried to rate myself as honestly as possible.',
-    fr: 'Voici un aperçu de mes compétences. Je tiens à préciser que les barres de niveau sont à prendre avec du recul. J’ai surtout voulu utiliser ce style de design, et j’ai simplement essayé de m’auto-évaluer du mieux possible.'
+    en: "Here's an overview of my skills. I'd like to point out that the skill bars are more for visual style than accuracy. I mainly wanted to use this design, and I just tried to rate myself as honestly as possible.",
+    fr: "Voici un aperçu de mes compétences. Je tiens à préciser que les barres de niveau sont à prendre avec du recul. J'ai surtout voulu utiliser ce style de design, et j'ai simplement essayé de m'auto-évaluer du mieux possible."
   },
   'frontEnd': {
     en: 'Front-end',
@@ -234,6 +310,40 @@ const translations: TranslationMap = {
   'lookingForOpportunities': {
     en: 'Actively looking for new collaboration opportunities on innovative technical projects.',
     fr: 'Je recherche activement de nouvelles opportunités de collaboration sur des projets techniques innovants.'
+  },
+  
+  // Footer
+  'allRightsReserved': {
+    en: 'All rights reserved.',
+    fr: 'Tous droits réservés.'
+  },
+  'madeWith': {
+    en: 'Made with',
+    fr: 'Fait avec'
+  },
+  'by': {
+    en: 'by',
+    fr: 'par'
+  },
+  'navigation': {
+    en: 'Navigation',
+    fr: 'Navigation'
+  },
+  'technologies': {
+    en: 'Technologies',
+    fr: 'Technologies'
+  },
+  'quickLinks': {
+    en: 'Quick Links',
+    fr: 'Liens Rapides'
+  },
+  'learnMore': {
+    en: 'Learn more',
+    fr: 'En savoir plus'
+  },
+  'footerDescription': {
+    en: 'Creating modern web experiences with cutting-edge technologies.',
+    fr: 'Création d\'expériences web modernes avec des technologies de pointe.'
   },
   
   // Language

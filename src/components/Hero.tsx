@@ -5,6 +5,319 @@ import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { AnimationType, BackgroundAnimation, getAnimationCode } from './HeroAnimations';
 import { AnimationControls } from './AnimationControls';
 
+// Fonction pour la coloration syntaxique - style VS Code
+const syntaxHighlight = (code: string): string => {
+  // Simplement échapper le HTML et retourner le code sans coloration
+  return code
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+};
+
+// Animation code content (hardcoded for simplicity)
+const getAnimationCodeContent = (type: AnimationType): string => {
+  switch(type) {
+    case 'squares':
+      return `// Particle animation
+const particles = [];
+const particleCount = 50;
+
+// Create particles
+for (let i = 0; i < particleCount; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 2 + 1,
+    speedX: (Math.random() - 0.5) * 0.5,
+    speedY: (Math.random() - 0.5) * 0.5,
+    opacity: Math.random() * 0.5 + 0.2
+  });
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Update and draw each particle
+  for (const p of particles) {
+    p.x += p.speedX;
+    p.y += p.speedY;
+    
+    // Bounce off edges
+    if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+    
+    // Draw the particle
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255, 255, 255, ' + p.opacity + ')';
+    ctx.fill();
+  }
+  
+  requestAnimationFrame(animate);
+}
+
+animate();`;
+    case 'matrix':
+      return `// Matrix Animation
+class Symbol {
+  x: number;
+  y: number;
+  fontSize: number;
+  text: string;
+  canvasHeight: number;
+  color: string;
+  speed: number;
+  opacity: number;
+  
+  constructor(x: number, y: number, fontSize: number, canvasHeight: number, isDark: boolean) {
+    this.x = x;
+    this.y = Math.random() * canvasHeight;
+    this.fontSize = fontSize;
+    this.canvasHeight = canvasHeight;
+    this.color = isDark 
+      ? \`rgba(99, 102, 241, \${Math.random() * 0.4 + 0.6})\` // Indigo for dark mode
+      : \`rgba(20, 184, 166, \${Math.random() * 0.4 + 0.6})\`;  // Teal for light mode
+    this.text = String.fromCharCode(
+      Math.floor(Math.random() * 93) + 33
+    );
+    this.speed = Math.random() * 5 + 3;
+    this.opacity = Math.random() * 0.8 + 0.2;
+  }
+  
+  update() {
+    if (this.y > this.canvasHeight) {
+      this.y = 0;
+    } else {
+      this.y += this.speed;
+    }
+    
+    // Randomly change character
+    if (Math.random() > 0.95) {
+      this.text = String.fromCharCode(
+        Math.floor(Math.random() * 93) + 33
+      );
+    }
+  }
+  
+  draw(ctx: CanvasRenderingContext2D) {
+    ctx.fillStyle = this.color.replace(')', \`, \${this.opacity})\`);
+    ctx.font = \`\${this.fontSize}px monospace\`;
+    ctx.fillText(this.text, this.x, this.y);
+  }
+}
+
+// Initialization and animation
+const symbols: Symbol[] = [];
+const fontSize = 14;
+const columns = Math.floor(canvas.width / fontSize);
+
+for (let i = 0; i < columns; i++) {
+  symbols.push(new Symbol(i * fontSize, 0, fontSize, canvas.height, isDark));
+}
+
+function animate() {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  symbols.forEach(symbol => {
+    symbol.update();
+    symbol.draw(ctx);
+  });
+  
+  requestAnimationFrame(animate);
+}
+
+animate();`;
+    case 'waves':
+      return `// Ripples Animation
+class Ripple {
+  x: number;
+  y: number;
+  radius: number;
+  maxRadius: number;
+  speed: number;
+  color: string;
+  opacity: number;
+  
+  constructor(x: number, y: number, isDark: boolean) {
+    this.x = x;
+    this.y = y;
+    this.radius = 0;
+    this.maxRadius = Math.random() * 50 + 50;
+    this.speed = Math.random() * 2 + 1;
+    this.color = isDark 
+      ? \`rgba(99, 102, 241, \${Math.random() * 0.4 + 0.6})\` // Indigo for dark mode
+      : \`rgba(20, 184, 166, \${Math.random() * 0.4 + 0.6})\`;  // Teal for light mode
+    this.opacity = 1;
+  }
+  
+  update() {
+    this.radius += this.speed;
+    this.opacity = 1 - (this.radius / this.maxRadius);
+  }
+  
+  draw(ctx: CanvasRenderingContext2D) {
+    if (this.opacity <= 0) return;
+    
+    ctx.strokeStyle = this.color.replace(')', \`, \${this.opacity})\`);
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+  
+  isFinished(): boolean {
+    return this.radius >= this.maxRadius;
+  }
+}
+
+// Initialization and animation
+const ripples: Ripple[] = [];
+
+function createRipple(e: MouseEvent) {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  ripples.push(new Ripple(x, y, isDark));
+}
+
+canvas.addEventListener('click', createRipple);
+
+function animate() {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  ripples.forEach((ripple, index) => {
+    ripple.update();
+    ripple.draw(ctx);
+    
+    if (ripple.isFinished()) {
+      ripples.splice(index, 1);
+    }
+  });
+  
+  requestAnimationFrame(animate);
+}
+
+animate();`;
+    case 'stars':
+      return `// Particles Animation
+class Particle {
+  x: number;
+  y: number;
+  size: number;
+  speedX: number;
+  speedY: number;
+  color: string;
+  opacity: number;
+  maxSize: number;
+  minSize: number;
+  growing: boolean;
+  
+  constructor(mode: 'dark' | 'light') {
+    this.x = Math.random() * window.innerWidth;
+    this.y = Math.random() * window.innerHeight;
+    this.size = Math.random() * 3 + 1;
+    this.speedX = Math.random() * 2 - 1;
+    this.speedY = Math.random() * 2 - 1;
+    this.color = mode === 'dark' ? '#ffffff' : '#000000';
+    this.opacity = Math.random() * 0.5 + 0.1;
+    this.maxSize = Math.random() * 5 + 2;
+    this.minSize = Math.random() * 2 + 1;
+    this.growing = true;
+  }
+  
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    
+    if (this.x < 0 || this.x > window.innerWidth) this.speedX *= -1;
+    if (this.y < 0 || this.y > window.innerHeight) this.speedY *= -1;
+
+    if (this.growing) {
+      this.size += 0.05;
+      if (this.size >= this.maxSize) {
+        this.growing = false;
+      }
+    } else {
+      this.size -= 0.05;
+      if (this.size <= this.minSize) {
+        this.growing = true;
+      }
+    }
+  }
+  
+  draw(ctx: CanvasRenderingContext2D) {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.globalAlpha = this.opacity;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+}
+
+class ParticleAnimation {
+  canvas: HTMLCanvasElement;
+  ctx: CanvasRenderingContext2D;
+  particles: Particle[];
+  mode: 'dark' | 'light';
+  
+  constructor(mode: 'dark' | 'light') {
+    this.canvas = document.createElement('canvas');
+    this.ctx = this.canvas.getContext('2d')!;
+    this.particles = [];
+    this.mode = mode;
+
+    this.init();
+  }
+  
+  init() {
+    this.canvas.style.position = 'fixed';
+    this.canvas.style.top = '0';
+    this.canvas.style.left = '0';
+    this.canvas.style.width = '100%';
+    this.canvas.style.height = '100%';
+    this.canvas.style.zIndex = '-1';
+    document.body.appendChild(this.canvas);
+
+    this.resize();
+    window.addEventListener('resize', () => this.resize());
+
+    for (let i = 0; i < 100; i++) {
+      this.particles.push(new Particle(this.mode));
+    }
+
+    this.animate();
+  }
+  
+  resize() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+  }
+  
+  animate() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    
+    this.particles.forEach(particle => {
+      particle.update();
+      particle.draw(this.ctx);
+    });
+
+    requestAnimationFrame(() => this.animate());
+  }
+  
+  destroy() {
+    window.removeEventListener('resize', () => this.resize());
+    document.body.removeChild(this.canvas);
+  }
+}`;
+    default:
+      return `// Default animation
+console.log("Default animation")`;
+  }
+};
+
 const skills = ['TypeScript', 'React', 'Node.js', 'C++', 'Docker', 'Git'];
 
 // Exemples de code guidés avec des animations - utilisés avec useMemo pour éviter les re-créations
@@ -114,9 +427,6 @@ for (let i = 0; i < particleCount; i++) {
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
     size: Math.random() * 2 + 1,
-    color: isDark 
-      ? \`hsl(\${Math.random() * 60 + 220}, 100%, 70%)\`
-      : \`hsl(\${Math.random() * 40 + 180}, 100%, 70%)\`,
     speedX: (Math.random() - 0.5) * 0.5,
     speedY: (Math.random() - 0.5) * 0.5,
     opacity: Math.random() * 0.5 + 0.2
@@ -138,7 +448,7 @@ function animate() {
     // Dessiner la particule
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fillStyle = p.color;
+    ctx.fillStyle = 'rgba(255, 255, 255, ' + p.opacity + ')';
     ctx.fill();
   }
   
@@ -177,8 +487,8 @@ class Symbol {
     this.fontSize = fontSize;
     this.canvasHeight = canvasHeight;
     this.color = isDark 
-      ? `rgba(99, 102, 241, ${Math.random() * 0.4 + 0.6})` // Indigo pour le dark mode
-      : `rgba(20, 184, 166, ${Math.random() * 0.4 + 0.6})`;  // Teal pour le light mode
+      ? `rgba(99, 102, 241, ${Math.random() * 0.4 + 0.6})` // Indigo for dark mode
+      : `rgba(20, 184, 166, ${Math.random() * 0.4 + 0.6})`;  // Teal for light mode
     this.text = String.fromCharCode(
       Math.floor(Math.random() * 93) + 33
     );
@@ -193,7 +503,7 @@ class Symbol {
       this.y += this.speed;
     }
     
-    // Changer le caractère aléatoirement
+    // Randomly change character
     if (Math.random() > 0.95) {
       this.text = String.fromCharCode(
         Math.floor(Math.random() * 93) + 33
@@ -223,7 +533,8 @@ export function Hero() {
   const [codeOutput, setCodeOutput] = useState('');
   const [isTypingCode, setIsTypingCode] = useState(false);
   const [isShowingPreview, setIsShowingPreview] = useState(false);
-  const [animationType, setAnimationType] = useState<AnimationType>('flow');
+  const [animationType, setAnimationType] = useState<AnimationType>('squares');
+  const [animationCode, setAnimationCode] = useState('');
   const [showingBackgroundCode, setShowingBackgroundCode] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   
@@ -244,6 +555,85 @@ export function Hero() {
     }
   }, []);
 
+  // Charger le code d'animation depuis le fichier importé
+  const loadAnimationCode = useCallback(async (type: AnimationType) => {
+    try {
+      // Utiliser directement les fichiers importés
+      return getAnimationCodeContent(type);
+    } catch (error) {
+      console.error('Erreur lors du chargement du code d\'animation:', error);
+      return `// Erreur lors du chargement du fichier ${type}.txt\n// Vérifiez que le fichier existe dans le dossier src/animations/`;
+    }
+  }, []);
+
+  // Animation de fond - using useCallback to avoid recreation
+  const showBackgroundAnimationCode = useCallback(async (type: AnimationType) => {
+    // Interrompre toute animation en cours
+    clearAllTimeouts();
+    
+    // Mettre à jour immédiatement le type d'animation
+    setAnimationType(type);
+    
+    // Mettre à jour l'état
+    setIsProcessing(true);
+    setShowingBackgroundCode(true);
+    setIsTypingCode(true);
+    setIsShowingPreview(false);
+    setCodeOutput('');
+    
+    // Charger le code depuis le fichier
+    const code = await loadAnimationCode(type);
+    setAnimationCode(code);
+    
+    // Afficher le code de l'animation de fond
+    let typedCode = '';
+    const codeLines = code.split('\n');
+    let currentLine = 0;
+    let charIndex = 0;
+    let lastFrameTime = 0;
+    const typingInterval = 5; // Plus rapide pour le code d'animation
+    
+    const typeCodeFrame = (timestamp: number) => {
+      if (!lastFrameTime) lastFrameTime = timestamp;
+      
+      const elapsed = timestamp - lastFrameTime;
+      
+      if (elapsed >= typingInterval) {
+        if (currentLine < codeLines.length) {
+          const line = codeLines[currentLine];
+          
+          if (charIndex < line.length) {
+            typedCode += line[charIndex];
+            setCodeOutput(typedCode);
+            charIndex++;
+            lastFrameTime = timestamp;
+          } else {
+            typedCode += '\n';
+            setCodeOutput(typedCode);
+            currentLine++;
+            charIndex = 0;
+            lastFrameTime = timestamp;
+          }
+          
+          animationFrameRef.current = requestAnimationFrame(typeCodeFrame);
+        } else {
+          // Show result after typing code - Correction ici pour éviter l'effacement
+          setCodeOutput(typedCode); // On conserve le texte tapé
+          setAnimationCode(typedCode); // On sauvegarde également le texte complet
+          
+          // Pas de setTimeout ici, on change directement l'état
+          setIsTypingCode(false);
+          setIsShowingPreview(true);
+          setIsProcessing(false);
+        }
+      } else {
+        animationFrameRef.current = requestAnimationFrame(typeCodeFrame);
+      }
+    };
+    
+    animationFrameRef.current = requestAnimationFrame(typeCodeFrame);
+  }, [clearAllTimeouts, loadAnimationCode]);
+  
   // Typing effect for skill demonstration
   useEffect(() => {
     const currentSkill = skills[currentSkillIndex];
@@ -336,72 +726,6 @@ export function Hero() {
     animationFrameRef.current = requestAnimationFrame(typeCodeFrame);
   }, [clearAllTimeouts, codeExamples, currentCodeIndex, isProcessing]);
   
-  // Animation de fond - using useCallback to avoid recreation
-  const showBackgroundAnimationCode = useCallback((type: AnimationType) => {
-    // Interrompre toute animation en cours
-    clearAllTimeouts();
-    
-    // Mettre à jour immédiatement le type d'animation
-    setAnimationType(type);
-    
-    // Mettre à jour l'état
-    setIsProcessing(true);
-    setShowingBackgroundCode(true);
-    setIsTypingCode(true);
-    setIsShowingPreview(false);
-    setCodeOutput('');
-    
-    // Afficher le code de l'animation de fond avec requestAnimationFrame
-    const animationCode = getAnimationCode(type);
-    let typedCode = '';
-    const codeLines = animationCode.split('\n');
-    let currentLine = 0;
-    let charIndex = 0;
-    let lastFrameTime = 0;
-    const typingInterval = 5; // Plus rapide pour le code d'animation
-    
-    const typeCodeFrame = (timestamp: number) => {
-      if (!lastFrameTime) lastFrameTime = timestamp;
-      
-      const elapsed = timestamp - lastFrameTime;
-      
-      if (elapsed >= typingInterval) {
-      if (currentLine < codeLines.length) {
-        const line = codeLines[currentLine];
-        
-        if (charIndex < line.length) {
-          typedCode += line[charIndex];
-          setCodeOutput(typedCode);
-          charIndex++;
-            lastFrameTime = timestamp;
-        } else {
-          typedCode += '\n';
-          setCodeOutput(typedCode);
-          currentLine++;
-          charIndex = 0;
-            lastFrameTime = timestamp;
-        }
-          
-          animationFrameRef.current = requestAnimationFrame(typeCodeFrame);
-      } else {
-        // Show result after typing code
-          animationTimeoutRef.current = window.setTimeout(() => {
-          setCodeOutput(prev => prev + '\n\n' + `> Animation de fond "${type}" activée\n> Adaptation au thème ${isDark ? 'sombre' : 'clair'}`);
-            animationTimeoutRef.current = window.setTimeout(() => {
-            setIsTypingCode(false);
-            setIsShowingPreview(true);
-            setIsProcessing(false);
-        }, 200);
-          }, 100);
-        }
-      } else {
-        animationFrameRef.current = requestAnimationFrame(typeCodeFrame);
-      }
-    };
-    
-    animationFrameRef.current = requestAnimationFrame(typeCodeFrame);
-  }, [clearAllTimeouts, isDark]);
-  
   // Passer à l'exemple de code suivant - using useCallback to avoid recreation
   const nextCodeExample = useCallback(() => {
     // Interrompre toute animation en cours
@@ -472,17 +796,15 @@ export function Hero() {
     });
   }, [clearAllTimeouts, codeExamples]);
   
-  // Start demo on initial load - reduced frequency of updates
+  // Start animation on initial load
   useEffect(() => {
-    const timer = setTimeout(() => {
-      startCodeDemo();
-    }, 1000);
+    // Chargement immédiat de l'animation par défaut (squares)
+    showBackgroundAnimationCode('squares');
     
     return () => {
-      clearTimeout(timer);
       clearAllTimeouts();
     };
-  }, [startCodeDemo, clearAllTimeouts]);
+  }, [showBackgroundAnimationCode, clearAllTimeouts]);
   
   // Change code example - optimized with useCallback and the debounce pattern
   useEffect(() => {
@@ -507,23 +829,22 @@ export function Hero() {
       <BackgroundAnimation type={animationType} />
       
       {/* Conteneur de contenu avec fond légèrement opaque pour contraste */}
-      <div className="container relative mx-auto px-6 py-12 md:py-24 z-30 rounded-xl bg-white/30 dark:bg-black/30 backdrop-blur-sm shadow-lg dark:shadow-none border border-gray-300 dark:border-white/10">
+      <div className="container relative mx-auto px-6 py-12 md:py-18 z-30 rounded-xl bg-white/30 dark:bg-black/30 backdrop-blur-sm shadow-lg dark:shadow-none border border-gray-300 dark:border-white/10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 dark:from-slate-800 dark:via-blue-900 dark:to-slate-900 h-1.5 w-24 mb-8 rounded-full"></div>
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-              <span className="block">Welcome to my portfolio</span>
-              <span className="text-transparent text-5xl bg-clip-text bg-gradient-to-r from-emerald-500 to-green-600 dark:from-blue-700 dark:to-slate-600">Full-Stack Developer</span>
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 pt-8">
+              <span className="block">{t('welcome')}</span>
+              <span className="text-transparent text-5xl bg-clip-text bg-gradient-to-r from-emerald-500 to-green-600 dark:from-blue-700 dark:to-slate-600">{t("iAmA")} {t("fullStack")} {t("developer")}</span>
             </h1>
             
             <p className="text-gray-700 dark:text-gray-400 text-lg md:text-xl mb-8 max-w-lg">
-              I'm a full-stack developer with a passion for creating interactive and user-friendly web applications.
+              {t('heroDescription')}
             </p>
             
             {/* Typing Effect */}
             <div className="mb-8 font-mono text-xl">
               <span className="text-gray-600 dark:text-gray-400">{'>'} </span>
-              <span className="text-emerald-600 dark:text-blue-500">I code </span>
+              <span className="text-emerald-600 dark:text-blue-500">{t('iCode')} </span>
               <span className="text-green-600 dark:text-blue-500 inline-flex">
                 {displayText}
                 <span className="border-r-2 border-green-600 dark:border-blue-500 ml-1 animate-blink"></span>
@@ -537,9 +858,9 @@ export function Hero() {
                 onClick={() => setAnimationType('matrix')}
               >
                 <MousePointer className="w-6 h-6 text-emerald-600 dark:text-blue-600 mb-2" />
-                <h3 className="text-gray-900 dark:text-white font-medium mb-1">Interactive Background</h3>
+                <h3 className="text-gray-900 dark:text-white font-medium mb-1">{t('interactiveBackground')}</h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  Animated network system in background
+                  {t('animatedNetwork')}
                 </p>
                 <div className="h-1 w-0 bg-gradient-to-r from-emerald-500 to-green-500 dark:from-blue-800 dark:to-slate-800 mt-2 group-hover:w-full transition-all duration-500"></div>
               </div>
@@ -549,9 +870,9 @@ export function Hero() {
                 onClick={nextCodeExample}
               >
                 <Code className="w-6 h-6 text-teal-600 dark:text-blue-500 mb-2" />
-                <h3 className="text-gray-900 dark:text-white font-medium mb-1">Code Demos</h3>
+                <h3 className="text-gray-900 dark:text-white font-medium mb-1">{t('codeDemos')}</h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  Interactive React code examples
+                  {t('interactiveReact')}
                 </p>
                 <div className="h-1 w-0 bg-gradient-to-r from-teal-500 to-green-500 dark:from-blue-700 dark:to-slate-800 mt-2 group-hover:w-full transition-all duration-500"></div>
               </div>
@@ -562,7 +883,7 @@ export function Hero() {
                 href="#projects"
                 className="px-8 py-3 rounded-lg bg-gradient-to-r from-emerald-500 to-green-600 dark:from-blue-800 dark:to-slate-800 text-white font-medium hover:shadow-lg hover:shadow-emerald-500/25 dark:hover:shadow-blue-900/25 transition-all hover:-translate-y-1"
               >
-                Explore Examples
+                {t('exploreExamples')}
               </a>
               <a
                 href="https://github.com/yourusername"
@@ -570,7 +891,7 @@ export function Hero() {
                 rel="noopener noreferrer"
                 className="px-8 py-3 rounded-lg bg-white/20 hover:bg-white/30 dark:bg-white/10 dark:hover:bg-white/15 text-gray-900 dark:text-white font-medium border border-gray-300 dark:border-white/10 flex items-center gap-2 transition-all hover:-translate-y-1"
               >
-                <Github className="w-5 h-5" /> View Source Code
+                <Github className="w-5 h-5" /> {t('viewSourceCode')}
               </a>
             </div>
           </div>
@@ -586,7 +907,7 @@ export function Hero() {
                 <div className="text-gray-600 dark:text-gray-400 text-sm font-mono flex items-center gap-2">
                   <Terminal className="w-4 h-4" /> 
                   {showingBackgroundCode 
-                    ? `${animationType}.js`
+                    ? `${animationType}.tsx`
                     : `${codeExamples[currentCodeIndex].title}.${codeExamples[currentCodeIndex].language}`
                   }
                 </div>
@@ -597,108 +918,57 @@ export function Hero() {
                 {/* Terminal Output - VS Code style */}
                 <div 
                   ref={terminalRef}
-                  className="font-mono text-sm h-[350px] overflow-y-auto text-gray-300 bg-[#1e1e1e] dark:bg-[#1e1e1e] p-0 rounded border border-gray-700 dark:border-gray-800"
+                  className={`font-mono text-sm h-[350px] overflow-y-auto ${
+                    isDark 
+                      ? "text-gray-300 bg-[#1e1e1e]" 
+                      : "text-gray-800 bg-[#f5f5f5]"
+                  } p-0 rounded border ${isDark ? "border-gray-700" : "border-gray-300"}`}
                 >
-                  <div className="flex items-center text-xs text-gray-500 dark:text-gray-400 border-b border-gray-700">
-                    <span className="bg-[#2d2d2d] text-white px-3 py-1 rounded-t mr-1 border-t border-l border-r border-gray-700">App.tsx</span>
-                    <span className="px-3 py-1">index.ts</span>
-                    <span className="px-3 py-1">style.css</span>
+                  <div className={`flex items-center text-xs ${isDark ? "text-gray-500 dark:text-gray-400 border-gray-700" : "text-gray-600 border-gray-300"} border-b`}>
+                    <span className={`${isDark ? "bg-[#2d2d2d] text-white" : "bg-[#e8e8e8] text-gray-800"} px-3 py-1 rounded-t mr-1 border-t border-l border-r ${isDark ? "border-gray-700" : "border-gray-300"}`}>
+                      {showingBackgroundCode ? `${animationType}.tsx` : `${codeExamples[currentCodeIndex].title}.${codeExamples[currentCodeIndex].language}`}
+                    </span>
                   </div>
                   
                   <div className="flex">
-                    {/* Line numbers */}
-                    <div className="p-2 text-right pr-3 border-r border-gray-700 bg-[#1e1e1e] text-gray-500 select-none w-12">
-                      {Array.from({ length: codeOutput.split('\n').length + 3 }).map((_, i) => (
-                        <div key={i}>{i + 1}</div>
-                      ))}
+                    {/* Numéros de ligne */}
+                    <div className={`p-2 text-right pr-3 border-r ${
+                      isDark 
+                        ? "border-gray-700 bg-[#1e1e1e] text-gray-500" 
+                        : "border-gray-300 bg-[#f5f5f5] text-gray-600"
+                    } select-none w-12`}>
+                      {(isShowingPreview 
+                        ? (showingBackgroundCode ? animationCode : codeExamples[currentCodeIndex].code) 
+                        : (codeOutput || (showingBackgroundCode ? animationCode : '')))
+                        .split('\n')
+                        .map((_, i: number) => (
+                          <div key={i} className="leading-relaxed">{i + 1}</div>
+                        ))}
                     </div>
                     
                     {/* Code content */}
                     <div className="p-2 pl-4 flex-1">
-                  {isShowingPreview ? (
-                    <div>
-                          <div className="mb-4">
-                            {showingBackgroundCode ? (
-                              <pre className="whitespace-pre-wrap">
-                                <span dangerouslySetInnerHTML={{ 
-                                  __html: codeOutput
-                                    .replace(/\/\/(.*)/g, match => 
-                                      `<span class="text-[#6a9955]">${match}</span>`)
-                                    .replace(/import|export|from|const|let|function|return|if|else|for|class|new|this/g, match => 
-                                      `<span class="text-[#569cd6]">${match}</span>`)
-                                    .replace(/\b\w+\(/g, match => 
-                                      `<span class="text-[#dcdcaa]">${match}</span>`)
-                                    .replace(/\b(canvas|ctx|document|window|Math)\b/g, match => 
-                                      `<span class="text-[#4fc1ff]">${match}</span>`)
-                                    .replace(/[{}()[\]=>;,.]/g, match => 
-                                      `<span class="text-gray-400">${match}</span>`)
-                                    .replace(/".*?"/g, match => 
-                                      `<span class="text-[#ce9178]">${match}</span>`)
-                                    .replace(/'.*?'/g, match => 
-                                      `<span class="text-[#ce9178]">${match}</span>`)
-                                    .replace(/\b\d+(\.\d+)?\b/g, match => 
-                                      `<span class="text-[#b5cea8]">${match}</span>`)
-                                }} />
-                              </pre>
-                            ) : (
-                              <>
-                                <div><span className="text-[#569cd6]">import</span> <span className="text-[#9cdcfe]">React</span><span className="text-gray-400">,</span> <span className="text-[#9cdcfe]">{"{"}</span> <span className="text-[#9cdcfe]">useState</span><span className="text-[#9cdcfe]">{"}"}</span> <span className="text-[#569cd6]">from</span> <span className="text-[#ce9178]">'react'</span><span className="text-gray-400">;</span></div>
-                                <div className="mt-2"><span className="text-[#569cd6]">function</span> <span className="text-[#dcdcaa]">App</span><span className="text-gray-400">()</span> <span className="text-gray-400">{"{"}</span></div>
-                                <div className="ml-4"><span className="text-[#569cd6]">const</span> <span className="text-gray-400">[</span><span className="text-[#9cdcfe]">count</span><span className="text-gray-400">,</span> <span className="text-[#9cdcfe]">setCount</span><span className="text-gray-400">]</span> <span className="text-gray-400">=</span> <span className="text-[#dcdcaa]">useState</span><span className="text-gray-400">(</span><span className="text-[#b5cea8]">0</span><span className="text-gray-400">);</span></div>
-                                <div className="mt-2 ml-4"><span className="text-[#569cd6]">return</span> <span className="text-gray-400">(</span></div>
-                                <div className="ml-8"><span className="text-gray-400">{"<"}</span><span className="text-[#4ec9b0]">div</span><span className="text-gray-400">{">"}</span></div>
-                                <div className="ml-12"><span className="text-gray-400">{"<"}</span><span className="text-[#4ec9b0]">h1</span><span className="text-gray-400">{">"}</span><span className="text-gray-300">Count: {"{"}count{"}"}</span><span className="text-gray-400">{"</"}</span><span className="text-[#4ec9b0]">h1</span><span className="text-gray-400">{">"}</span></div>
-                                <div className="ml-12">
-                                  <span className="text-gray-400">{"<"}</span>
-                                  <span className="text-[#4ec9b0]">button</span> 
-                                  <span className="text-[#9cdcfe]">onClick</span>
-                                  <span className="text-gray-400">{"{() => "}</span>
-                                  <span className="text-[#dcdcaa]">setCount</span>
-                                  <span className="text-gray-400">(</span>
-                                  <span className="text-[#9cdcfe]">count</span> 
-                                  <span className="text-gray-400">+</span> 
-                                  <span className="text-[#b5cea8]">1</span>
-                                  <span className="text-gray-400">){"}"}</span>
-                                  <span className="text-gray-400">{">"}</span>
-                                  <span className="text-gray-300">Increment</span>
-                                  <span className="text-gray-400">{"</"}</span>
-                                  <span className="text-[#4ec9b0]">button</span>
-                                  <span className="text-gray-400">{">"}</span>
-                                </div>
-                                <div className="ml-8"><span className="text-gray-400">{"</"}</span><span className="text-[#4ec9b0]">div</span><span className="text-gray-400">{">"}</span></div>
-                                <div className="ml-4"><span className="text-gray-400">{");"}</span></div>
-                                <div><span className="text-gray-400">{"}"}</span></div>
-                                <div className="mt-2"><span className="text-[#569cd6]">export</span> <span className="text-[#569cd6]">default</span> <span className="text-[#9cdcfe]">App</span><span className="text-gray-400">;</span></div>
-                              </>
-                            )}
-                          </div>
-                          
-                      {!showingBackgroundCode && (
-                            <div className="border-t border-gray-700 pt-3 mt-3">
-                              <div className="text-sm font-medium mb-1 text-[#569cd6]">
-                            Preview:
-                          </div>
-                          {codeExamples[currentCodeIndex].previewComponent(isDark)}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
+                      {isShowingPreview ? (
                         <div>
-                          <div>
-                            {showingBackgroundCode ? (
-                              <span className="text-[#6a9955]">// Animation code for {animationType}</span>
-                            ) : (
-                              <><span className="text-[#569cd6]">import</span> <span className="text-[#9cdcfe]">React</span><span className="text-gray-400">,</span> <span className="text-[#9cdcfe]">{"{"}</span> <span className="text-[#9cdcfe]">useState</span><span className="text-[#9cdcfe]">{"}"}</span> <span className="text-[#569cd6]">from</span> <span className="text-[#ce9178]">'react'</span><span className="text-gray-400">;</span></>
-                            )}
+                          <div className="mb-4">
+                            <pre className={`whitespace-pre-wrap font-mono ${isDark ? "text-gray-300" : "text-gray-800"}`}>
+                              {showingBackgroundCode ? animationCode : codeExamples[currentCodeIndex].code}
+                            </pre>
                           </div>
                           
-                          <pre className="whitespace-pre-wrap mt-2 text-xs leading-relaxed">
-                            {codeOutput.split('\n').map((line, index) => (
-                              <div key={index} className="flex">
-                                <span className="inline-block w-8 text-right pr-4 text-gray-500 select-none">{index + 1}</span>
-                                <span className="text-gray-300">{line}</span>
+                          {!showingBackgroundCode && (
+                            <div className={`border-t ${isDark ? "border-gray-700" : "border-gray-300"} pt-3 mt-3`}>
+                              <div className={`text-sm font-medium mb-1 ${isDark ? "text-[#569cd6]" : "text-[#0e5aa7]"}`}>
+                                {t('preview')}:
                               </div>
-                            ))}
+                              {codeExamples[currentCodeIndex].previewComponent(isDark)}
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <div>
+                          <pre className={`whitespace-pre-wrap leading-relaxed relative z-10 font-mono ${isDark ? "text-gray-300" : "text-gray-800"}`}>
+                            {codeOutput || (showingBackgroundCode ? animationCode : '')}
                           </pre>
                         </div>
                       )}
@@ -707,23 +977,25 @@ export function Hero() {
                 </div>
                 
                 {/* Animation Controls */}
-                <div className="border-t border-gray-300 dark:border-gray-700 pt-4">
+                <div className={`border-t ${isDark ? "border-gray-700" : "border-gray-300"} pt-4`}>
                   <div className="text-sm font-medium text-gray-800 dark:text-gray-200 flex items-center gap-2 mb-3">
-                    <Code className="w-4 h-4" /> Animation Controls
+                    <Code className="w-4 h-4" /> {t('animationControls')}
                   </div>
                   
                   <div className="grid grid-cols-2 gap-3 mb-2">
                     <button
-                      onClick={() => showBackgroundAnimationCode('flow')}
+                      onClick={() => showBackgroundAnimationCode('squares')}
                       className={`p-3 rounded-lg transition-all flex items-center gap-2 ${
-                        animationType === 'flow'
+                        animationType === 'squares'
                           ? 'bg-gradient-to-r from-emerald-600 to-green-600 dark:from-blue-800 dark:to-slate-900 text-white shadow-lg shadow-emerald-500/20 dark:shadow-blue-900/20'
-                          : 'bg-white/10 backdrop-blur-sm hover:bg-white/15 text-gray-300 border border-gray-700/50'
+                          : isDark
+                            ? 'bg-white/10 backdrop-blur-sm hover:bg-white/15 text-gray-300 border border-gray-700/50'
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
                       }`}
-                      title="Flow"
+                      title={t('animatedSquares')}
                     >
                       <Waves className="w-4 h-4" />
-                      <span className="text-sm font-medium">Flow</span>
+                      <span className="text-sm font-medium">{t('squares')}</span>
                     </button>
                     
                     <button
@@ -731,12 +1003,14 @@ export function Hero() {
                       className={`p-3 rounded-lg transition-all flex items-center gap-2 ${
                         animationType === 'matrix'
                           ? 'bg-gradient-to-r from-emerald-600 to-green-600 dark:from-blue-800 dark:to-slate-900 text-white shadow-lg shadow-emerald-500/20 dark:shadow-blue-900/20'
-                          : 'bg-white/10 backdrop-blur-sm hover:bg-white/15 text-gray-300 border border-gray-700/50'
+                          : isDark
+                            ? 'bg-white/10 backdrop-blur-sm hover:bg-white/15 text-gray-300 border border-gray-700/50'
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
                       }`}
-                      title="Matrix"
+                      title={t('matrixRain')}
                     >
                       <Code className="w-4 h-4" />
-                      <span className="text-sm font-medium">Matrix</span>
+                      <span className="text-sm font-medium">{t('matrix')}</span>
                     </button>
                     
                     <button
@@ -744,12 +1018,14 @@ export function Hero() {
                       className={`p-3 rounded-lg transition-all flex items-center gap-2 ${
                         animationType === 'waves'
                           ? 'bg-gradient-to-r from-emerald-600 to-green-600 dark:from-blue-800 dark:to-slate-900 text-white shadow-lg shadow-emerald-500/20 dark:shadow-blue-900/20'
-                          : 'bg-white/10 backdrop-blur-sm hover:bg-white/15 text-gray-300 border border-gray-700/50'
+                          : isDark
+                            ? 'bg-white/10 backdrop-blur-sm hover:bg-white/15 text-gray-300 border border-gray-700/50'
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
                       }`}
-                      title="Waves"
+                      title={t('fluidWaves')}
                     >
                       <Waves className="w-4 h-4" />
-                      <span className="text-sm font-medium">Waves</span>
+                      <span className="text-sm font-medium">{t('waves')}</span>
                     </button>
                     
                     <button
@@ -757,12 +1033,14 @@ export function Hero() {
                       className={`p-3 rounded-lg transition-all flex items-center gap-2 ${
                         animationType === 'stars'
                           ? 'bg-gradient-to-r from-emerald-600 to-green-600 dark:from-blue-800 dark:to-slate-900 text-white shadow-lg shadow-emerald-500/20 dark:shadow-blue-900/20'
-                          : 'bg-white/10 backdrop-blur-sm hover:bg-white/15 text-gray-300 border border-gray-700/50'
+                          : isDark
+                            ? 'bg-white/10 backdrop-blur-sm hover:bg-white/15 text-gray-300 border border-gray-700/50'
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
                       }`}
-                      title="Stars"
+                      title={t('luminousParticles')}
                     >
                       <Sparkles className="w-4 h-4" />
-                      <span className="text-sm font-medium">Stars</span>
+                      <span className="text-sm font-medium">{t('particles')}</span>
                     </button>
                   </div>
                 </div>
