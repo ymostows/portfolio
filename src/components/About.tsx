@@ -19,86 +19,6 @@ type SkillCategory = {
   darkColor: string;
 };
 
-const skills: SkillCategory[] = [
-  {
-    key: 'frontEnd',
-    icon: <Code className="w-5 h-5 text-white" />,
-    techs: [
-      { name: "TypeScript", experience: "J'ai construit une application web avec cette technologie.", level: 2 },
-      { name: "JavaScript", experience: "Je l'utilise principalement avec Node.js et Next.js, mais je connais bien le langage.", level: 2 },
-      { name: "React", experience: "Tous mes projets récents, y compris ce portfolio, sont construits avec.", level: 3 },
-      { name: "HTML/CSS", experience: "Je l'ai appris à l'école et j'applique ces concepts quotidiennement.", level: 3 },
-      { name: "TailwindCSS", experience: "Je l'utilise dans tous mes projets web et le trouve très utile.", level: 3 },      
-    ],
-    lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
-    darkGradient: "from-blue-700 to-indigo-800",
-    lightColor: "bg-emerald-500",
-    darkColor: "bg-blue-700"
-  },
-  {
-    key: 'backEnd',
-    icon: <Server className="w-5 h-5 text-white" />,
-    techs: [
-      { name: "Node.js", experience: "J'ai construit une application web avec cette technologie.", level: 2 },
-      { name: "Next.js", experience: "Je l'utilise pour tous mes projets web et le trouve très utile.", level: 2 },
-      { name: "Python", experience: "Je l'ai appris à l'école et j'ai fait beaucoup de projets avec, mais rien lié au développement web.", level: 3 }
-    ],
-    lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
-    darkGradient: "from-blue-700 to-indigo-800",
-    lightColor: "bg-emerald-500",
-    darkColor: "bg-blue-700"
-  },
-  {
-    key: 'lowLevelLanguages',
-    icon: <Cpu className="w-5 h-5 text-white" />,
-    techs: [
-      { name: "C", experience: "C'est le premier langage que nous apprenons à l'école 42 et il y a beaucoup de projets qui l'utilisent.", level: 3 },
-      { name: "C++", experience: "C'est le deuxième langage que nous apprenons à l'école 42 et il y a beaucoup de projets qui l'utilisent.", level: 3 }
-    ],
-    lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
-    darkGradient: "from-blue-700 to-indigo-800",
-    lightColor: "bg-emerald-500",
-    darkColor: "bg-blue-700"
-  },
-  {
-    key: 'devOps',
-    icon: <Layers className="w-5 h-5 text-white" />,
-    techs: [
-      { name: "Docker", experience: "Utilisé dans 2 projets et je l'apprécie beaucoup.", level: 2 },
-      { name: "Git", experience: "Depuis que je suis à l'école 42, je l'utilise pour tous mes projets.", level: 3 },
-      { name: "Linux", experience: "J'aime ce système d'exploitation et je l'utilise beaucoup.", level: 3 }
-    ],
-    lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
-    darkGradient: "from-blue-700 to-indigo-800",
-    lightColor: "bg-emerald-500",
-    darkColor: "bg-blue-700"
-  },
-  {
-    key: 'databases',
-    icon: <Database className="w-5 h-5 text-white" />,
-    techs: [
-      { name: "SQLite", experience: "Utilisé dans beaucoup de mes projets.", level: 2 },
-      { name: "MariaDB", experience: "Utilisé dans 1 projet.", level: 1 }
-    ],
-    lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
-    darkGradient: "from-blue-700 to-indigo-800",
-    lightColor: "bg-emerald-500",
-    darkColor: "bg-blue-700"
-  },
-  {
-    key: 'tools',
-    icon: <Terminal className="w-5 h-5 text-white" />,
-    techs: [
-      { name: "Bash", experience: "Je l'utilise pour tous mes projets.", level: 3 },
-      { name: "n8n", experience: "Je l'ai utilisé quelques fois récemment dans mes projets web.", level: 1 }
-    ],
-    lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
-    darkGradient: "from-blue-700 to-indigo-800",
-    lightColor: "bg-emerald-500",
-    darkColor: "bg-blue-700"
-  }
-];
-
 interface AnimatedElementProps {
   children: React.ReactNode;
   delay?: number;
@@ -167,16 +87,17 @@ const AnimatedElement: React.FC<AnimatedElementProps> = ({
 // Composant de niveau de compétence
 const SkillLevel = ({ level, lightColor, darkColor }: { level: number, lightColor: string, darkColor: string }) => {
   const { isDark } = useTheme();
+  const { t } = useLanguage();
   
   // Conversion du niveau numérique en description qualitative
   const getLevelLabel = (level: number) => {
     switch(level) {
-      case 1: return "Débutant";
-      case 2: return "Intermédiaire";
-      case 3: return "Avancé";
-      case 4: return "Expert";
-      case 5: return "Maîtrise";
-      default: return "Intermédiaire";
+      case 1: return t('levelBeginner');
+      case 2: return t('levelIntermediate');
+      case 3: return t('levelAdvanced');
+      case 4: return t('levelExpert');
+      case 5: return t('levelMastery');
+      default: return t('levelIntermediate');
     }
   };
   
@@ -213,16 +134,103 @@ export function About() {
     }
   };
   
+  const skills: SkillCategory[] = [
+    {
+      key: 'frontEnd',
+      icon: <Code className="w-5 h-5 text-white" />,
+      techs: [
+        { name: "TypeScript", experience: t('typescriptExp'), level: 2 },
+        { name: "JavaScript", experience: t('javascriptExp'), level: 2 },
+        { name: "React", experience: t('reactExp'), level: 3 },
+        { name: "HTML/CSS", experience: t('htmlCssExp'), level: 3 },
+        { name: "TailwindCSS", experience: t('tailwindExp'), level: 3 },      
+      ],
+      lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
+      darkGradient: "from-blue-700 to-indigo-800",
+      lightColor: "bg-emerald-500",
+      darkColor: "bg-blue-700"
+    },
+    {
+      key: 'backEnd',
+      icon: <Server className="w-5 h-5 text-white" />,
+      techs: [
+        { name: "Node.js", experience: t('nodejsExp'), level: 2 },
+        { name: "Next.js", experience: t('nextjsExp'), level: 2 },
+        { name: "Python", experience: t('pythonExp'), level: 3 }
+      ],
+      lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
+      darkGradient: "from-blue-700 to-indigo-800",
+      lightColor: "bg-emerald-500",
+      darkColor: "bg-blue-700"
+    },
+    {
+      key: 'lowLevelLanguages',
+      icon: <Cpu className="w-5 h-5 text-white" />,
+      techs: [
+        { name: "C", experience: t('cExp'), level: 3 },
+        { name: "C++", experience: t('cppExp'), level: 3 }
+      ],
+      lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
+      darkGradient: "from-blue-700 to-indigo-800",
+      lightColor: "bg-emerald-500",
+      darkColor: "bg-blue-700"
+    },
+    {
+      key: 'devOps',
+      icon: <Layers className="w-5 h-5 text-white" />,
+      techs: [
+        { name: "Docker", experience: t('dockerExp'), level: 2 },
+        { name: "Git", experience: t('gitExp'), level: 3 },
+        { name: "Linux", experience: t('linuxExp'), level: 3 }
+      ],
+      lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
+      darkGradient: "from-blue-700 to-indigo-800",
+      lightColor: "bg-emerald-500",
+      darkColor: "bg-blue-700"
+    },
+    {
+      key: 'databases',
+      icon: <Database className="w-5 h-5 text-white" />,
+      techs: [
+        { name: "SQLite", experience: t('sqliteExp'), level: 2 },
+        { name: "MariaDB", experience: t('mariadbExp'), level: 1 }
+      ],
+      lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
+      darkGradient: "from-blue-700 to-indigo-800",
+      lightColor: "bg-emerald-500",
+      darkColor: "bg-blue-700"
+    },
+    {
+      key: 'tools',
+      icon: <Terminal className="w-5 h-5 text-white" />,
+      techs: [
+        { name: "Bash", experience: t('bashExp'), level: 3 },
+        { name: "n8n", experience: t('n8nExp'), level: 1 }
+      ],
+      lightGradient: "from-emerald-600 via-green-500 to-emerald-400",
+      darkGradient: "from-blue-700 to-indigo-800",
+      lightColor: "bg-emerald-500",
+      darkColor: "bg-blue-700"
+    }
+  ];
+  
   const selectedCategory = skills.find(s => s.key === expandedCategory);
   
   return (
     <section id="about" className="relative z-40">
-      <div className="container relative mx-auto px-6 py-6 rounded-xl bg-white/30 dark:bg-black/30 backdrop-blur-sm shadow-lg dark:shadow-none border border-gray-300 dark:border-white/10">
+      <div className={`container relative mx-auto px-6 py-6 rounded-xl backdrop-blur-sm shadow-lg dark:shadow-none border ${
+          isDark 
+            ? 'bg-black/30 border-white/10'
+            : 'bg-white/30 border-gray-300'
+        }`}>
         
         {/* Section À propos de moi - style uniforme */}
         <AnimatedElement>
-          <div className="mb-4">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
+          <div className="flex items-center gap-3 mb-8">
+            <div className={`${isDark ? 'bg-blue-900/50 text-blue-400' : 'bg-emerald-100 text-emerald-600'} p-2 rounded-lg`}>
+              <Code className="w-6 h-6" />
+            </div>
+            <h2 className={`text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
               {t('aboutMe')}
             </h2>
           </div>
@@ -234,7 +242,7 @@ export function About() {
                 
                 {/* Recto - Photo et infos de base */}
                 <div className="flip-card-front">
-                  <div className={`h-full rounded-2xl ${isDark ? 'bg-gray-900' : 'bg-white'} shadow-md overflow-hidden border ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
+                  <div className={`h-full rounded-2xl ${isDark ? 'bg-gray-900/70' : 'bg-white/70'} shadow-md overflow-hidden border ${isDark ? 'border-gray-700/50' : 'border-gray-300/70'}`}>
                     <div className="flex flex-col items-center justify-center h-full relative py-6">
                       <div className="w-28 h-28 rounded-full border-4 border-white overflow-hidden mb-5">
                         <img 
@@ -262,7 +270,7 @@ export function About() {
                         
                         <div className="flex gap-2 mt-2">
                           <span className={`${isDark ? 'bg-blue-600/20 text-blue-300' : 'bg-emerald-100 text-emerald-700'} px-2 py-0.5 rounded text-xs`}>Français</span>
-                          <span className={`${isDark ? 'bg-blue-600/20 text-blue-300' : 'bg-emerald-100 text-emerald-700'} px-2 py-0.5 rounded text-xs`}>English</span>
+                          <span className={`${isDark ? 'bg-blue-600/20 text-blue-300' : 'bg-emerald-100 text-emerald-700'} px-2 py-0.5 rounded text-xs`}>English B2</span>
                         </div>
                       </div>
                       
@@ -284,7 +292,7 @@ export function About() {
                       
                       {/* Texte d'information centré */}
                       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none">
-                        <span className={`text-xs ${isDark ? 'text-white/80 bg-black/20' : 'text-gray-700 bg-gray-200/70'} px-2 py-0.5 rounded-full backdrop-blur-sm whitespace-nowrap`}>Cliquez pour plus d'infos</span>
+                        <span className={`text-xs ${isDark ? 'text-white/80 bg-black/20' : 'text-gray-700 bg-gray-200/70'} px-2 py-0.5 rounded-full backdrop-blur-sm whitespace-nowrap`}>{t('clickForInfo')}</span>
                       </div>
                     </div>
                   </div>
@@ -292,7 +300,7 @@ export function About() {
                 
                 {/* Verso - Biographie détaillée */}
                 <div className="flip-card-back">
-                  <div className={`h-full ${isDark ? 'bg-gray-900' : 'bg-white'} rounded-2xl shadow-md p-5 flex flex-col border ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
+                  <div className={`h-full ${isDark ? 'bg-gray-900/70' : 'bg-white/70'} rounded-2xl shadow-md p-5 flex flex-col border ${isDark ? 'border-gray-700/50' : 'border-gray-300/70'}`}>
                     <div className={`flex-1 overflow-auto ${isDark ? 'text-white/80' : 'text-gray-600'} custom-scrollbar`}>
                       <p className="mb-5">
                         {t('personalDescription')}
@@ -302,8 +310,8 @@ export function About() {
                         <div className="flex items-start">
                           <GraduationCap className={`w-5 h-5 mr-2 ${isDark ? 'text-blue-400' : 'text-emerald-600'} mt-0.5 flex-shrink-0`} />
                           <div>
-                            <div className={`font-medium ${isDark ? 'text-blue-300' : 'text-emerald-700'}`}>École 42</div>
-                            <div className={`text-sm ${isDark ? 'text-white/70' : 'text-gray-500'}`}>2023 - Présent</div>
+                            <div className={`font-medium ${isDark ? 'text-blue-300' : 'text-emerald-700'}`}>{t('school42')}</div>
+                            <div className={`text-sm ${isDark ? 'text-white/70' : 'text-gray-500'}`}>2023 - {t('presentTime')}</div>
                             <div className="text-sm mt-1">{t('school42Description')}</div>
                           </div>
                         </div>
@@ -313,20 +321,19 @@ export function About() {
                         <div className="flex items-start">
                           <GraduationCap className={`w-5 h-5 mr-2 ${isDark ? 'text-blue-400' : 'text-emerald-600'} mt-0.5 flex-shrink-0`} />
                           <div>
-                            <div className={`font-medium ${isDark ? 'text-blue-300' : 'text-emerald-700'}`}>Baccalauréat Général</div>
+                            <div className={`font-medium ${isDark ? 'text-blue-300' : 'text-emerald-700'}`}>{t('baccalaureate')}</div>
                             <div className={`text-sm ${isDark ? 'text-white/70' : 'text-gray-500'}`}>2022 - 2023</div>
                             <div className="text-sm mt-1">
-                              Spécialités Mathématiques et Informatique<br/>
-                              Lycée Jean Pierre Timbaud
+                              {t('baccalaureateDescription')}
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     
-                    <div className={`flex items-center justify-end ${isDark ? 'text-white/70' : 'text-gray-500'} pt-3 border-t ${isDark ? 'border-white/10' : 'border-gray-200'} mt-3`}>
+                    <div className={`flex items-center justify-end ${isDark ? 'text-white/70' : 'text-gray-500'} pt-3 border-t ${isDark ? 'border-gray-700/50' : 'border-gray-300/70'} mt-3`}>
                       <div className={`${isDark ? 'text-blue-300' : 'text-emerald-600'} flex items-center text-sm`}>
-                        <span>Retourner</span>
+                        <span>{t('goBack')}</span>
                         <ArrowRight className="w-4 h-4 ml-1" />
                       </div>
                     </div>
@@ -336,7 +343,7 @@ export function About() {
             </div>
             
             {/* Carte d'expérience - côté droit */}
-            <div className={`rounded-2xl ${isDark ? 'bg-gray-900' : 'bg-white'} shadow-md p-5 h-full border ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
+            <div className={`rounded-2xl ${isDark ? 'bg-gray-900/70' : 'bg-white/70'} shadow-md p-5 h-full border ${isDark ? 'border-gray-700/50' : 'border-gray-300/70'}`}>
               <div className="flex items-center gap-3 mb-5">
                 <div className={`${isDark ? 'bg-blue-900/50 text-blue-400' : 'bg-emerald-100 text-emerald-600'} p-1.5 rounded-lg`}>
                   <Award className="w-4 h-4" />
@@ -351,31 +358,31 @@ export function About() {
                 {/* Freelance Coding Instructor */}
                 <div className="relative pl-7">
                   <div className={`absolute left-0 top-1 w-[16px] h-[16px] rounded-full ${isDark ? 'border-2 border-gray-900 bg-blue-600' : 'border-2 border-white bg-emerald-500'} z-10`}></div>
-                  <div className={`text-base font-semibold ${isDark ? 'text-white' : 'text-gray-800'}`}>Freelance Coding Instructor</div>
-                  <div className={`text-sm ${isDark ? 'text-blue-400' : 'text-emerald-600'} mb-1`}>Magic Makers – Remote & On-Site (Paris) • 2024 - Présent</div>
+                  <div className={`text-base font-semibold ${isDark ? 'text-white' : 'text-gray-800'}`}>{t('codingInstructor')}</div>
+                  <div className={`text-sm ${isDark ? 'text-blue-400' : 'text-emerald-600'} mb-1`}>{t('magicMakers')}</div>
                   <div className={`text-xs ${isDark ? 'text-white/70' : 'text-gray-600'} space-y-1`}>
-                    <div>• Teach web development, Python, and Unity basics to teenagers</div>
-                    <div>• Conduct workshops both online and in-person</div>
+                    <div>{t('instructorDesc1')}</div>
+                    <div>{t('instructorDesc2')}</div>
                   </div>
                 </div>
                 
                 {/* Freelance Web Developer */}
                 <div className="relative pl-7">
                   <div className={`absolute left-0 top-1 w-[16px] h-[16px] rounded-full ${isDark ? 'border-2 border-gray-900 bg-blue-600' : 'border-2 border-white bg-emerald-500'} z-10`}></div>
-                  <div className={`text-base font-semibold ${isDark ? 'text-white' : 'text-gray-800'}`}>Freelance Web Developer</div>
-                  <div className={`text-sm ${isDark ? 'text-blue-400' : 'text-emerald-600'} mb-1`}>Self-employed – Remote • 2024 - Présent</div>
+                  <div className={`text-base font-semibold ${isDark ? 'text-white' : 'text-gray-800'}`}>{t('freelanceWebDev')}</div>
+                  <div className={`text-sm ${isDark ? 'text-blue-400' : 'text-emerald-600'} mb-1`}>{t('selfEmployed')}</div>
                   <div className={`text-xs ${isDark ? 'text-white/70' : 'text-gray-600'} space-y-1`}>
-                    <div>• Develop websites and web applications for small clients</div>
-                    <div>• Use modern web technologies like TypeScript, React, Node.js and Docker</div>
+                    <div>{t('freelanceDesc1')}</div>
+                    <div>{t('freelanceDesc2')}</div>
                   </div>
                 </div>
               </div>
               
               {/* Objectifs professionnels */}
               <div className={`mt-6 pt-5 border-t ${isDark ? 'border-gray-700/50' : 'border-gray-200'}`}>
-                <div className={`text-sm font-medium ${isDark ? 'text-blue-400' : 'text-emerald-600'} mb-2`}>Objectifs professionnels</div>
+                <div className={`text-sm font-medium ${isDark ? 'text-blue-400' : 'text-emerald-600'} mb-2`}>{t('professionalGoals')}</div>
                 <p className={`text-xs ${isDark ? 'text-white/80' : 'text-gray-600'}`}>
-                  Développer mes compétences en développement full-stack, être polyvalent et m'adapter à des nouvelles technologies puis par la suite me spécialiser dans un domaine.
+                  {t('goalsDescription')}
                 </p>
               </div>
             </div>
@@ -383,13 +390,13 @@ export function About() {
         </AnimatedElement>
         
         <AnimatedElement>
-          <div className="mb-8">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <div className="flex items-center gap-3 mb-8">
+            <div className={`${isDark ? 'bg-blue-900/50 text-blue-400' : 'bg-emerald-100 text-emerald-600'} p-2 rounded-lg`}>
+              <Layers className="w-6 h-6" />
+            </div>
+            <h2 className={`text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
               {t('technologiesMastered')}
             </h2>
-            <p className="text-gray-700 dark:text-gray-400 text-lg max-w-2xl">
-              {t('aboutDescription')}
-            </p>
           </div>
         </AnimatedElement>
         
@@ -470,10 +477,10 @@ export function About() {
                           ? 'bg-blue-600/20 text-blue-300'
                           : 'bg-emerald-600/20 text-emerald-700'
                       }`}>
-                        {selectedCategory.techs.length} {selectedCategory.techs.length > 1 ? 'technologies' : 'technologie'}
-                  </div>
-                </div>
-                
+                        {selectedCategory.techs.length} {selectedCategory.techs.length > 1 ? t('technologiesPlural') : t('technologiesSingular')}
+                      </div>
+                    </div>
+                    
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {selectedCategory.techs.map((tech, i) => (
                     <div 
@@ -502,7 +509,6 @@ export function About() {
                                 darkColor={selectedCategory.darkColor}
                               />
                             </div>
-                            <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} mb-4`}>{tech.experience}</p>
                             
                             {/* Description de l'expérience */}
                             <div className="space-y-2">
@@ -513,8 +519,8 @@ export function About() {
                                       isDark ? 'bg-blue-400' : 'bg-emerald-500'
                                     }`} />
                                     <div>
-                                      <span className="font-medium">Exploration</span>
-                                      <p className="text-xs mt-1">Je découvre cette technologie et commence à l'utiliser dans des projets simples.</p>
+                                      <span className="font-medium">{t('exploration')}</span>
+                                      <p className="text-xs mt-1">{tech.experience}</p>
                                     </div>
                                   </div>
                                 )}
@@ -524,8 +530,8 @@ export function About() {
                                       isDark ? 'bg-blue-400' : 'bg-emerald-500'
                                     }`} />
                                     <div>
-                                      <span className="font-medium">Pratique régulière</span>
-                                      <p className="text-xs mt-1">Je l'utilise activement dans mes projets et peux résoudre les problèmes courants.</p>
+                                      <span className="font-medium">{t('regularPractice')}</span>
+                                      <p className="text-xs mt-1">{tech.experience}</p>
                                     </div>
                                   </div>
                                 )}
@@ -535,8 +541,8 @@ export function About() {
                                       isDark ? 'bg-blue-400' : 'bg-emerald-500'
                                     }`} />
                                     <div>
-                                      <span className="font-medium">Expérience solide</span>
-                                      <p className="text-xs mt-1">Je maîtrise les concepts avancés et peux implémenter des solutions complexes.</p>
+                                      <span className="font-medium">{t('solidExperience')}</span>
+                                      <p className="text-xs mt-1">{tech.experience}</p>
                                     </div>
                                   </div>
                                 )}
@@ -546,8 +552,8 @@ export function About() {
                                       isDark ? 'bg-blue-400' : 'bg-emerald-500'
                                     }`} />
                                     <div>
-                                      <span className="font-medium">Expertise confirmée</span>
-                                      <p className="text-xs mt-1">Je peux optimiser les performances et partager mes connaissances avec d'autres.</p>
+                                      <span className="font-medium">{t('confirmedExpertise')}</span>
+                                      <p className="text-xs mt-1">{tech.experience}</p>
                                     </div>
                                   </div>
                                 )}
@@ -557,8 +563,8 @@ export function About() {
                                       isDark ? 'bg-blue-400' : 'bg-emerald-500'
                                     }`} />
                                     <div>
-                                      <span className="font-medium">Maîtrise approfondie</span>
-                                      <p className="text-xs mt-1">Je peux innover et créer des solutions avancées dans ce domaine.</p>
+                                      <span className="font-medium">{t('deepMastery')}</span>
+                                      <p className="text-xs mt-1">{tech.experience}</p>
                                     </div>
                                   </div>
                                 )}
@@ -579,9 +585,9 @@ export function About() {
                       <Layers className="w-8 h-8" />
         </div>
                     <div>
-                      <h3 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-800'} mb-2`}>Explorez mes compétences</h3>
+                      <h3 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-800'} mb-2`}>{t('exploreSkills')}</h3>
                       <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} max-w-md`}>
-                        Sélectionnez une catégorie dans la barre ci-dessus pour découvrir mes compétences techniques et mon niveau d'expérience
+                        {t('selectCategory')}
                       </p>
             </div>
                 </div>

@@ -829,7 +829,7 @@ export function Hero() {
       <BackgroundAnimation type={animationType} />
       
       {/* Conteneur de contenu avec fond légèrement opaque pour contraste */}
-      <div className="container relative mx-auto px-6 py-12 md:py-18 z-30 rounded-xl bg-white/30 dark:bg-black/30 backdrop-blur-sm shadow-lg dark:shadow-none border border-gray-300 dark:border-white/10">
+      <div className="container relative mx-auto px-6 py-12 md:py-18 z-30 rounded-xl bg-white/80 dark:bg-black/30  backdrop-blur-sm shadow-lg border border-gray-200/50 dark:border-white/10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 pt-8">
@@ -854,7 +854,7 @@ export function Hero() {
             {/* Interactive Skill Modules */}
             <div className="grid grid-cols-2 gap-4 mb-8">
               <div 
-                className="bg-white/70 dark:bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-gray-200 dark:border-white/10 hover:border-emerald-500/30 dark:hover:border-blue-700/30 transition-all group cursor-pointer"
+                className="bg-white/70 dark:bg-gray-900/50 backdrop-blur-sm p-4 rounded-xl border border-gray-300/70 dark:border-gray-700/50 hover:border-emerald-500/40 dark:hover:border-blue-700/40 transition-all group cursor-pointer"
                 onClick={() => setAnimationType('matrix')}
               >
                 <MousePointer className="w-6 h-6 text-emerald-600 dark:text-blue-600 mb-2" />
@@ -866,7 +866,7 @@ export function Hero() {
               </div>
               
               <div 
-                className="bg-white/70 dark:bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-gray-200 dark:border-white/10 hover:border-teal-500/30 dark:hover:border-blue-700/30 transition-all group cursor-pointer"
+                className="bg-white/70 dark:bg-gray-900/50 backdrop-blur-sm p-4 rounded-xl border border-gray-300/70 dark:border-gray-700/50 hover:border-teal-500/40 dark:hover:border-blue-700/40 transition-all group cursor-pointer"
                 onClick={nextCodeExample}
               >
                 <Code className="w-6 h-6 text-teal-600 dark:text-blue-500 mb-2" />
@@ -881,15 +881,15 @@ export function Hero() {
             <div className="flex gap-4">
               <a
                 href="#projects"
-                className="px-8 py-3 rounded-lg bg-gradient-to-r from-emerald-500 to-green-600 dark:from-blue-800 dark:to-slate-800 text-white font-medium hover:shadow-lg hover:shadow-emerald-500/25 dark:hover:shadow-blue-900/25 transition-all hover:-translate-y-1"
+                className="px-8 py-3 rounded-lg bg-gradient-to-r from-emerald-500/80 to-green-600/80 dark:from-blue-700/80 dark:to-slate-700/80 text-white font-medium hover:shadow-lg hover:from-emerald-500/90 hover:to-green-600/90 dark:hover:from-blue-700/90 dark:hover:to-slate-700/90 backdrop-blur-sm transition-all hover:-translate-y-1"
               >
                 {t('exploreExamples')}
               </a>
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/HeedzZ/portfolio/"
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="px-8 py-3 rounded-lg bg-white/20 hover:bg-white/30 dark:bg-white/10 dark:hover:bg-white/15 text-gray-900 dark:text-white font-medium border border-gray-300 dark:border-white/10 flex items-center gap-2 transition-all hover:-translate-y-1"
+                className="px-8 py-3 rounded-lg bg-white/40 hover:bg-white/50 dark:bg-gray-900/40 dark:hover:bg-gray-900/50 text-gray-900 dark:text-white font-medium border border-gray-300/50 dark:border-gray-700/50 flex items-center gap-2 backdrop-blur-sm transition-all hover:-translate-y-1"
               >
                 <Github className="w-5 h-5" /> {t('viewSourceCode')}
               </a>
@@ -897,7 +897,7 @@ export function Hero() {
           </div>
           
           <div className="relative">
-            <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-gray-300 dark:border-gray-700/50 rounded-xl p-2 shadow-2xl">
+            <div className="bg-white/70 dark:bg-gray-900/60 backdrop-blur-md border border-gray-300/70 dark:border-gray-700/50 rounded-xl p-2 shadow-xl">
               <div className="flex items-center justify-between gap-1.5 mb-4">
                 <div className="flex items-center gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-red-400"></div>
@@ -987,10 +987,10 @@ export function Hero() {
                       onClick={() => showBackgroundAnimationCode('squares')}
                       className={`p-3 rounded-lg transition-all flex items-center gap-2 ${
                         animationType === 'squares'
-                          ? 'bg-gradient-to-r from-emerald-600 to-green-600 dark:from-blue-800 dark:to-slate-900 text-white shadow-lg shadow-emerald-500/20 dark:shadow-blue-900/20'
+                          ? 'bg-gradient-to-r from-emerald-500/80 to-green-600/80 dark:from-blue-700/80 dark:to-slate-700/80 text-white backdrop-blur-sm shadow-md'
                           : isDark
-                            ? 'bg-white/10 backdrop-blur-sm hover:bg-white/15 text-gray-300 border border-gray-700/50'
-                            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
+                            ? 'bg-gray-900/40 backdrop-blur-sm hover:bg-gray-900/50 text-gray-300 border border-gray-700/50'
+                            : 'bg-white/40 backdrop-blur-sm hover:bg-white/50 text-gray-700 border border-gray-300/50'
                       }`}
                       title={t('animatedSquares')}
                     >
@@ -1002,10 +1002,10 @@ export function Hero() {
                       onClick={() => showBackgroundAnimationCode('matrix')}
                       className={`p-3 rounded-lg transition-all flex items-center gap-2 ${
                         animationType === 'matrix'
-                          ? 'bg-gradient-to-r from-emerald-600 to-green-600 dark:from-blue-800 dark:to-slate-900 text-white shadow-lg shadow-emerald-500/20 dark:shadow-blue-900/20'
+                          ? 'bg-gradient-to-r from-emerald-500/80 to-green-600/80 dark:from-blue-700/80 dark:to-slate-700/80 text-white backdrop-blur-sm shadow-md'
                           : isDark
-                            ? 'bg-white/10 backdrop-blur-sm hover:bg-white/15 text-gray-300 border border-gray-700/50'
-                            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
+                            ? 'bg-gray-900/40 backdrop-blur-sm hover:bg-gray-900/50 text-gray-300 border border-gray-700/50'
+                            : 'bg-white/40 backdrop-blur-sm hover:bg-white/50 text-gray-700 border border-gray-300/50'
                       }`}
                       title={t('matrixRain')}
                     >
@@ -1017,10 +1017,10 @@ export function Hero() {
                       onClick={() => showBackgroundAnimationCode('waves')}
                       className={`p-3 rounded-lg transition-all flex items-center gap-2 ${
                         animationType === 'waves'
-                          ? 'bg-gradient-to-r from-emerald-600 to-green-600 dark:from-blue-800 dark:to-slate-900 text-white shadow-lg shadow-emerald-500/20 dark:shadow-blue-900/20'
+                          ? 'bg-gradient-to-r from-emerald-500/80 to-green-600/80 dark:from-blue-700/80 dark:to-slate-700/80 text-white backdrop-blur-sm shadow-md'
                           : isDark
-                            ? 'bg-white/10 backdrop-blur-sm hover:bg-white/15 text-gray-300 border border-gray-700/50'
-                            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
+                            ? 'bg-gray-900/40 backdrop-blur-sm hover:bg-gray-900/50 text-gray-300 border border-gray-700/50'
+                            : 'bg-white/40 backdrop-blur-sm hover:bg-white/50 text-gray-700 border border-gray-300/50'
                       }`}
                       title={t('fluidWaves')}
                     >
@@ -1032,10 +1032,10 @@ export function Hero() {
                       onClick={() => showBackgroundAnimationCode('stars')}
                       className={`p-3 rounded-lg transition-all flex items-center gap-2 ${
                         animationType === 'stars'
-                          ? 'bg-gradient-to-r from-emerald-600 to-green-600 dark:from-blue-800 dark:to-slate-900 text-white shadow-lg shadow-emerald-500/20 dark:shadow-blue-900/20'
+                          ? 'bg-gradient-to-r from-emerald-500/80 to-green-600/80 dark:from-blue-700/80 dark:to-slate-700/80 text-white backdrop-blur-sm shadow-md'
                           : isDark
-                            ? 'bg-white/10 backdrop-blur-sm hover:bg-white/15 text-gray-300 border border-gray-700/50'
-                            : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300'
+                            ? 'bg-gray-900/40 backdrop-blur-sm hover:bg-gray-900/50 text-gray-300 border border-gray-700/50'
+                            : 'bg-white/40 backdrop-blur-sm hover:bg-white/50 text-gray-700 border border-gray-300/50'
                       }`}
                       title={t('luminousParticles')}
                     >

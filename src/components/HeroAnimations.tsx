@@ -276,9 +276,7 @@ export function BackgroundAnimation({ type }: AnimationProps) {
         height: '100%',
         zIndex: 1,
         pointerEvents: 'none',
-        background: isDark ? 
-          'linear-gradient(to bottom, #0f172a, #1e293b)' : 
-          'linear-gradient(to bottom, #f0f9ff, #e0f2fe)'
+        backgroundColor: isDark ? 'rgba(17, 24, 39, 1)' : 'rgba(240, 249, 255, 1)',
       };
       break;
     case 'squares':
@@ -656,21 +654,13 @@ export function BackgroundAnimation({ type }: AnimationProps) {
     canvas.style.pointerEvents = 'none';
     container.appendChild(canvas);
     
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) return;
     
-    // Créer un dégradé de fond
+    // Utiliser un fond uni au lieu d'un dégradé
     const drawBackground = () => {
-      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-      if (isDark) {
-        gradient.addColorStop(0, 'rgba(15, 23, 42, 1)');
-        gradient.addColorStop(1, 'rgba(30, 41, 59, 1)');
-      } else {
-        gradient.addColorStop(0, 'rgba(240, 249, 255, 1)');
-        gradient.addColorStop(1, 'rgba(224, 242, 254, 1)');
-      }
-      ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = isDark ? 'rgba(17, 24, 39, 1)' : 'rgba(240, 249, 255, 1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
     
     // Interface pour les particules
@@ -688,38 +678,37 @@ export function BackgroundAnimation({ type }: AnimationProps) {
       hue: number;
     }
     
-    // Particules et paramètres adaptés selon les performances
+    // Particules et paramètres adaptés selon les performances - RÉDUIT POUR ÉVITER LE BRUIT
     const particles: Particle[] = [];
-    const maxParticles = isLowPerformance ? 25 : 50;
-    const trailLength = isLowPerformance ? 12 : 20; // Augmenté la longueur des traînées
+    const maxParticles = isLowPerformance ? 15 : 30; // Réduit de 25/50 à 15/30
+    const trailLength = isLowPerformance ? 8 : 12; // Réduit de 12/20 à 8/12
     
     // Référence sûre au contexte pour éviter les erreurs TypeScript
-    // Le check ctx === null est déjà fait plus haut, donc on peut utiliser l'opérateur ! ici
     const safeCtx = ctx!;
     
     // Couleurs de base selon le thème
-    const baseHue = isDark ? 240 : 180; // Bleu pour sombre, turquoise pour clair
+    const baseHue = isDark ? 240 : 180;
     
     // Fonction pour créer une particule
     function createParticle(): Particle {
-      const size = Math.random() * 3.5 + 1.5; // Particules légèrement plus grandes
+      const size = Math.random() * 3 + 1.5;
       const x = Math.random() * canvas.width;
       const y = Math.random() * canvas.height;
       
       // Variation de teinte autour de la couleur de base
-      const hueVariation = 40; // ±40 degrés pour plus de variété
+      const hueVariation = 30;
       const hue = baseHue + (Math.random() * hueVariation * 2) - hueVariation;
       
       // Couleur avec luminosité et saturation élevées
-      const color = `hsla(${hue}, 95%, 75%, 0.9)`; // Augmenté luminosité et opacité
+      const color = `hsla(${hue}, 95%, 75%, 0.9)`;
       
-      // Vitesse aléatoire mais douce
-      const speedFactor = 0.7; // Vitesse légèrement augmentée
+      // Vitesse aléatoire mais douce - RÉDUITE
+      const speedFactor = 0.5; // Réduit de 0.7 à 0.5
       const vx = (Math.random() * 2 - 1) * speedFactor;
       const vy = (Math.random() * 2 - 1) * speedFactor;
       
       // Durée de vie aléatoire mais longue
-      const maxLife = Math.random() * 300 + 150; // Durée de vie augmentée
+      const maxLife = Math.random() * 200 + 150; // Réduit de 300+150 à 200+150
       
       return {
         x,
@@ -731,7 +720,7 @@ export function BackgroundAnimation({ type }: AnimationProps) {
         life: 0,
         maxLife,
         trail: [],
-        trailLength: Math.floor(Math.random() * 8) + trailLength, // Traînées plus longues
+        trailLength: Math.floor(Math.random() * 4) + trailLength, // Réduit la variabilité
         hue
       };
     }
@@ -739,12 +728,10 @@ export function BackgroundAnimation({ type }: AnimationProps) {
     // Initialiser les particules
     for (let i = 0; i < maxParticles; i++) {
       particles.push(createParticle());
-      // Initialiser la vie à une valeur aléatoire pour éviter que toutes les particules
-      // ne se réinitialisent en même temps
       particles[i].life = Math.random() * particles[i].maxLife;
     }
     
-    // Fonction pour mettre à jour et dessiner une particule
+    // Fonction pour mettre à jour et dessiner une particule - OPTIMISÉE
     function updateAndDrawParticle(particle: Particle) {
       // Mettre à jour la position
       particle.x += particle.vx;
@@ -753,12 +740,12 @@ export function BackgroundAnimation({ type }: AnimationProps) {
       // Augmenter la durée de vie
       particle.life++;
       
-      // Ajouter la position actuelle à la traînée plus fréquemment
-      if (particle.life % 1 === 0) { // Ajouter un point à chaque frame
+      // Ajouter la position actuelle à la traînée moins fréquemment
+      if (particle.life % 2 === 0) { // Réduit de chaque frame à une frame sur deux
         particle.trail.push({
           x: particle.x,
           y: particle.y,
-          size: particle.size * 1.2 // Traînées plus larges
+          size: particle.size
         });
         
         // Limiter la longueur de la traînée
@@ -770,33 +757,37 @@ export function BackgroundAnimation({ type }: AnimationProps) {
       // Calculer l'opacité basée sur la durée de vie
       const opacityFactor = 1 - particle.life / particle.maxLife;
       
-      // Dessiner la traînée avec effet de dégradé
-      particle.trail.forEach((point, index) => {
-        const trailOpacity = (index / particle.trail.length) * opacityFactor * 0.9; // Plus opaque
-        const pointSize = point.size * (index / particle.trail.length);
-        
-        safeCtx.beginPath();
-        safeCtx.arc(point.x, point.y, pointSize, 0, Math.PI * 2);
-        safeCtx.fillStyle = particle.color.replace('0.9', String(trailOpacity));
-        
-        // Ajouter un halo à la traînée
-        safeCtx.shadowBlur = pointSize * 3;
-        safeCtx.shadowColor = particle.color.replace('0.9', String(trailOpacity * 0.8));
-        
-        safeCtx.fill();
-        safeCtx.shadowBlur = 0;
-      });
+      // Dessiner la traînée avec effet de dégradé - SIMPLIFIÉ
+      if (particle.trail.length > 2) { // Ne dessiner que si suffisamment de points
+        particle.trail.forEach((point, index) => {
+          if (index % 2 === 0) { // Dessiner un point sur deux pour économiser des ressources
+            const trailOpacity = (index / particle.trail.length) * opacityFactor * 0.8;
+            const pointSize = point.size * (index / particle.trail.length);
+            
+            safeCtx.beginPath();
+            safeCtx.arc(point.x, point.y, pointSize, 0, Math.PI * 2);
+            safeCtx.fillStyle = particle.color.replace('0.9', String(trailOpacity));
+            
+            // Réduire l'effet de flou pour la traînée
+            safeCtx.shadowBlur = pointSize * 1.5; // Réduit de 3 à 1.5
+            safeCtx.shadowColor = particle.color.replace('0.9', String(trailOpacity * 0.6));
+            
+            safeCtx.fill();
+            safeCtx.shadowBlur = 0;
+          }
+        });
+      }
       
       // Dessiner la particule
       safeCtx.beginPath();
       safeCtx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
       
-      // Ajouter un halo lumineux plus intense
-      safeCtx.shadowBlur = particle.size * 6;
+      // Ajouter un halo lumineux moins intense
+      safeCtx.shadowBlur = particle.size * 3; // Réduit de 6 à 3
       safeCtx.shadowColor = particle.color;
       
       // Dessiner avec opacité variable
-      const mainOpacity = Math.min(1, opacityFactor * 1.8); // Augmenter l'opacité
+      const mainOpacity = Math.min(1, opacityFactor * 1.5); // Réduit de 1.8 à 1.5
       safeCtx.fillStyle = particle.color.replace('0.9', String(mainOpacity));
       safeCtx.fill();
       
@@ -814,15 +805,14 @@ export function BackgroundAnimation({ type }: AnimationProps) {
       // Réinitialiser la particule si sa durée de vie est écoulée
       if (particle.life >= particle.maxLife) {
         const newParticle = createParticle();
-        // Copier les propriétés vers la particule existante
         Object.assign(particle, newParticle);
-        particle.trail = []; // Vider la traînée
+        particle.trail = [];
       }
     }
     
-    // Fonction d'animation avec limitation de fréquence
+    // Fonction d'animation avec limitation de fréquence - RÉDUIT FPS
     let lastFrameTime = 0;
-    const targetFPS = isLowPerformance ? 24 : 45; // FPS légèrement augmenté
+    const targetFPS = isLowPerformance ? 20 : 30; // Réduit de 24/45 à 20/30
     const frameInterval = 1000 / targetFPS;
     
     // Fonction d'animation
@@ -841,18 +831,18 @@ export function BackgroundAnimation({ type }: AnimationProps) {
       // Mettre à jour et dessiner toutes les particules
       particles.forEach(updateAndDrawParticle);
       
-      // Effet de lueur globale pour le mode sombre
+      // Effet de lueur globale pour le mode sombre - SIMPLIFIÉ
       if (isDark) {
-        // Appliquer un flou sur tout le canvas pour un effet de lueur
+        // Appliquer un flou plus léger sur le canvas
         safeCtx.globalCompositeOperation = 'lighter';
-        safeCtx.filter = 'blur(6px)'; // Augmenté l'effet de flou
+        safeCtx.filter = 'blur(4px)'; // Réduit de 6px à 4px
         
-        // Dessiner des points lumineux additionnels sur certaines particules
+        // Dessiner des points lumineux sur moins de particules
         particles.forEach((p, index) => {
-          if (index % 2 === 0) {
+          if (index % 3 === 0) { // Réduit de une sur deux à une sur trois
             safeCtx.beginPath();
-            safeCtx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI * 2);
-            safeCtx.fillStyle = p.color.replace('0.9', '0.3'); // Plus visible
+            safeCtx.arc(p.x, p.y, p.size * 2, 0, Math.PI * 2);
+            safeCtx.fillStyle = p.color.replace('0.9', '0.2'); // Réduit de 0.3 à 0.2
             safeCtx.fill();
           }
         });
@@ -869,7 +859,7 @@ export function BackgroundAnimation({ type }: AnimationProps) {
     const handleResize = throttle(() => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-    }, 200);
+    }, 300); // Augmenté de 200ms à 300ms
     
     window.addEventListener('resize', handleResize);
     let animationId = requestAnimationFrame(animate);
@@ -1286,7 +1276,7 @@ function animate() {
   // Draw background
   const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
   if (isDark) {
-    gradient.addColorStop(0, 'rgba(15, 23, 42, 1)');
+    gradient.addColorStop(0, 'rgba(17, 24, 39, 1)');
     gradient.addColorStop(1, 'rgba(30, 41, 59, 1)');
   } else {
     gradient.addColorStop(0, 'rgba(240, 249, 255, 1)');

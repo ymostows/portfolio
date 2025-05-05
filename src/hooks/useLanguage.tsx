@@ -136,8 +136,8 @@ const translations: TranslationMap = {
     fr: 'À propos de moi'
   },
   'personalDescription': {
-    en: 'I am a passionate developer specialized in building modern web applications. With a background from 42 School, I combine low-level programming skills with modern web technologies to create elegant and efficient solutions.',
-    fr: 'Je suis un développeur passionné spécialisé dans la création d\'applications web modernes. Avec une formation à l\'École 42, je combine des compétences en programmation bas niveau avec des technologies web modernes pour créer des solutions élégantes et efficaces.'
+    en: 'I am a passionate developer who loves creating modern web applications. My journey at École 42 has given me a solid foundation, and I enjoy combining different technologies to build elegant and efficient solutions that solve real problems.',
+    fr: 'Passionné par le développement, j\'aime créer des applications web modernes et intuitives. Mon parcours à l\'École 42 m\'a donné une solide formation, et j\'apprécie particulièrement combiner différentes technologies pour concevoir des solutions élégantes qui répondent à de vrais besoins.'
   },
   'location': {
     en: 'Location',
@@ -171,57 +171,45 @@ const translations: TranslationMap = {
     en: "Here's an overview of my skills. I'd like to point out that the skill bars are more for visual style than accuracy. I mainly wanted to use this design, and I just tried to rate myself as honestly as possible.",
     fr: "Voici un aperçu de mes compétences. Je tiens à préciser que les barres de niveau sont à prendre avec du recul. J'ai surtout voulu utiliser ce style de design, et j'ai simplement essayé de m'auto-évaluer du mieux possible."
   },
-  'frontEnd': {
-    en: 'Front-end',
-    fr: 'Front-end'
+  'beginner': {
+    en: 'Beginner',
+    fr: 'Débutant'
   },
-  'backEnd': {
-    en: 'Back-end',
-    fr: 'Back-end'
+  'intermediate': {
+    en: 'Intermediate',
+    fr: 'Intermédiaire'
   },
-  'lowLevelLanguages': {
-    en: 'Low-level Languages',
-    fr: 'Langages bas niveau'
+  'advanced': {
+    en: 'Advanced',
+    fr: 'Avancé'
   },
-  'databases': {
-    en: 'Databases',
-    fr: 'Bases de données'
+  'expert': {
+    en: 'Expert',
+    fr: 'Expert'
   },
-  'tools': {
-    en: 'Tools',
-    fr: 'Outils'
+  'mastery': {
+    en: 'Mastery',
+    fr: 'Maîtrise'
   },
-  'professionalExperience': {
-    en: 'Professional Experience',
-    fr: 'Expérience professionnelle'
+  'technologiesPlural': {
+    en: 'technologies',
+    fr: 'technologies'
   },
-  'fullStackDeveloper': {
-    en: 'Full-Stack Developer',
-    fr: 'Développeur Full-Stack'
+  'technologiesSingular': {
+    en: 'technology',
+    fr: 'technologie'
   },
-  'companyXYZ': {
-    en: 'Company XYZ • 2022 - Present',
-    fr: 'Entreprise XYZ • 2022 - Présent'
+  'clickForMore': {
+    en: 'Click for more info',
+    fr: 'Cliquez pour plus d\'infos'
   },
-  'fullStackDescription': {
-    en: 'Web application development with React, TypeScript and Node.js. Docker infrastructure and CI/CD setup.',
-    fr: 'Développement d\'applications Web avec React, TypeScript et Node.js. Mise en place d\'infrastructures Docker et CI/CD.'
+  'goBack': {
+    en: 'Go back',
+    fr: 'Retourner'
   },
-  'cppDeveloper': {
-    en: 'C++ Developer',
-    fr: 'Développeur C++'
-  },
-  'companyABC': {
-    en: 'Company ABC • 2020 - 2022',
-    fr: 'Entreprise ABC • 2020 - 2022'
-  },
-  'cppDescription': {
-    en: 'Embedded systems development and performance optimization.',
-    fr: 'Développement de systèmes embarqués et optimisation de performances.'
-  },
-  'school42Student': {
-    en: 'School 42 Student',
-    fr: 'Étudiant à l\'École 42'
+  'school42': {
+    en: 'School 42',
+    fr: 'École 42'
   },
   'school42Period': {
     en: '2018 - 2022',
@@ -231,15 +219,163 @@ const translations: TranslationMap = {
     en: 'Digital Technology Architect',
     fr: 'Architecte des technologies numériques'
   },
+  'baccalaureate': {
+    en: 'General Baccalaureate',
+    fr: 'Baccalauréat Général'
+  },
+  'baccalaureatePeriod': {
+    en: '2022 - 2023',
+    fr: '2022 - 2023'
+  },
+  'baccalaureateDescription': {
+    en: 'Mathematics and Computer Science specialties\nJean Pierre Timbaud High School',
+    fr: 'Spécialités Mathématiques et Informatique\nLycée Jean Pierre Timbaud'
+  },
+  'professionalGoals': {
+    en: 'Professional Goals',
+    fr: 'Objectifs professionnels'
+  },
+  'goalsDescription': {
+    en: 'Develop my skills in full-stack development, be versatile and adapt to new technologies, then eventually specialize in a specific area.',
+    fr: 'Développer mes compétences en développement full-stack, être polyvalent et m\'adapter à des nouvelles technologies puis par la suite me spécialiser dans un domaine.'
+  },
+  'codingInstructor': {
+    en: 'Freelance Coding Instructor',
+    fr: 'Formateur Freelance en Programmation'
+  },
+  'magicMakers': {
+    en: 'Magic Makers – Remote & On-Site (Paris) • 2024 - Currently',
+    fr: 'Magic Makers – À distance & Sur site (Paris) • 2024 - Actuellement'
+  },
+  'instructorDesc1': {
+    en: '• Teach web development, Python, and Unity basics to teenagers',
+    fr: '• Enseigne le développement web, Python et les bases d\'Unity aux adolescents'
+  },
+  'instructorDesc2': {
+    en: '• Conduct workshops both online and in-person',
+    fr: '• Anime des ateliers en ligne et en présentiel'
+  },
+  'freelanceWebDev': {
+    en: 'Freelance Web Developer',
+    fr: 'Développeur Web Freelance'
+  },
+  'selfEmployed': {
+    en: 'Self-employed – Remote • 2024 - Currently',
+    fr: 'Auto-entrepreneur – À distance • 2024 - Actuellement'
+  },
+  'freelanceDesc1': {
+    en: '• Develop websites and web applications for small clients',
+    fr: '• Développe des sites web et des applications web pour des petits clients'
+  },
+  'freelanceDesc2': {
+    en: '• Use modern web technologies like TypeScript, React, Node.js and Docker',
+    fr: '• Utilise des technologies web modernes comme TypeScript, React, Node.js et Docker'
+  },
+  'exploreSkills': {
+    en: 'Explore my skills',
+    fr: 'Explorez mes compétences'
+  },
+  'selectCategory': {
+    en: 'Select a category in the bar above to discover my technical skills and level of experience',
+    fr: 'Sélectionnez une catégorie dans la barre ci-dessus pour découvrir mes compétences techniques et mon niveau d\'expérience'
+  },
+  'exploration': {
+    en: 'Exploration',
+    fr: 'Exploration'
+  },
+  'explorationDesc': {
+    en: 'I am discovering this technology and starting to use it in simple projects.',
+    fr: 'Je découvre cette technologie et commence à l\'utiliser dans des projets simples.'
+  },
+  'regularPractice': {
+    en: 'Regular Practice',
+    fr: 'Pratique régulière'
+  },
+  'practiceDesc': {
+    en: 'I use it actively in my projects and can solve common problems.',
+    fr: 'Je l\'utilise activement dans mes projets et peux résoudre les problèmes courants.'
+  },
+  'solidExperience': {
+    en: 'Solid Experience',
+    fr: 'Expérience solide'
+  },
+  'experienceDesc': {
+    en: 'I master advanced concepts and can implement complex solutions.',
+    fr: 'Je maîtrise les concepts avancés et peux implémenter des solutions complexes.'
+  },
+  'confirmedExpertise': {
+    en: 'Confirmed Expertise',
+    fr: 'Expertise confirmée'
+  },
+  'expertiseDesc': {
+    en: 'I can optimize performance and share my knowledge with others.',
+    fr: 'Je peux optimiser les performances et partager mes connaissances avec d\'autres.'
+  },
+  'deepMastery': {
+    en: 'Deep Mastery',
+    fr: 'Maîtrise approfondie'
+  },
+  'masteryDesc': {
+    en: 'I can innovate and create advanced solutions in this field.',
+    fr: 'Je peux innover et créer des solutions avancées dans ce domaine.'
+  },
+  'present': {
+    en: 'Present',
+    fr: 'Présent'
+  },
 
   // Projects
-  'githubProjects': {
-    en: 'GitHub Projects',
-    fr: 'Projets GitHub'
+  'featuredProjects': {
+    en: 'Featured Projects',
+    fr: 'Projets en Vedette'
   },
-  'projectsDescription': {
-    en: 'My open source projects and contributions that demonstrate my technical skills',
-    fr: 'Mes projets et contributions open source qui démontrent mes compétences techniques'
+  'all': {
+    en: 'All',
+    fr: 'Tous'
+  },
+  'code': {
+    en: 'Code',
+    fr: 'Code'
+  },
+  'demo': {
+    en: 'Demo',
+    fr: 'Démo'
+  },
+  'featured': {
+    en: 'Featured',
+    fr: 'En vedette'
+  },
+  'discoverOtherProjects': {
+    en: 'Discover my other projects',
+    fr: 'Découvrez mes autres projets'
+  },
+  'checkGitHub': {
+    en: 'Check out my GitHub to explore my smaller projects and technical experiments',
+    fr: 'Consultez mon GitHub pour explorer mes projets plus petits et mes expérimentations techniques'
+  },
+  'viewOnGitHub': {
+    en: 'View on GitHub',
+    fr: 'Voir sur GitHub'
+  },
+  'aboutProject': {
+    en: 'About this project',
+    fr: 'À propos de ce projet'
+  },
+  'technologies': {
+    en: 'Technologies',
+    fr: 'Technologies'
+  },
+  'projectDetails': {
+    en: 'Project Details',
+    fr: 'Détails du projet'
+  },
+  'owner': {
+    en: 'Owner',
+    fr: 'Propriétaire'
+  },
+  'visibility': {
+    en: 'Visibility',
+    fr: 'Visibilité'
   },
   'public': {
     en: 'Public',
@@ -249,9 +385,17 @@ const translations: TranslationMap = {
     en: 'Private',
     fr: 'Privé'
   },
-  'viewCode': {
-    en: 'View code',
-    fr: 'Voir le code'
+  'year': {
+    en: 'Year',
+    fr: 'Année'
+  },
+  'liveDemo': {
+    en: 'Live Demo',
+    fr: 'Démo en ligne'
+  },
+  'clickForInfo': {
+    en: 'Click for info',
+    fr: 'Cliquez pour infos'
   },
   
   // Contact
@@ -329,10 +473,6 @@ const translations: TranslationMap = {
     en: 'Navigation',
     fr: 'Navigation'
   },
-  'technologies': {
-    en: 'Technologies',
-    fr: 'Technologies'
-  },
   'quickLinks': {
     en: 'Quick Links',
     fr: 'Liens Rapides'
@@ -350,7 +490,131 @@ const translations: TranslationMap = {
   'switchToLanguage': {
     en: 'FR',
     fr: 'EN'
-  }
+  },
+
+  // Skill levels
+  'levelBeginner': {
+    en: 'Beginner',
+    fr: 'Débutant'
+  },
+  'levelIntermediate': {
+    en: 'Intermediate',
+    fr: 'Intermédiaire'
+  },
+  'levelAdvanced': {
+    en: 'Advanced',
+    fr: 'Avancé'
+  },
+  'levelExpert': {
+    en: 'Expert',
+    fr: 'Expert'
+  },
+  'levelMastery': {
+    en: 'Mastery',
+    fr: 'Maîtrise'
+  },
+  
+  // Skill categories
+  'frontEndCategory': {
+    en: 'Front End',
+    fr: 'Front End'
+  },
+  'backEndCategory': {
+    en: 'Back End',
+    fr: 'Back End'
+  },
+  'lowLevelCategory': {
+    en: 'Low Level Languages',
+    fr: 'Langages Bas Niveau'
+  },
+  'devOpsCategory': {
+    en: 'DevOps',
+    fr: 'DevOps'
+  },
+  'databasesCategory': {
+    en: 'Databases',
+    fr: 'Bases de données'
+  },
+  'toolsCategory': {
+    en: 'Tools',
+    fr: 'Outils'
+  },
+  
+  // Skills experience
+  'typescriptExp': {
+    en: 'I built a web application with this technology.',
+    fr: 'J\'ai construit une application web avec cette technologie.'
+  },
+  'javascriptExp': {
+    en: 'I mainly use it with Node.js and Next.js, but I know the language well.',
+    fr: 'Je l\'utilise principalement avec Node.js et Next.js, mais je connais bien le langage.'
+  },
+  'reactExp': {
+    en: 'All my recent projects, including this portfolio, are built with it.',
+    fr: 'Tous mes projets récents, y compris ce portfolio, sont construits avec.'
+  },
+  'htmlCssExp': {
+    en: 'I learned it at school and apply these concepts daily.',
+    fr: 'Je l\'ai appris à l\'école et j\'applique ces concepts quotidiennement.'
+  },
+  'tailwindExp': {
+    en: 'I use it in all my web projects and find it very useful.',
+    fr: 'Je l\'utilise dans tous mes projets web et le trouve très utile.'
+  },
+  'nodejsExp': {
+    en: 'I built a web application with this technology.',
+    fr: 'J\'ai construit une application web avec cette technologie.'
+  },
+  'nextjsExp': {
+    en: 'I use it for all my web projects and find it very useful.',
+    fr: 'Je l\'utilise pour tous mes projets web et le trouve très utile.'
+  },
+  'pythonExp': {
+    en: 'I learned it at school and did many projects with it, but nothing related to web development. I also teach private lessons in Digital and Computer Science. And my courses at Magic Makers are based on Python.',
+    fr: 'Je l\'ai appris à l\'école et j\'ai fait beaucoup de projets avec, mais rien lié au développement web. Je fais aussi des cours particuliers de NSI (Numérique et Sciences Informatiques). Et mes cours chez Magic Makers sont basés sur Python.'
+  },
+  'cExp': {
+    en: 'It\'s the first language we learn at 42 school and there are many projects that use it.',
+    fr: 'C\'est le premier langage que nous apprenons à l\'école 42 et il y a beaucoup de projets qui l\'utilisent.'
+  },
+  'cppExp': {
+    en: 'It\'s the second language we learn at 42 school and there are many projects that use it.',
+    fr: 'C\'est le deuxième langage que nous apprenons à l\'école 42 et il y a beaucoup de projets qui l\'utilisent.'
+  },
+  'dockerExp': {
+    en: 'Used in 2 projects and I really enjoy structuring my projects with it.',
+    fr: 'Utilisé dans 2 projets et j\'aime beaucoup structurer mes projets avec.'
+  },
+  'gitExp': {
+    en: 'Since I\'ve been at 42 school, I\'ve used it for all my projects.',
+    fr: 'Depuis que je suis à l\'école 42, je l\'utilise pour tous mes projets.'
+  },
+  'linuxExp': {
+    en: 'I love this operating system and use it a lot.',
+    fr: 'J\'aime ce système d\'exploitation et je l\'utilise beaucoup.'
+  },
+  'sqliteExp': {
+    en: 'Used in many of my projects.',
+    fr: 'Utilisé dans beaucoup de mes projets.'
+  },
+  'mariadbExp': {
+    en: 'Used in 1 project.',
+    fr: 'Utilisé dans 1 projet.'
+  },
+  'bashExp': {
+    en: 'I use it for all my projects.',
+    fr: 'Je l\'utilise pour tous mes projets.'
+  },
+  'n8nExp': {
+    en: 'I\'ve used it a few times recently in my web projects.',
+    fr: 'Je l\'ai utilisé quelques fois récemment dans mes projets web.'
+  },
+  
+  // UI text
+  'presentTime': {
+    en: 'Currently',
+    fr: 'Actuellement'
+  },
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
