@@ -174,3 +174,67 @@ html, body {
 .animate-blink {
   animation: blink 1s step-end infinite;
 }
+
+/* Styles globaux responsifs */
+@layer utilities {
+  /* Styles pour les images */
+  img {
+    @apply max-w-full h-auto;
+  }
+  
+  /* Ajustements de texte pour petits écrans */
+  h1 {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
+  }
+  
+  h2 {
+    @apply text-2xl sm:text-3xl md:text-4xl;
+  }
+  
+  h3 {
+    @apply text-xl sm:text-2xl;
+  }
+  
+  p {
+    @apply text-sm sm:text-base;
+  }
+  
+  /* Flexbox responsive pour les conteneurs */
+  .flex-container {
+    @apply flex flex-col sm:flex-row;
+  }
+  
+  /* Grilles responsives */
+  .responsive-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+  
+  /* Espacements responsifs */
+  .section-padding {
+    @apply py-6 md:py-12 px-4 md:px-8;
+  }
+  
+  /* Masquer/afficher des éléments selon la taille d'écran */
+  .mobile-only {
+    @apply block sm:hidden;
+  }
+  
+  .desktop-only {
+    @apply hidden sm:block;
+  }
+  
+  /* Overflow control pour les conteneurs */
+  .overflow-container {
+    @apply overflow-x-auto;
+  }
+  
+  /* Ajustements pour les boutons sur mobile */
+  button, .btn-primary, .btn-secondary, .btn-outline {
+    @apply text-sm sm:text-base py-1.5 sm:py-2 px-3 sm:px-4;
+  }
+  
+  /* Meilleure lisibilité des tableaux sur petit écran */
+  table {
+    @apply w-full overflow-x-auto block sm:table;
+  }
+}

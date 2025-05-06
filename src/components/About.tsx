@@ -1,4 +1,4 @@
-import { Code, Database, Terminal, Server, Cpu, Layers, BarChart, ArrowRight, MapPin, Award, GraduationCap, FileDown, Mail, ExternalLink } from 'lucide-react';
+import { Code, Database, Terminal, Server, Cpu, Layers, BarChart, ArrowRight, MapPin, Award, GraduationCap, FileDown, Mail, ExternalLink, ChevronDown, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 import { useTheme } from '../hooks/useTheme';
 import { useEffect, useRef, useState } from 'react';
@@ -122,6 +122,17 @@ export function About() {
   const categoryRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
   const contentRef = useRef<HTMLDivElement>(null);
   const [showBio, setShowBio] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  
+  // Détection du mobile
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   const toggleCategory = (key: string) => {
     setExpandedCategory(expandedCategory === key ? null : key);
@@ -217,8 +228,8 @@ export function About() {
   const selectedCategory = skills.find(s => s.key === expandedCategory);
   
   return (
-    <section id="about" className="relative z-40">
-      <div className={`container relative mx-auto px-6 py-6 rounded-xl backdrop-blur-sm shadow-lg dark:shadow-none border ${
+    <section id="about" className="relative z-40 pt-6 sm:pt-12 md:pt-16">
+      <div className={`container relative mx-auto px-3 sm:px-6 py-4 sm:py-6 rounded-xl backdrop-blur-sm shadow-lg dark:shadow-none border ${
           isDark 
             ? 'bg-black/30 border-white/10'
             : 'bg-white/30 border-gray-300'
@@ -226,116 +237,121 @@ export function About() {
         
         {/* Section À propos de moi - style uniforme */}
         <AnimatedElement>
-          <div className="flex items-center gap-3 mb-8">
-            <div className={`${isDark ? 'bg-blue-900/50 text-blue-400' : 'bg-emerald-100 text-emerald-600'} p-2 rounded-lg`}>
-              <Code className="w-6 h-6" />
+          <div className="flex items-center gap-2 sm:gap-3 mb-5 sm:mb-8">
+            <div className={`${isDark ? 'bg-blue-900/50 text-blue-400' : 'bg-emerald-100 text-emerald-600'} p-1.5 sm:p-2 rounded-lg`}>
+              <Code className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <h2 className={`text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
+            <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
               {t('aboutMe')}
             </h2>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
-            {/* Carte de profil - côté gauche */}
-            <div className="flip-card-container cursor-pointer aspect-[4/3] w-full h-full" onClick={() => setShowBio(!showBio)}>
-              <div className={`flip-card ${showBio ? 'flipped' : ''}`}>
-                
-                {/* Recto - Photo et infos de base */}
-                <div className="flip-card-front">
-                  <div className={`h-full rounded-2xl ${isDark ? 'bg-gray-900/70' : 'bg-white/70'} shadow-md overflow-hidden border ${isDark ? 'border-gray-700/50' : 'border-gray-300/70'}`}>
-                    <div className="flex flex-col items-center justify-center h-full relative py-6">
-                      <div className="w-28 h-28 rounded-full border-4 border-white overflow-hidden mb-5">
-                        <img 
-                          src="/images/profile/avatar.jpg" 
-                          alt="Profile" 
-                          className="w-full h-full object-cover"
-                        />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-10">
+            {/* Carte de profil - côté gauche - RECONSTRUITE AVEC DIV SÉPARÉS POUR ÉVITER LES PROBLÈMES DE FLOU */}
+            <div className="relative w-full aspect-square sm:aspect-[4/3]">
+              {/* Face avant */}
+              <div 
+                className={`w-full h-full absolute inset-0 transition-all duration-500 ease-out cursor-pointer ${showBio ? 'opacity-0 rotate-y-180 pointer-events-none' : 'opacity-100 rotate-y-0'}`} 
+                onClick={() => setShowBio(true)}
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                <div className={`h-full rounded-2xl ${isDark ? 'bg-gray-900/70' : 'bg-white/70'} shadow-md border ${isDark ? 'border-gray-700/50' : 'border-gray-300/70'}`}>
+                  <div className="flex flex-col items-center justify-center h-full relative py-4 sm:py-6">
+                    <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full border-4 border-white overflow-hidden mb-3 sm:mb-5">
+                      <img 
+                        src="/images/profile/avatar.jpg" 
+                        alt="Profile" 
+                        className="w-full h-full object-cover rounded-full"
+                      />
+                    </div>
+                    
+                    <h3 className={`text-lg sm:text-xl font-bold ${isDark ? 'text-white' : 'text-gray-800'} mb-1 sm:mb-2 text-center`}>Yann Mostowski</h3>
+                    <div className={`${isDark ? 'text-blue-300' : 'text-emerald-600'} text-center mb-3 sm:mb-5 text-sm sm:text-base`}>
+                      Full-Stack Developer
+                    </div>
+                    
+                    <div className="flex flex-col items-center gap-1.5 sm:gap-2 mb-8">
+                      <div className={`flex items-center gap-1.5 sm:gap-2 ${isDark ? 'text-white/80' : 'text-gray-600'} text-xs sm:text-sm`}>
+                        <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                        <span>1 {t('yearsExperience')}</span>
                       </div>
                       
-                      <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-800'} mb-2 text-center`}>Yann Mostowski</h3>
-                      <div className={`${isDark ? 'text-blue-300' : 'text-emerald-600'} text-center mb-5`}>
-                        Full-Stack Developer
+                      <div className={`flex items-center gap-1.5 sm:gap-2 ${isDark ? 'text-white/80' : 'text-gray-600'} text-xs sm:text-sm`}>
+                        <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                        <span>{t('locationValue')}</span>
                       </div>
                       
-                      <div className="flex flex-col items-center gap-2">
-                        <div className={`flex items-center gap-2 ${isDark ? 'text-white/80' : 'text-gray-600'} text-sm`}>
-                          <Award className="w-4 h-4" />
-                          <span>1 {t('yearsExperience')}</span>
-                        </div>
+                      <div className="flex gap-2 mt-1.5 sm:mt-2">
+                        <span className={`${isDark ? 'bg-blue-600/20 text-blue-300' : 'bg-emerald-100 text-emerald-700'} px-2 py-0.5 rounded text-xs`}>Français</span>
+                        <span className={`${isDark ? 'bg-blue-600/20 text-blue-300' : 'bg-emerald-100 text-emerald-700'} px-2 py-0.5 rounded text-xs`}>English B2</span>
+                      </div>
+                    </div>
+                    
+                    {/* Texte d'information centré */}
+                    <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 pointer-events-none">
+                      <span className={`text-xs ${isDark ? 'text-white/90 bg-black/40' : 'text-gray-700 bg-gray-200/90'} px-2 py-0.5 rounded-full backdrop-blur-sm whitespace-nowrap shadow-sm`}>{t('clickForInfo')}</span>
+                    </div>
+                    
+                    {/* Icône du curseur dans le coin */}
+                    <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 pointer-events-none">
+                      <div className="relative">
+                        {/* Cercles d'ondes animés */}
+                        <div className={`absolute -inset-3 sm:-inset-4 rounded-full border ${isDark ? 'border-white/20' : 'border-gray-700/20'} animate-ping`}></div>
+                        <div className={`absolute -inset-2 sm:-inset-3 rounded-full border ${isDark ? 'border-white/30' : 'border-gray-700/30'} animate-ping`} style={{ animationDelay: '0.5s' }}></div>
+                        <div className={`absolute -inset-1 sm:-inset-2 rounded-full border ${isDark ? 'border-white/40' : 'border-gray-700/40'} animate-ping`} style={{ animationDelay: '1s' }}></div>
                         
-                        <div className={`flex items-center gap-2 ${isDark ? 'text-white/80' : 'text-gray-600'} text-sm`}>
-                          <MapPin className="w-4 h-4" />
-                          <span>{t('locationValue')}</span>
-                        </div>
-                        
-                        <div className="flex gap-2 mt-2">
-                          <span className={`${isDark ? 'bg-blue-600/20 text-blue-300' : 'bg-emerald-100 text-emerald-700'} px-2 py-0.5 rounded text-xs`}>Français</span>
-                          <span className={`${isDark ? 'bg-blue-600/20 text-blue-300' : 'bg-emerald-100 text-emerald-700'} px-2 py-0.5 rounded text-xs`}>English B2</span>
-                        </div>
-                      </div>
-                      
-                      {/* Icône du curseur dans le coin */}
-                      <div className="absolute bottom-4 right-4 pointer-events-none">
-                        <div className="relative">
-                          {/* Cercles d'ondes animés */}
-                          <div className={`absolute -inset-4 rounded-full border ${isDark ? 'border-white/20' : 'border-gray-700/20'} animate-ping`}></div>
-                          <div className={`absolute -inset-3 rounded-full border ${isDark ? 'border-white/30' : 'border-gray-700/30'} animate-ping`} style={{ animationDelay: '0.5s' }}></div>
-                          <div className={`absolute -inset-2 rounded-full border ${isDark ? 'border-white/40' : 'border-gray-700/40'} animate-ping`} style={{ animationDelay: '1s' }}></div>
-                          
-                          {/* Icône du curseur */}
-                          <svg className={`w-6 h-6 relative z-10 cursor-animation ${isDark ? 'text-white' : 'text-gray-800'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"></path>
-                            <path d="M13 13l6 6"></path>
-                          </svg>
-                        </div>
-                      </div>
-                      
-                      {/* Texte d'information centré */}
-                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none">
-                        <span className={`text-xs ${isDark ? 'text-white/80 bg-black/20' : 'text-gray-700 bg-gray-200/70'} px-2 py-0.5 rounded-full backdrop-blur-sm whitespace-nowrap`}>{t('clickForInfo')}</span>
+                        {/* Icône du curseur */}
+                        <svg className={`w-5 h-5 sm:w-6 sm:h-6 relative cursor-animation ${isDark ? 'text-white' : 'text-gray-800'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"></path>
+                          <path d="M13 13l6 6"></path>
+                        </svg>
                       </div>
                     </div>
                   </div>
                 </div>
-                
-                {/* Verso - Biographie détaillée */}
-                <div className="flip-card-back">
-                  <div className={`h-full ${isDark ? 'bg-gray-900/70' : 'bg-white/70'} rounded-2xl shadow-md p-5 flex flex-col border ${isDark ? 'border-gray-700/50' : 'border-gray-300/70'}`}>
-                    <div className={`flex-1 overflow-auto ${isDark ? 'text-white/80' : 'text-gray-600'} custom-scrollbar`}>
-                      <p className="mb-5">
-                        {t('personalDescription')}
-                      </p>
-                      
-                      <div className={`p-3 rounded-lg ${isDark ? 'border border-blue-600/30 bg-blue-600/10' : 'border border-emerald-200 bg-emerald-50'} mb-3`}>
-                        <div className="flex items-start">
-                          <GraduationCap className={`w-5 h-5 mr-2 ${isDark ? 'text-blue-400' : 'text-emerald-600'} mt-0.5 flex-shrink-0`} />
-                          <div>
-                            <div className={`font-medium ${isDark ? 'text-blue-300' : 'text-emerald-700'}`}>{t('school42')}</div>
-                            <div className={`text-sm ${isDark ? 'text-white/70' : 'text-gray-500'}`}>2023 - {t('presentTime')}</div>
-                            <div className="text-sm mt-1">{t('school42Description')}</div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className={`p-3 rounded-lg ${isDark ? 'border border-blue-600/30 bg-blue-600/10' : 'border border-emerald-200 bg-emerald-50'}`}>
-                        <div className="flex items-start">
-                          <GraduationCap className={`w-5 h-5 mr-2 ${isDark ? 'text-blue-400' : 'text-emerald-600'} mt-0.5 flex-shrink-0`} />
-                          <div>
-                            <div className={`font-medium ${isDark ? 'text-blue-300' : 'text-emerald-700'}`}>{t('baccalaureate')}</div>
-                            <div className={`text-sm ${isDark ? 'text-white/70' : 'text-gray-500'}`}>2022 - 2023</div>
-                            <div className="text-sm mt-1">
-                              {t('baccalaureateDescription')}
-                            </div>
-                          </div>
+              </div>
+              
+              {/* Face arrière */}
+              <div 
+                className={`w-full h-full absolute inset-0 transition-all duration-500 ease-out cursor-pointer ${showBio ? 'opacity-100 rotate-y-0' : 'opacity-0 rotate-y-180 pointer-events-none'}`} 
+                onClick={() => setShowBio(false)}
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                <div className={`h-full ${isDark ? 'bg-gray-900/70' : 'bg-white/70'} rounded-2xl shadow-md p-3 sm:p-5 flex flex-col border ${isDark ? 'border-gray-700/50' : 'border-gray-300/70'}`}>
+                  <div className={`flex-1 overflow-auto ${isDark ? 'text-white/80' : 'text-gray-600'} custom-scrollbar text-xs sm:text-sm`}>
+                    <p className="mb-3 sm:mb-5">
+                      {t('personalDescription')}
+                    </p>
+                    
+                    <div className={`p-2 sm:p-3 rounded-lg ${isDark ? 'border border-blue-600/30 bg-blue-600/10' : 'border border-emerald-200 bg-emerald-50'} mb-2 sm:mb-3`}>
+                      <div className="flex items-start">
+                        <GraduationCap className={`w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2 ${isDark ? 'text-blue-400' : 'text-emerald-600'} mt-0.5 flex-shrink-0`} />
+                        <div>
+                          <div className={`font-medium ${isDark ? 'text-blue-300' : 'text-emerald-700'} text-xs sm:text-sm`}>{t('school42')}</div>
+                          <div className={`text-xs ${isDark ? 'text-white/70' : 'text-gray-500'}`}>2023 - {t('presentTime')}</div>
+                          <div className="text-xs mt-1">{t('school42Description')}</div>
                         </div>
                       </div>
                     </div>
                     
-                    <div className={`flex items-center justify-end ${isDark ? 'text-white/70' : 'text-gray-500'} pt-3 border-t ${isDark ? 'border-gray-700/50' : 'border-gray-300/70'} mt-3`}>
-                      <div className={`${isDark ? 'text-blue-300' : 'text-emerald-600'} flex items-center text-sm`}>
-                        <span>{t('goBack')}</span>
-                        <ArrowRight className="w-4 h-4 ml-1" />
+                    <div className={`p-2 sm:p-3 rounded-lg ${isDark ? 'border border-blue-600/30 bg-blue-600/10' : 'border border-emerald-200 bg-emerald-50'}`}>
+                      <div className="flex items-start">
+                        <GraduationCap className={`w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2 ${isDark ? 'text-blue-400' : 'text-emerald-600'} mt-0.5 flex-shrink-0`} />
+                        <div>
+                          <div className={`font-medium ${isDark ? 'text-blue-300' : 'text-emerald-700'} text-xs sm:text-sm`}>{t('baccalaureate')}</div>
+                          <div className={`text-xs ${isDark ? 'text-white/70' : 'text-gray-500'}`}>2022 - 2023</div>
+                          <div className="text-xs mt-1">
+                            {t('baccalaureateDescription')}
+                          </div>
+                        </div>
                       </div>
+                    </div>
+                  </div>
+                  
+                  <div className={`flex items-center justify-end ${isDark ? 'text-white/70' : 'text-gray-500'} pt-2 sm:pt-3 border-t ${isDark ? 'border-gray-700/50' : 'border-gray-300/70'} mt-2 sm:mt-3`}>
+                    <div className={`${isDark ? 'text-blue-300' : 'text-emerald-600'} flex items-center text-xs sm:text-sm`}>
+                      <span>{t('goBack')}</span>
+                      <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1" />
                     </div>
                   </div>
                 </div>
@@ -343,35 +359,35 @@ export function About() {
             </div>
             
             {/* Carte d'expérience - côté droit */}
-            <div className={`rounded-2xl ${isDark ? 'bg-gray-900/70' : 'bg-white/70'} shadow-md p-5 h-full border ${isDark ? 'border-gray-700/50' : 'border-gray-300/70'}`}>
-              <div className="flex items-center gap-3 mb-5">
-                <div className={`${isDark ? 'bg-blue-900/50 text-blue-400' : 'bg-emerald-100 text-emerald-600'} p-1.5 rounded-lg`}>
-                  <Award className="w-4 h-4" />
+            <div className={`rounded-2xl ${isDark ? 'bg-gray-900/70' : 'bg-white/70'} shadow-md p-3 sm:p-5 h-full border ${isDark ? 'border-gray-700/50' : 'border-gray-300/70'}`}>
+              <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-5">
+                <div className={`${isDark ? 'bg-blue-900/50 text-blue-400' : 'bg-emerald-100 text-emerald-600'} p-1 sm:p-1.5 rounded-lg`}>
+                  <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
-                <h3 className={`text-lg font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>{t('experience')}</h3>
+                <h3 className={`text-base sm:text-lg font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>{t('experience')}</h3>
               </div>
               
-              <div className="space-y-6 relative">
+              <div className="space-y-4 sm:space-y-6 relative">
                 {/* Ligne verticale */}
-                <div className={`absolute left-[9px] top-2 bottom-0 w-0.5 ${isDark ? 'bg-blue-600/50' : 'bg-emerald-500/50'}`}></div>
+                <div className={`absolute left-[7px] sm:left-[9px] top-2 bottom-0 w-0.5 ${isDark ? 'bg-blue-600/50' : 'bg-emerald-500/50'}`}></div>
                 
                 {/* Freelance Coding Instructor */}
-                <div className="relative pl-7">
-                  <div className={`absolute left-0 top-1 w-[16px] h-[16px] rounded-full ${isDark ? 'border-2 border-gray-900 bg-blue-600' : 'border-2 border-white bg-emerald-500'} z-10`}></div>
-                  <div className={`text-base font-semibold ${isDark ? 'text-white' : 'text-gray-800'}`}>{t('codingInstructor')}</div>
-                  <div className={`text-sm ${isDark ? 'text-blue-400' : 'text-emerald-600'} mb-1`}>{t('magicMakers')}</div>
-                  <div className={`text-xs ${isDark ? 'text-white/70' : 'text-gray-600'} space-y-1`}>
+                <div className="relative pl-5 sm:pl-7">
+                  <div className={`absolute left-0 top-1 w-[14px] h-[14px] sm:w-[16px] sm:h-[16px] rounded-full ${isDark ? 'border-2 border-gray-900 bg-blue-600' : 'border-2 border-white bg-emerald-500'} z-10`}></div>
+                  <div className={`text-sm sm:text-base font-semibold ${isDark ? 'text-white' : 'text-gray-800'}`}>{t('codingInstructor')}</div>
+                  <div className={`text-xs sm:text-sm ${isDark ? 'text-blue-400' : 'text-emerald-600'} mb-0.5 sm:mb-1`}>{t('magicMakers')}</div>
+                  <div className={`text-xs ${isDark ? 'text-white/70' : 'text-gray-600'} space-y-0.5 sm:space-y-1`}>
                     <div>{t('instructorDesc1')}</div>
                     <div>{t('instructorDesc2')}</div>
                   </div>
                 </div>
                 
                 {/* Freelance Web Developer */}
-                <div className="relative pl-7">
-                  <div className={`absolute left-0 top-1 w-[16px] h-[16px] rounded-full ${isDark ? 'border-2 border-gray-900 bg-blue-600' : 'border-2 border-white bg-emerald-500'} z-10`}></div>
-                  <div className={`text-base font-semibold ${isDark ? 'text-white' : 'text-gray-800'}`}>{t('freelanceWebDev')}</div>
-                  <div className={`text-sm ${isDark ? 'text-blue-400' : 'text-emerald-600'} mb-1`}>{t('selfEmployed')}</div>
-                  <div className={`text-xs ${isDark ? 'text-white/70' : 'text-gray-600'} space-y-1`}>
+                <div className="relative pl-5 sm:pl-7">
+                  <div className={`absolute left-0 top-1 w-[14px] h-[14px] sm:w-[16px] sm:h-[16px] rounded-full ${isDark ? 'border-2 border-gray-900 bg-blue-600' : 'border-2 border-white bg-emerald-500'} z-10`}></div>
+                  <div className={`text-sm sm:text-base font-semibold ${isDark ? 'text-white' : 'text-gray-800'}`}>{t('freelanceWebDev')}</div>
+                  <div className={`text-xs sm:text-sm ${isDark ? 'text-blue-400' : 'text-emerald-600'} mb-0.5 sm:mb-1`}>{t('selfEmployed')}</div>
+                  <div className={`text-xs ${isDark ? 'text-white/70' : 'text-gray-600'} space-y-0.5 sm:space-y-1`}>
                     <div>{t('freelanceDesc1')}</div>
                     <div>{t('freelanceDesc2')}</div>
                   </div>
@@ -379,8 +395,8 @@ export function About() {
               </div>
               
               {/* Objectifs professionnels */}
-              <div className={`mt-6 pt-5 border-t ${isDark ? 'border-gray-700/50' : 'border-gray-200'}`}>
-                <div className={`text-sm font-medium ${isDark ? 'text-blue-400' : 'text-emerald-600'} mb-2`}>{t('professionalGoals')}</div>
+              <div className={`mt-4 sm:mt-6 pt-3 sm:pt-5 border-t ${isDark ? 'border-gray-700/50' : 'border-gray-200'}`}>
+                <div className={`text-xs sm:text-sm font-medium ${isDark ? 'text-blue-400' : 'text-emerald-600'} mb-1 sm:mb-2`}>{t('professionalGoals')}</div>
                 <p className={`text-xs ${isDark ? 'text-white/80' : 'text-gray-600'}`}>
                   {t('goalsDescription')}
                 </p>
@@ -390,17 +406,17 @@ export function About() {
         </AnimatedElement>
         
         <AnimatedElement>
-          <div className="flex items-center gap-3 mb-8">
-            <div className={`${isDark ? 'bg-blue-900/50 text-blue-400' : 'bg-emerald-100 text-emerald-600'} p-2 rounded-lg`}>
-              <Layers className="w-6 h-6" />
+          <div className="flex items-center gap-2 sm:gap-3 mb-5 sm:mb-8">
+            <div className={`${isDark ? 'bg-blue-900/50 text-blue-400' : 'bg-emerald-100 text-emerald-600'} p-1.5 sm:p-2 rounded-lg`}>
+              <Layers className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <h2 className={`text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
+            <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
               {t('technologiesMastered')}
             </h2>
           </div>
         </AnimatedElement>
         
-        {/* Section des compétences - redesign amélioré */}
+        {/* Section des compétences - NOUVELLE VERSION ADAPTÉE POUR MOBILE */}
         <div className="mb-8">
           <AnimatedElement>
             {/* Conteneur principal */}
@@ -409,224 +425,265 @@ export function About() {
                 ? 'bg-gray-900/50 border border-gray-800/50 backdrop-blur-sm'
                 : 'bg-white/50 border border-gray-200/50 backdrop-blur-sm'
             }`}>
-              {/* Barre de navigation des catégories */}
-              <div className={`flex flex-wrap ${
-                isDark 
-                  ? 'bg-gray-800/80 border-gray-700/50'
-                  : 'bg-white/80 border-gray-200/50'
-              } border rounded-t-xl p-1.5`}>
-                {skills.map((skill) => {
-                  const isSelected = expandedCategory === skill.key;
-                  return (
-                    <button
-                      key={skill.key} 
-                      ref={el => categoryRefs.current[skill.key] = el}
-                      className={`flex items-center gap-2 px-4 py-2.5 rounded-lg m-1 transition-all ${
-                        isSelected
-                          ? isDark 
-                            ? `bg-gradient-to-r ${skill.darkGradient} text-white shadow-md` 
-                            : `bg-gradient-to-r ${skill.lightGradient} text-white shadow-md`
-                          : isDark 
-                            ? 'hover:bg-gray-700/50 text-gray-300'
-                            : 'hover:bg-gray-100/50 text-gray-700'
-                      }`}
-                      onClick={() => toggleCategory(skill.key)}
-                    >
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        isSelected
-                          ? 'bg-white/20'
-                          : isDark 
-                            ? `bg-gradient-to-r ${skill.darkGradient} text-white`
-                            : `bg-gradient-to-r ${skill.lightGradient} text-white`
-                      }`}>
-                        {skill.icon}
-                      </div>
-                      <span className="font-medium">{t(skill.key)}</span>
-                      <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${
-                        isSelected ? 'rotate-90' : ''
-                      }`} />
-                    </button>
-                  );
-                })}
-              </div>
-              
-              {/* Zone de contenu */}
-              <div 
-                ref={contentRef}
-                className={`border border-t-0 ${
-                  isDark 
-                    ? 'border-gray-800/50 bg-gray-900/30'
-                    : 'border-gray-200/50 bg-white/30'
-                } rounded-b-xl overflow-hidden backdrop-blur-sm`}
-              >
-                {expandedCategory && selectedCategory ? (
-                  <div className="p-6 md:p-8">
-                    <div className="flex justify-between items-center mb-6">
-                      <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-800'} flex items-center gap-2`}>
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                          isDark 
-                            ? `bg-gradient-to-r ${selectedCategory.darkGradient} text-white`
-                            : `bg-gradient-to-r ${selectedCategory.lightGradient} text-white`
-                        }`}>
-                          {selectedCategory.icon}
-                        </div>
-                        {t(selectedCategory.key)}
-                      </h3>
-                      <div className={`px-3 py-1 rounded-full text-sm font-medium ${
-                        isDark
-                          ? 'bg-blue-600/20 text-blue-300'
-                          : 'bg-emerald-600/20 text-emerald-700'
-                      }`}>
-                        {selectedCategory.techs.length} {selectedCategory.techs.length > 1 ? t('technologiesPlural') : t('technologiesSingular')}
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {selectedCategory.techs.map((tech, i) => (
-                    <div 
-                          key={tech.name} 
-                          className={`${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all border`}
-                      style={{
-                            animation: `fadeInUp 0.5s ease forwards ${0.1 + i * 0.1}s`,
-                            opacity: 0,
-                            transform: 'translateY(20px)'
-                          }}
+              {/* Version Desktop: Affichage sous forme d'onglets */}
+              {!isMobile && (
+                <>
+                  {/* Barre de navigation des catégories - VERSION DESKTOP */}
+                  <div className={`flex flex-wrap ${
+                    isDark 
+                      ? 'bg-gray-800/80 border-gray-700/50'
+                      : 'bg-white/80 border-gray-200/50'
+                  } border rounded-t-xl p-1.5`}>
+                    {skills.map((skill) => {
+                      const isSelected = expandedCategory === skill.key;
+                      return (
+                        <button
+                          key={skill.key} 
+                          ref={el => categoryRefs.current[skill.key] = el}
+                          className={`flex items-center gap-2 px-4 py-2.5 rounded-lg m-1 transition-all ${
+                            isSelected
+                              ? isDark 
+                                ? `bg-gradient-to-r ${skill.darkGradient} text-white shadow-md` 
+                                : `bg-gradient-to-r ${skill.lightGradient} text-white shadow-md`
+                              : isDark 
+                                ? 'hover:bg-gray-700/50 text-gray-300'
+                                : 'hover:bg-gray-100/50 text-gray-700'
+                          }`}
+                          onClick={() => toggleCategory(skill.key)}
                         >
-                          {/* En-tête avec dégradé */}
-                          <div className={`h-2 w-full bg-gradient-to-r ${
-                            isDark 
-                              ? selectedCategory.darkGradient
-                              : selectedCategory.lightGradient
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                            isSelected
+                              ? 'bg-white/20'
+                              : isDark 
+                                ? `bg-gradient-to-r ${skill.darkGradient} text-white`
+                                : `bg-gradient-to-r ${skill.lightGradient} text-white`
+                          }`}>
+                            {skill.icon}
+                          </div>
+                          <span className="font-medium">{t(skill.key)}</span>
+                          <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${
+                            isSelected ? 'rotate-90' : ''
                           }`} />
-                          
-                          {/* Contenu */}
-                          <div className="p-5">
-                            <div className="flex justify-between items-center mb-3">
-                              <h4 className={`font-bold ${isDark ? 'text-gray-100' : 'text-gray-800'} text-lg`}>{tech.name}</h4>
-                              <SkillLevel 
-                                level={tech.level} 
-                                lightColor={selectedCategory.lightColor}
-                                darkColor={selectedCategory.darkColor}
-                              />
+                        </button>
+                      );
+                    })}
+                  </div>
+                  
+                  {/* Zone de contenu - VERSION DESKTOP */}
+                  <div 
+                    ref={contentRef}
+                    className={`border border-t-0 ${
+                      isDark 
+                        ? 'border-gray-800/50 bg-gray-900/30'
+                        : 'border-gray-200/50 bg-white/30'
+                    } rounded-b-xl overflow-hidden backdrop-blur-sm`}
+                  >
+                    {expandedCategory && selectedCategory ? (
+                      <div className="p-6 md:p-8">
+                        <div className="flex justify-between items-center mb-6">
+                          <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-800'} flex items-center gap-2`}>
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                              isDark 
+                                ? `bg-gradient-to-r ${selectedCategory.darkGradient} text-white`
+                                : `bg-gradient-to-r ${selectedCategory.lightGradient} text-white`
+                            }`}>
+                              {selectedCategory.icon}
                             </div>
-                            
-                            {/* Description de l'expérience */}
-                            <div className="space-y-2">
-                              <div className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                                {tech.level === 1 && (
-                                  <div className="flex items-start gap-2">
-                                    <div className={`w-2 h-2 rounded-full mt-2 ${
-                                      isDark ? 'bg-blue-400' : 'bg-emerald-500'
-                                    }`} />
-                                    <div>
-                                      <span className="font-medium">{t('exploration')}</span>
-                                      <p className="text-xs mt-1">{tech.experience}</p>
+                            {t(selectedCategory.key)}
+                          </h3>
+                          <div className={`px-3 py-1 rounded-full text-sm font-medium ${
+                            isDark
+                              ? 'bg-blue-600/20 text-blue-300'
+                              : 'bg-emerald-600/20 text-emerald-700'
+                          }`}>
+                            {selectedCategory.techs.length} {selectedCategory.techs.length > 1 ? t('technologiesPlural') : t('technologiesSingular')}
+                          </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {selectedCategory && selectedCategory.techs.map((tech, i) => (
+                            <div 
+                              key={tech.name} 
+                              className={`${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all border`}
+                              style={{
+                                animation: `fadeInUp 0.5s ease forwards ${0.1 + i * 0.1}s`,
+                                opacity: 0,
+                                transform: 'translateY(20px)'
+                              }}
+                            >
+                              {/* En-tête avec dégradé */}
+                              <div className={`h-2 w-full bg-gradient-to-r ${
+                                isDark 
+                                  ? selectedCategory.darkGradient
+                                  : selectedCategory.lightGradient
+                              }`} />
+                              
+                              {/* Contenu */}
+                              <div className="p-5">
+                                <div className="flex justify-between items-center mb-3">
+                                  <h4 className={`font-bold ${isDark ? 'text-gray-100' : 'text-gray-800'} text-lg`}>{tech.name}</h4>
+                                  <SkillLevel 
+                                    level={tech.level} 
+                                    lightColor={selectedCategory.lightColor}
+                                    darkColor={selectedCategory.darkColor}
+                                  />
+                                </div>
+                                
+                                {/* Description de l'expérience */}
+                                <div className="space-y-2">
+                                  <div className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                                    <div className="flex items-start gap-2">
+                                      <div className={`w-2 h-2 rounded-full mt-2 ${
+                                        isDark ? 'bg-blue-400' : 'bg-emerald-500'
+                                      }`} />
+                                      <div>
+                                        <span className="font-medium">{t('exploration')}</span>
+                                        <p className="text-xs mt-1">{tech.experience}</p>
+                                      </div>
                                     </div>
                                   </div>
-                                )}
-                                {tech.level === 2 && (
-                                  <div className="flex items-start gap-2">
-                                    <div className={`w-2 h-2 rounded-full mt-2 ${
-                                      isDark ? 'bg-blue-400' : 'bg-emerald-500'
-                                    }`} />
-                                    <div>
-                                      <span className="font-medium">{t('regularPractice')}</span>
-                                      <p className="text-xs mt-1">{tech.experience}</p>
-                                    </div>
-                                  </div>
-                                )}
-                                {tech.level === 3 && (
-                                  <div className="flex items-start gap-2">
-                                    <div className={`w-2 h-2 rounded-full mt-2 ${
-                                      isDark ? 'bg-blue-400' : 'bg-emerald-500'
-                                    }`} />
-                                    <div>
-                                      <span className="font-medium">{t('solidExperience')}</span>
-                                      <p className="text-xs mt-1">{tech.experience}</p>
-                                    </div>
-                                  </div>
-                                )}
-                                {tech.level === 4 && (
-                                  <div className="flex items-start gap-2">
-                                    <div className={`w-2 h-2 rounded-full mt-2 ${
-                                      isDark ? 'bg-blue-400' : 'bg-emerald-500'
-                                    }`} />
-                                    <div>
-                                      <span className="font-medium">{t('confirmedExpertise')}</span>
-                                      <p className="text-xs mt-1">{tech.experience}</p>
-                                    </div>
-                                  </div>
-                                )}
-                                {tech.level === 5 && (
-                                  <div className="flex items-start gap-2">
-                                    <div className={`w-2 h-2 rounded-full mt-2 ${
-                                      isDark ? 'bg-blue-400' : 'bg-emerald-500'
-                                    }`} />
-                                    <div>
-                                      <span className="font-medium">{t('deepMastery')}</span>
-                                      <p className="text-xs mt-1">{tech.experience}</p>
-                                    </div>
-                                  </div>
-                                )}
+                                </div>
                               </div>
                             </div>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center gap-4 p-12 text-center">
+                        <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
+                          isDark 
+                            ? 'bg-blue-600/20 text-blue-300'
+                            : 'bg-emerald-600/20 text-emerald-700'
+                        }`}>
+                          <Layers className="w-8 h-8" />
+                        </div>
+                        <div>
+                          <h3 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-800'} mb-2`}>{t('exploreSkills')}</h3>
+                          <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} max-w-md`}>
+                            {t('selectCategory')}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
+              
+              {/* Version Mobile: Affichage sous forme d'accordéon */}
+              {isMobile && (
+                <div className="p-3">
+                  {skills.map((skill) => {
+                    const isSelected = expandedCategory === skill.key;
+                    return (
+                      <div 
+                        key={skill.key}
+                        className={`mb-2 rounded-lg overflow-hidden ${
+                          isDark 
+                            ? 'bg-gray-800/80 border border-gray-700/50'
+                            : 'bg-white/80 border border-gray-200/50'
+                        }`}
+                      >
+                        {/* Entête de l'accordéon */}
+                        <button
+                          onClick={() => toggleCategory(skill.key)}
+                          className={`w-full flex items-center justify-between p-3 ${
+                            isSelected
+                              ? isDark 
+                                ? `bg-gradient-to-r ${skill.darkGradient} text-white` 
+                                : `bg-gradient-to-r ${skill.lightGradient} text-white`
+                              : ''
+                          }`}
+                        >
+                          <div className="flex items-center gap-2">
+                            <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${
+                              isSelected
+                                ? 'bg-white/20'
+                                : isDark 
+                                  ? `bg-gradient-to-r ${skill.darkGradient} text-white`
+                                  : `bg-gradient-to-r ${skill.lightGradient} text-white`
+                            }`}>
+                              {skill.icon}
+                            </div>
+                            <span className={`font-medium text-sm ${
+                              isSelected 
+                                ? 'text-white' 
+                                : isDark 
+                                  ? 'text-gray-200' 
+                                  : 'text-gray-700'
+                            }`}>{t(skill.key)}</span>
                           </div>
-                    </div>
-                  ))}
+                          {isSelected ? (
+                            <ChevronDown className="w-4 h-4" />
+                          ) : (
+                            <ChevronRight className="w-4 h-4" />
+                          )}
+                        </button>
+                        
+                        {/* Contenu de l'accordéon */}
+                        {isSelected && skill && skill.techs.map((tech) => (
+                          <div 
+                            key={tech.name}
+                            className={`p-3 border-t ${
+                              isDark 
+                                ? 'border-gray-700/50'
+                                : 'border-gray-200/50'
+                            }`}
+                          >
+                            <div className="flex justify-between items-center mb-2">
+                              <h4 className={`font-bold ${isDark ? 'text-gray-100' : 'text-gray-800'} text-sm`}>{tech.name}</h4>
+                              <SkillLevel 
+                                level={tech.level} 
+                                lightColor={skill.lightColor}
+                                darkColor={skill.darkColor}
+                              />
+                            </div>
+                            <p className={`text-xs ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                              {tech.experience}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })}
                 </div>
-              </div>
-                ) : (
-                  <div className="flex flex-col items-center justify-center gap-4 p-12 text-center">
-                    <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
-                      isDark 
-                        ? 'bg-blue-600/20 text-blue-300'
-                        : 'bg-emerald-600/20 text-emerald-700'
-                    }`}>
-                      <Layers className="w-8 h-8" />
+              )}
+            </div>
+          </AnimatedElement>
         </div>
-                    <div>
-                      <h3 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-800'} mb-2`}>{t('exploreSkills')}</h3>
-                      <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} max-w-md`}>
-                        {t('selectCategory')}
-                      </p>
-            </div>
-                </div>
-                )}
-                </div>
-                </div>
-              </AnimatedElement>
-            </div>
       </div>
     </section>
   );
 }
 
-// Style pour les animations
+// Ajouter ces styles personnalisés à la feuille de style CSS
 const styleElement = document.createElement('style');
 styleElement.textContent = `
 @keyframes fadeInUp {
-  from {
+  0% {
     opacity: 0;
     transform: translateY(20px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
 @keyframes fadeIn {
-  from {
+  0% {
     opacity: 0;
   }
-  to {
+  100% {
     opacity: 1;
   }
 }
 
 @keyframes growWidth {
-  from {
+  0% {
     width: 0%;
+  }
+  100% {
+    width: 100%;
   }
 }
 
@@ -667,39 +724,12 @@ styleElement.textContent = `
   transform: translateY(20px);
 }
 
-/* Styles pour la carte qui se retourne */
-.flip-card-container {
-  width: 100%;
-  height: 100%;
-  perspective: 1000px;
+/* Styles pour l'animation de la carte */
+.rotate-y-0 {
+  transform: rotateY(0deg);
 }
 
-.flip-card {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
-
-.flip-card.flipped {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front,
-.flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.flip-card-front {
-  z-index: 1;
-}
-
-.flip-card-back {
+.rotate-y-180 {
   transform: rotateY(180deg);
 }
 
