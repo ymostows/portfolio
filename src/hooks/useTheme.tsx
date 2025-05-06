@@ -5,6 +5,9 @@ type Theme = 'light' | 'dark';
 export interface ThemeContextType {
   isDark: boolean;
   toggleTheme: () => void;
+  isHeaderVisible: boolean;
+  hideHeader: () => void;
+  showHeader: () => void;
 }
 
 interface ThemeProviderProps {
@@ -23,6 +26,9 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       ? 'dark' 
       : 'light';
   });
+  
+  // État pour la visibilité du header
+  const [isHeaderVisible, setIsHeaderVisible] = useState<boolean>(true);
   
   // Update document class when theme changes
   useEffect(() => {
@@ -112,6 +118,10 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     prevTheme === 'light' ? 'dark' : 'light'
   );
   
+  // Fonctions pour gérer la visibilité du header
+  const hideHeader = () => setIsHeaderVisible(false);
+  const showHeader = () => setIsHeaderVisible(true);
+  
   // Écouter les changements de préférence système
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -126,7 +136,13 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   }, []);
   
   return (
-    <ThemeContext.Provider value={{ isDark: theme === 'dark', toggleTheme }}>
+    <ThemeContext.Provider value={{ 
+      isDark: theme === 'dark', 
+      toggleTheme,
+      isHeaderVisible,
+      hideHeader,
+      showHeader
+    }}>
       {children}
     </ThemeContext.Provider>
   );

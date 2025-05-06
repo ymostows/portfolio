@@ -4,7 +4,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import { useState, useEffect } from 'react';
 
 export function Header() {
-  const { isDark, toggleTheme } = useTheme();
+  const { isDark, toggleTheme, isHeaderVisible } = useTheme();
   const { t, toggleLanguage, language } = useLanguage();
   const [isMobile, setIsMobile] = useState(false);
   
@@ -18,10 +18,13 @@ export function Header() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
   
+  // Si le header n'est pas visible, ne pas le rendre
+  if (!isHeaderVisible) return null;
+  
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 flex justify-center ${isMobile ? 'pt-4' : 'pt-6'}`}>
       <nav className={`w-full max-w-[76rem] mx-4 ${isMobile ? 'py-4 px-4 mx-2' : 'py-5 px-8'} bg-white/50 dark:bg-black/30 backdrop-blur-sm border border-gray-300 dark:border-white/10 transition-all duration-300 rounded-xl shadow-sm`}>
-        {isMobile ? (
+        {isMobile && (
           // Version mobile optimisée
           <div className="flex items-center justify-between">
             <div className="flex gap-3">
@@ -90,7 +93,9 @@ export function Header() {
               </button>
             </div>
           </div>
-        ) : (
+        )}
+        
+        {!isMobile && (
           // Version desktop
           <div className="flex flex-wrap justify-between items-center gap-3">
             {/* Navigation liens - version desktop */}

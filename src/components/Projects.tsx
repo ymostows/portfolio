@@ -356,7 +356,7 @@ const ProjectCard = ({
 
 export function Projects() {
   const { t, language } = useLanguage();
-  const { isDark } = useTheme();
+  const { isDark, hideHeader, showHeader } = useTheme();
   const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [filterTech, setFilterTech] = useState<string | "All">("All");
@@ -381,12 +381,14 @@ export function Projects() {
     setActiveProject(project);
     setIsPreviewOpen(true);
     document.body.style.overflow = 'hidden';
-  }, []);
+    hideHeader(); // Masquer le header lors de l'ouverture de la prévisualisation
+  }, [hideHeader]);
   
   const closePreview = useCallback(() => {
     setIsPreviewOpen(false);
     document.body.style.overflow = '';
-  }, []);
+    showHeader(); // Réafficher le header lors de la fermeture de la prévisualisation
+  }, [showHeader]);
   
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
