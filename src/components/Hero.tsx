@@ -405,11 +405,9 @@ export const PulseButton = () => {
 > L'effet s'active au passage de la souris`,
     previewComponent: (isDark: boolean) => (
       <div className="mt-2 p-2 rounded bg-gray-100 dark:bg-gray-800">
-        <div className="h-16 w-full flex items-center justify-center">
-          <div className={`p-3 ${isDark ? 'bg-gray-700' : 'bg-white'} rounded-lg shadow-md hover:shadow-lg transition-all duration-300 text-left transform hover:scale-105`}>
-            <h3 className={`text-sm font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>Titre de la carte</h3>
-            <p className={`text-xs ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>Effet de survol</p>
-          </div>
+        <div className={`p-3 ${isDark ? 'bg-gray-700' : 'bg-white'} rounded-lg shadow-md hover:shadow-lg transition-all duration-300 text-left transform hover:scale-105`}>
+          <h3 className={`text-sm font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>Titre de la carte</h3>
+          <p className={`text-xs ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>Effet de survol</p>
         </div>
       </div>
     )
@@ -1065,26 +1063,26 @@ export function Hero() {
               </div>
             </div>
             
-            <div className="absolute -top-6 -right-6 bg-gradient-to-br from-emerald-600 via-green-500 to-teal-600 dark:from-blue-800 dark:via-blue-900 dark:to-slate-900 rounded-lg p-4 shadow-xl backdrop-blur-md border border-emerald-500/50 dark:border-blue-700/50 transform rotate-3 hover:rotate-1 transition-transform">
-              <div className="font-mono text-sm text-white">
-                <div className="flex items-center gap-2 mb-2">
-                  <Code className="w-4 h-4 text-emerald-100" />
-                  <span className="text-emerald-100 text-xs">App.tsx</span>
+            <div className="absolute -top-6 -right-6 bg-gradient-to-br from-emerald-600 via-green-500 to-teal-600 dark:from-blue-800 dark:via-blue-900 dark:to-slate-900 rounded-lg p-1.5 sm:p-2 md:p-4 shadow-xl backdrop-blur-md border border-emerald-500/50 dark:border-blue-700/50 transform rotate-3 hover:rotate-1 transition-transform">
+              <div className="font-mono text-[10px] xs:text-xs md:text-sm text-white">
+                <div className="flex items-center gap-1 md:gap-2 mb-0.5 sm:mb-1 md:mb-2">
+                  <Code className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 text-emerald-100" />
+                  <span className="text-emerald-100 text-[10px] xs:text-xs">App.tsx</span>
                 </div>
                 <div><span className="text-emerald-100 dark:text-pink-300">import</span> <span className="text-white dark:text-blue-300">React</span> <span className="text-emerald-100 dark:text-pink-300">from</span> <span className="text-green-100 dark:text-green-300">'react'</span>;</div>
                 <div><span className="text-emerald-100 dark:text-pink-300">import</span> <span className="text-white dark:text-cyan-300">{'{'} Header {'}'}</span> <span className="text-emerald-100 dark:text-pink-300">from</span> <span className="text-green-100 dark:text-green-300">'./components'</span>;</div>
               </div>
             </div>
             
-            <div className="absolute -bottom-20 -left-6 bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 dark:from-blue-700 dark:via-blue-800 dark:to-slate-900 rounded-lg p-4 shadow-xl backdrop-blur-md border border-emerald-500/50 dark:border-blue-700/50 transform -rotate-2 hover:rotate-0 transition-transform">
-              <div className="font-mono text-sm text-white">
-                <div className="flex items-center gap-2 mb-2">
-                  <Braces className="w-4 h-4 text-emerald-100" />
-                  <span className="text-emerald-100 text-xs">tsconfig.json</span>
+            <div className="absolute -bottom-10 sm:-bottom-16 md:-bottom-20 -left-4 sm:-left-5 md:-left-6 bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 dark:from-blue-700 dark:via-blue-800 dark:to-slate-900 rounded-lg p-1.5 sm:p-2 md:p-4 shadow-xl backdrop-blur-md border border-emerald-500/50 dark:border-blue-700/50 transform -rotate-2 hover:rotate-0 transition-transform">
+              <div className="font-mono text-[10px] xs:text-xs md:text-sm text-white">
+                <div className="flex items-center gap-1 md:gap-2 mb-0.5 sm:mb-1 md:mb-2">
+                  <Braces className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 text-emerald-100" />
+                  <span className="text-emerald-100 text-[10px] xs:text-xs">tsconfig.json</span>
                 </div>
                 <div><span className="text-white dark:text-gray-300">{'{'}</span></div>
-                <div><span className="pl-2 text-emerald-100 dark:text-blue-300">"compilerOptions"</span>: <span className="text-white dark:text-gray-300">{'{'}</span></div>
-                <div><span className="pl-4 text-emerald-100 dark:text-blue-300">"target"</span>: <span className="text-green-100 dark:text-green-300">"ES2020"</span>,</div>
+                <div><span className="pl-1 md:pl-2 text-emerald-100 dark:text-blue-300">"compilerOptions"</span>: <span className="text-white dark:text-gray-300">{'{'}</span></div>
+                <div><span className="pl-1.5 sm:pl-2 md:pl-4 text-emerald-100 dark:text-blue-300">"target"</span>: <span className="text-green-100 dark:text-green-300">"ES2020"</span>,</div>
               </div>
             </div>
           </div>
