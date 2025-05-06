@@ -111,7 +111,7 @@ export const Contact = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`container relative mx-auto px-6 py-6 rounded-xl backdrop-blur-sm shadow-lg dark:shadow-none border ${
+        className={`container relative mx-auto my-auto px-6 py-6 rounded-xl backdrop-blur-sm shadow-lg dark:shadow-none border ${
           isDark 
             ? 'bg-black/30 border-white/10'
             : 'bg-white/30 border-gray-300'
@@ -159,7 +159,7 @@ export const Contact = () => {
                   </div>
                 </a>
                 
-                <a href="https://github.com/HeedzZ" target="_blank" rel="noopener noreferrer"
+                <a href="https://github.com/ymostows" target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-3 p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
                 >
                   <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
@@ -167,7 +167,7 @@ export const Contact = () => {
                   </div>
                   <div>
                     <p className="font-medium text-gray-700 dark:text-gray-300">GitHub</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">github.com/HeedzZ</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">github.com/ymostows</p>
                   </div>
                 </a>
                 

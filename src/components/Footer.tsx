@@ -10,7 +10,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className={`w-full rounded-b-lg py-5 relative mt-6 ${
+    <footer className={`w-full rounded-b-lg py-5 relative ${
       isDark 
         ? 'bg-black/30 border border-white/10 backdrop-blur-sm dark:shadow-none'
         : 'bg-white/30 border border-gray-300 backdrop-blur-sm'
@@ -22,7 +22,7 @@ export default function Footer() {
           : 'bg-gray-200'
       }`}></div>
       
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto my-auto px-6">
         {/* Footer compact */}
         <div className={`pt-3 flex flex-col md:flex-row justify-between items-center gap-4`}>
           <div className="flex items-center gap-2">

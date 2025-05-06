@@ -54,8 +54,8 @@ const translations: TranslationMap = {
     fr: 'Full-Stack'
   },
   'heroDescription': {
-    en: 'I\'m a full-stack developer with a passion for creating interactive and user-friendly web applications.',
-    fr: 'Je suis un développeur full-stack passionné par la création d\'applications web interactives et conviviales.'
+    en: 'I enjoy crafting complete web applications that are both interactive and intuitive.',
+    fr: 'J’aime concevoir des applications web complètes, à la fois interactives et intuitives.'
   },
   'iCode': {
     en: 'I code',

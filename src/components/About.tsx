@@ -228,8 +228,8 @@ export function About() {
   const selectedCategory = skills.find(s => s.key === expandedCategory);
   
   return (
-    <section id="about" className="relative z-40 pt-6 sm:pt-12 md:pt-16">
-      <div className={`container relative mx-auto px-3 sm:px-6 py-4 sm:py-6 rounded-xl backdrop-blur-sm shadow-lg dark:shadow-none border ${
+    <section id="about" className="relative z-40 pt-0">
+      <div className={`container relative mx-auto my-auto px-3 sm:px-6 py-4 sm:py-6 rounded-xl backdrop-blur-sm shadow-lg dark:shadow-none border ${
           isDark 
             ? 'bg-black/30 border-white/10'
             : 'bg-white/30 border-gray-300'

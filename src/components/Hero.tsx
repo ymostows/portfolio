@@ -521,6 +521,7 @@ class Symbol {
 export function Hero() {
   const { t } = useLanguage();
   const { isDark } = useTheme();
+  const [isMobile, setIsMobile] = useState(false);
 
   // Memoize code examples to avoid recreations on each render
   const codeExamples = useMemo(() => getCodeExamples(isDark), [isDark]);
@@ -542,6 +543,17 @@ export function Hero() {
   const animationTimeoutRef = useRef<number | null>(null);
   const animationFrameRef = useRef<number | null>(null);
   
+  // Ajouter la détection de mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Fonction d'aide pour annuler tous les timers en cours
   const clearAllTimeouts = useCallback(() => {
     if (animationTimeoutRef.current !== null) {
@@ -823,13 +835,13 @@ export function Hero() {
   return (
     <section 
       id="home" 
-      className="relative flex justify-center items-center min-h-screen py-20 pt-28"
+      className={`relative flex justify-center items-center min-h-screen ${isMobile ? 'pt-16' : 'pt-10'}`}
     >
       {/* Animation de fond en position fixed pour couvrir toute la page */}
       <BackgroundAnimation type={animationType} />
       
       {/* Conteneur de contenu avec fond légèrement opaque pour contraste */}
-      <div className="container relative mx-auto px-6 py-12 md:py-18 z-30 rounded-xl bg-white/80 dark:bg-black/30  backdrop-blur-sm shadow-lg border border-gray-200/50 dark:border-white/10">
+      <div className={`container relative mx-auto mt-4 pb-6 px-6 z-30 rounded-xl bg-white/80 dark:bg-black/30 backdrop-blur-sm shadow-lg border border-gray-200/50 dark:border-white/10`}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 pt-8">
@@ -886,7 +898,7 @@ export function Hero() {
                 {t('exploreExamples')}
               </a>
               <a
-                href="https://github.com/HeedzZ/portfolio/"
+                href="https://github.com/ymostows/portfolio/"
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="px-8 py-3 rounded-lg bg-white/40 hover:bg-white/50 dark:bg-gray-900/40 dark:hover:bg-gray-900/50 text-gray-900 dark:text-white font-medium border border-gray-300/50 dark:border-gray-700/50 flex items-center gap-2 backdrop-blur-sm transition-all hover:-translate-y-1"

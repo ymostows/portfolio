@@ -37,11 +37,11 @@ const projects: ProjectType[] = [
   {
     title: "invoicecreator",
     title_fr: "Générateur de factures",
-    owner: "yourusername",
+    owner: "ymostows",
     description: "InvoiceCreator is a personal project built with React to practice and learn modern web development concepts. It connects to a n8n workflow to fetch invoice information and generates a PDF invoice automatically.",
     description_fr: "Générateur de factures est un projet personnel construit avec React pour pratiquer et apprendre les concepts modernes du développement web. Il se connecte à un workflow n8n pour récupérer les informations de facturation et génère automatiquement une facture PDF.",
     tech: ["React", "Workflow n8n", "Tailwind CSS"," NextJS"],
-    github: "https://github.com/HeedzZ/invoicecreactor",
+    github: "https://github.com/ymostows/invoicecreactor",
     isPublic: true,
     screenshot: "/gifs/invoice-creator.gif",
     isGif: true,
@@ -55,7 +55,7 @@ const projects: ProjectType[] = [
     description: "Webserv is a common core group project from 42 school: building a fully functional HTTP server from scratch in C++98 using low-level sockets, non-blocking I/O, and poll.",
     description_fr: "Webserv est un projet de groupe du tronc commun de l'école 42 : construction d'un serveur HTTP entièrement fonctionnel à partir de zéro en C++98 en utilisant des sockets bas niveau, des E/S non bloquantes et poll.",
     tech: ["C++", "HTTP", "Networking", "Unix"],
-    github: "https://github.com/HeedzZ/webserv",
+    github: "https://github.com/ymostows/webserv",
     isPublic: true,
     screenshot: "/gifs/webserv.gif",
     isGif: true,
@@ -65,11 +65,11 @@ const projects: ProjectType[] = [
   {
     title: "inception",
     title_fr: "inception",
-    owner: "yourusername",
+    owner: "ymostows",
     description: "A common core project from 42 school: deploying a Docker-based infrastructure with containerized services including NGINX, WordPress, and MariaDB.",
     description_fr: "Un projet du tronc commun de l'école 42 : déploiement d'une infrastructure basée sur Docker avec des services conteneurisés incluant NGINX, WordPress et MariaDB.",
     tech: ["Docker", "Docker-Compose", "NGINX", "WordPress", "MariaDB"],
-    github: "https://github.com/HeedzZ/inception",
+    github: "https://github.com/ymostows/inception",
     isPublic: true,
     screenshot: "/images/docker-2.png",
     year: "2025"
@@ -77,11 +77,11 @@ const projects: ProjectType[] = [
   {
     title: "c++ pool",
     title_fr: "piscine c++",
-    owner: "yourusername",
+    owner: "ymostows",
     description: "Its a project from 42 school that introduces the basics of C++ and Object-Oriented Programming.",
     description_fr: "C'est un projet de l'école 42 qui introduit les bases du C++ et de la programmation orientée objet.",
     tech: ["C++", "OOP", "Data Structures"],
-    github: "https://github.com/yourusername/cpp",
+    github: "https://github.com/ymostows/cpp",
     isPublic: true,
     screenshot: "/images/cpp-code.jpg",
     year: "2024"
@@ -410,7 +410,7 @@ export function Projects() {
     
     return (
       <a 
-        href="https://github.com/HeedzZ" 
+        href="https://github.com/ymostows" 
         target="_blank" 
         rel="noopener noreferrer"
         className="flex flex-col items-center justify-center h-full bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm rounded-2xl border border-gray-300/70 dark:border-gray-700/50 shadow-sm hover:shadow-xl transition-all p-8 text-center group"
@@ -433,8 +433,8 @@ export function Projects() {
   };
   
   return (
-    <section id="projects" className="relative z-40 mb-8">
-      <div className={`container relative mx-auto px-6 py-6 rounded-xl backdrop-blur-sm shadow-lg dark:shadow-none border ${
+    <section id="projects" className="relative z-40">
+      <div className={`container relative mx-auto my-auto px-6 py-6 rounded-xl backdrop-blur-sm shadow-lg dark:shadow-none border ${
         isDark 
           ? 'bg-black/30 border-white/10'
           : 'bg-white/30 border-gray-300'
