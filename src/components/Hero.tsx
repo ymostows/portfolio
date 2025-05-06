@@ -835,7 +835,7 @@ export function Hero() {
   return (
     <section 
       id="home" 
-      className={`relative flex justify-center items-center min-h-screen ${isMobile ? 'pt-16' : 'pt-10'}`}
+      className="relative flex justify-center items-center min-h-screen pt-16 md:pt-24 lg:pt-8 z-10"
     >
       {/* Animation de fond en position fixed pour couvrir toute la page */}
       <BackgroundAnimation type={animationType} />
