@@ -22,9 +22,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     const savedTheme = localStorage.getItem('theme') as Theme;
     if (savedTheme) return savedTheme;
     
-    return window.matchMedia('(prefers-color-scheme: dark)').matches 
-      ? 'dark' 
-      : 'light';
+    // Toujours retourner 'dark' au lieu d'utiliser la préférence système
+    return 'dark';
   });
   
   // État pour la visibilité du header
