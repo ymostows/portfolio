@@ -833,26 +833,26 @@ export function Hero() {
   return (
     <section 
       id="home" 
-      className="relative flex justify-center items-center min-h-screen pt-16 md:pt-24 tablet:pt-32 lg:pt-24 xl:pt-8 z-10"
+      className="relative flex justify-center items-center min-h-screen pt-16 md:pt-24 lg:pt-8 z-10"
     >
       {/* Animation de fond en position fixed pour couvrir toute la page */}
       <BackgroundAnimation type={animationType} />
       
       {/* Conteneur de contenu avec fond légèrement opaque pour contraste */}
-      <div className={`container relative mx-auto mt-8 md:mt-12 tablet:mt-16 lg:mt-6 xl:mt-4 pb-6 px-6 z-30 rounded-xl bg-white/80 dark:bg-black/30 backdrop-blur-sm shadow-lg border border-gray-200/50 dark:border-white/10`}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className={`container relative mx-auto mt-4 pb-6 px-4 sm:px-6 z-30 rounded-xl bg-white/80 dark:bg-black/30 backdrop-blur-sm shadow-lg border border-gray-200/50 dark:border-white/10`}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div>
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 pt-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 pt-8">
               <span className="block">{t('welcome')}</span>
-              <span className="text-transparent text-5xl bg-clip-text bg-gradient-to-r from-emerald-500 to-green-600 dark:from-blue-700 dark:to-slate-600">{t("iAmA")} {t("fullStack")} {t("developer")}</span>
+              <span className="text-transparent text-3xl sm:text-4xl md:text-5xl bg-clip-text bg-gradient-to-r from-emerald-500 to-green-600 dark:from-blue-700 dark:to-slate-600">{t("iAmA")} {t("fullStack")} {t("developer")}</span>
             </h1>
             
-            <p className="text-gray-700 dark:text-gray-400 text-lg md:text-xl mb-8 max-w-lg">
+            <p className="text-gray-700 dark:text-gray-400 text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-lg">
               {t('heroDescription')}
             </p>
             
             {/* Typing Effect */}
-            <div className="mb-8 font-mono text-xl">
+            <div className="mb-6 sm:mb-8 font-mono text-lg sm:text-xl">
               <span className="text-gray-600 dark:text-gray-400">{'>'} </span>
               <span className="text-emerald-600 dark:text-blue-500">{t('iCode')} </span>
               <span className="text-green-600 dark:text-blue-500 inline-flex">
@@ -862,36 +862,36 @@ export function Hero() {
             </div>
             
             {/* Interactive Skill Modules */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
               <div 
-                className="bg-white/70 dark:bg-gray-900/50 backdrop-blur-sm p-4 rounded-xl border border-gray-300/70 dark:border-gray-700/50 hover:border-emerald-500/40 dark:hover:border-blue-700/40 transition-all group cursor-pointer"
+                className="bg-white/70 dark:bg-gray-900/50 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-gray-300/70 dark:border-gray-700/50 hover:border-emerald-500/40 dark:hover:border-blue-700/40 transition-all group cursor-pointer"
                 onClick={() => setAnimationType('matrix')}
               >
-                <MousePointer className="w-6 h-6 text-emerald-600 dark:text-blue-600 mb-2" />
+                <MousePointer className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600 dark:text-blue-600 mb-1 sm:mb-2" />
                 <h3 className="text-gray-900 dark:text-white font-medium mb-1">{t('interactiveBackground')}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm">
                   {t('animatedNetwork')}
                 </p>
                 <div className="h-1 w-0 bg-gradient-to-r from-emerald-500 to-green-500 dark:from-blue-800 dark:to-slate-800 mt-2 group-hover:w-full transition-all duration-500"></div>
               </div>
               
               <div 
-                className="bg-white/70 dark:bg-gray-900/50 backdrop-blur-sm p-4 rounded-xl border border-gray-300/70 dark:border-gray-700/50 hover:border-teal-500/40 dark:hover:border-blue-700/40 transition-all group cursor-pointer"
+                className="bg-white/70 dark:bg-gray-900/50 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-gray-300/70 dark:border-gray-700/50 hover:border-teal-500/40 dark:hover:border-blue-700/40 transition-all group cursor-pointer"
                 onClick={nextCodeExample}
               >
-                <Code className="w-6 h-6 text-teal-600 dark:text-blue-500 mb-2" />
+                <Code className="w-5 h-5 sm:w-6 sm:h-6 text-teal-600 dark:text-blue-500 mb-1 sm:mb-2" />
                 <h3 className="text-gray-900 dark:text-white font-medium mb-1">{t('codeDemos')}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm">
                   {t('interactiveReact')}
                 </p>
                 <div className="h-1 w-0 bg-gradient-to-r from-teal-500 to-green-500 dark:from-blue-700 dark:to-slate-800 mt-2 group-hover:w-full transition-all duration-500"></div>
               </div>
             </div>
             
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-3 sm:gap-4">
               <a
                 href="#projects"
-                className="relative px-8 py-3 rounded-lg bg-gradient-to-r from-emerald-500/90 to-green-600/90 dark:from-blue-700/90 dark:to-slate-700/90 text-white font-medium shadow-lg backdrop-blur-sm transition-all hover:-translate-y-1 overflow-hidden group z-10"
+                className="relative px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-lg bg-gradient-to-r from-emerald-500/90 to-green-600/90 dark:from-blue-700/90 dark:to-slate-700/90 text-white font-medium shadow-lg backdrop-blur-sm transition-all hover:-translate-y-1 overflow-hidden group z-10"
               >
                 {/* Effet de lueur animée */}
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-emerald-400/0 via-white/50 dark:via-blue-400/50 to-emerald-400/0 -translate-x-full animate-shimmer"></span>
@@ -902,20 +902,20 @@ export function Hero() {
                 {/* Effet de halo */}
                 <span className="absolute -inset-3 rounded-xl bg-gradient-to-r from-emerald-400/10 to-green-500/10 dark:from-blue-400/10 dark:to-blue-600/10 blur-xl"></span>
                 
-                <span className="relative z-10">{t('exploreExamples')}</span>
+                <span className="relative z-10 text-sm sm:text-base">{t('exploreExamples')}</span>
               </a>
               <a
                 href="https://github.com/ymostows/portfolio/"
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="px-8 py-3 rounded-lg bg-white/40 hover:bg-white/50 dark:bg-gray-900/40 dark:hover:bg-gray-900/50 text-gray-900 dark:text-white font-medium border border-gray-300/50 dark:border-gray-700/50 flex items-center gap-2 backdrop-blur-sm transition-all hover:-translate-y-1"
+                className="px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-lg bg-white/40 hover:bg-white/50 dark:bg-gray-900/40 dark:hover:bg-gray-900/50 text-gray-900 dark:text-white font-medium border border-gray-300/50 dark:border-gray-700/50 flex items-center gap-2 backdrop-blur-sm transition-all hover:-translate-y-1"
               >
-                <Github className="w-5 h-5" /> {t('viewSourceCode')}
+                <Github className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="text-sm sm:text-base">{t('viewSourceCode')}</span>
               </a>
             </div>
           </div>
           
-          <div className="relative">
+          <div className="relative mt-8 lg:mt-0">
             <div className="bg-white/70 dark:bg-gray-900/60 backdrop-blur-md border border-gray-300/70 dark:border-gray-700/50 rounded-xl p-2 shadow-xl">
               <div className="flex items-center justify-between gap-1.5 mb-4">
                 <div className="flex items-center gap-1.5">

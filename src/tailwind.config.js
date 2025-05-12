@@ -814,11 +814,10 @@ module.exports = {
       150: '1.5',
     },
     screens: {
-      'sm': '640px',
-      'md': '768px',
-      'tablet': '900px',
-      'lg': '1024px',
-      'xl': '1280px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
       '2xl': '1536px',
     },
     scrollMargin: ({ theme }) => ({
