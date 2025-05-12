@@ -5,6 +5,95 @@ import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { AnimationType, BackgroundAnimation, getAnimationCode } from './HeroAnimations';
 import { AnimationControls } from './AnimationControls';
 
+// Hook personnalisé pour calculer le padding dynamiquement en fonction de la taille d'écran exacte
+const useDynamicPadding = (debug = false) => {
+  const [paddingTop, setPaddingTop] = useState('4rem');
+  const [screenInfo, setScreenInfo] = useState({ width: 0, height: 0, padding: '0rem' });
+
+  useEffect(() => {
+    // Fonction pour calculer le padding en fonction de la largeur et hauteur exactes de l'écran
+    const calculatePadding = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      let calculatedPadding: number;
+      
+      // Corrections directes pour les dimensions problématiques spécifiques
+      
+      // Pour les écrans mobiles très étroits
+      if (width <= 320) {
+        calculatedPadding = 4.0;
+      } 
+      // Pour les téléphones/tablettes
+      else if (width <= 768) {
+        calculatedPadding = 4.0;
+      }
+      // Solution spéciale pour les tailles moyennes comme 770-858
+      else if (width > 768 && width <= 1000) {
+        calculatedPadding = 6.0;
+      }
+      // Solution spéciale pour environ 1612px (valeur explicitement basse)
+      else if (width >= 1550 && width <= 1650) {
+        calculatedPadding = 6.0;
+      }
+      // Solution spéciale pour écrans de bureau (valeur explicitement basse)
+      else if (width >= 1900 && width <= 2000) {
+        calculatedPadding = 0.5;
+      }
+      // Pour les autres écrans, utiliser une formule fluide simplifiée
+      else {
+        // Base de calcul simplifiée par tranches
+        if (width <= 1200) {
+          calculatedPadding = 6.0;
+        } else if (width <= 1400) {
+          calculatedPadding = 6.0;
+        } else if (width <= 1800) {
+          calculatedPadding = 6.0;
+        } else {
+          calculatedPadding = 6.0;
+        }
+        
+        // Ajustement final par la hauteur (les écrans plus courts doivent avoir moins de padding)
+        if (height < 700) {
+          calculatedPadding = Math.max(2.5, calculatedPadding - 0.5);
+        }
+      }
+      
+      // Arrondir à 2 décimales pour stabilité
+      calculatedPadding = Math.round(calculatedPadding * 100) / 100;
+      
+      // Mise à jour du padding
+      setPaddingTop(`${calculatedPadding}rem`);
+      
+      // Mise à jour des informations de debug si nécessaire
+      if (debug) {
+        setScreenInfo({ 
+          width, 
+          height,
+          padding: `${calculatedPadding}rem` 
+        });
+      }
+    };
+
+    // Calcul initial
+    calculatePadding();
+
+    // Recalculer le padding à chaque redimensionnement
+    const handleResize = () => {
+      calculatePadding();
+    };
+    
+    window.addEventListener('resize', handleResize);
+
+    // Nettoyage
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [debug]);
+
+  // Retourner aussi les informations de debug pour affichage en mode développement
+  return { paddingTop, screenInfo };
+};
+
 // Fonction pour la coloration syntaxique - style VS Code
 const syntaxHighlight = (code: string): string => {
   // Simplement échapper le HTML et retourner le code sans coloration
@@ -520,6 +609,7 @@ export function Hero() {
   const { t } = useLanguage();
   const { isDark } = useTheme();
   const [isMobile, setIsMobile] = useState(false);
+  const { paddingTop, screenInfo } = useDynamicPadding(true);
 
   // Memoize code examples to avoid recreations on each render
   const codeExamples = useMemo(() => getCodeExamples(isDark), [isDark]);
@@ -833,8 +923,9 @@ export function Hero() {
   return (
     <section 
       id="home" 
-      className="relative flex justify-center items-center min-h-screen hero-padding-top z-10"
-    >
+      className="relative flex justify-center items-center min-h-screen z-10"
+      style={{ paddingTop }}
+    > 
       {/* Animation de fond en position fixed pour couvrir toute la page */}
       <BackgroundAnimation type={animationType} />
       

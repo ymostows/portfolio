@@ -576,9 +576,13 @@ video {
   --input: 185 50% 90%;
   --ring: 184 85% 43%;
   --radius: 0.5rem;
-  /* Padding dynamique pour le Hero */
-  --hero-padding-top: 4rem;
-  /* 16 * 0.25rem = 4rem (pt-16) */
+  /* Variables pour le padding dynamique */
+  --base-spacing: 0.25rem;
+  /* Unité de base Tailwind */
+  --hero-padding-base: 16;
+  /* Valeur de base (pt-16) */
+  --hero-padding-modifier: 0;
+  /* Modificateur basé sur l'écran */
 }
 
 .dark {
@@ -738,6 +742,10 @@ video {
   right: 0px;
 }
 
+.right-2 {
+  right: 0.5rem;
+}
+
 .right-3 {
   right: 0.75rem;
 }
@@ -784,6 +792,10 @@ video {
 
 .z-50 {
   z-index: 50;
+}
+
+.z-\[9999\] {
+  z-index: 9999;
 }
 
 .m-1 {
@@ -1666,6 +1678,10 @@ video {
 
 .bg-black\/60 {
   background-color: rgb(0 0 0 / 0.6);
+}
+
+.bg-black\/70 {
+  background-color: rgb(0 0 0 / 0.7);
 }
 
 .bg-blue-100 {
@@ -2800,40 +2816,47 @@ table {
   }
 }
 
-/* Media queries pour ajuster le padding du Hero */
+/* Media queries pour ajuster le modificateur de padding selon la taille d'écran */
 
 @media (min-width: 640px) {
   :root {
-    --hero-padding-top: 5rem;
-    /* 20 * 0.25rem = 5rem (pt-20) */
+    --hero-padding-modifier: 4;
+    /* +4 pour sm (20) */
   }
 }
 
 @media (min-width: 768px) {
   :root {
-    --hero-padding-top: 6rem;
-    /* 24 * 0.25rem = 6rem (pt-24) */
+    --hero-padding-modifier: 6;
+    /* +6 pour md (22) */
   }
 }
 
 @media (min-width: 1024px) {
   :root {
-    --hero-padding-top: 7rem;
-    /* 28 * 0.25rem = 7rem (pt-28) */
+    --hero-padding-modifier: 4;
+    /* +4 pour lg (20) */
   }
 }
 
 @media (min-width: 1280px) {
   :root {
-    --hero-padding-top: 8rem;
-    /* 32 * 0.25rem = 8rem (pt-32) */
+    --hero-padding-modifier: 0;
+    /* +0 pour xl (16) */
+  }
+}
+
+@media (min-width: 1536px) {
+  :root {
+    --hero-padding-modifier: -2;
+    /* -2 pour 2xl (14) */
   }
 }
 
 /* Classe utilitaire pour le padding dynamique du Hero */
 
 .hero-padding-top {
-  padding-top: var(--hero-padding-top);
+  padding-top: calc(var(--base-spacing) * (var(--hero-padding-base) + var(--hero-padding-modifier)));
 }
 
 html, body {
