@@ -23,7 +23,7 @@ export function Header() {
   
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 flex justify-center ${isMobile ? 'pt-4' : 'pt-6'}`}>
-      <nav className={`w-full max-w-[76rem] mx-4 ${isMobile ? 'py-4 px-4 mx-2' : 'py-5 px-8'} bg-white/50 dark:bg-black/30 backdrop-blur-sm border border-gray-300 dark:border-white/10 transition-all duration-300 rounded-xl shadow-sm`}>
+      <nav className={`w-full max-w-[76rem] mx-4 sm:mx-4 md:mx-6 ${isMobile ? 'py-4 px-4 mx-2' : 'py-4 sm:py-4 md:py-5 px-6 sm:px-6 md:px-8'} bg-white/50 dark:bg-black/30 backdrop-blur-sm border border-gray-300 dark:border-white/10 transition-all duration-300 rounded-xl shadow-sm`}>
         {isMobile && (
           // Version mobile optimisée
           <div className="flex items-center justify-between">

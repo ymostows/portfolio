@@ -78,8 +78,8 @@ const translations: TranslationMap = {
     fr: 'Exemples de code React interactifs'
   },
   'exploreExamples': {
-    en: 'Explore Examples',
-    fr: 'Explorer les Exemples'
+    en: 'My projects',
+    fr: 'Mes projets'
   },
   'viewSourceCode': {
     en: 'View Source Code',

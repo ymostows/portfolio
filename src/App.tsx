@@ -28,7 +28,7 @@ function AppContent() {
     <div className={`min-h-screen ${isDark ? 'dark' : ''}`}>
       <div className="min-h-screen transition-colors duration-500 bg-[hsl(var(--background))] text-[hsl(var(--foreground))] relative">
         <Header />
-        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-30 pt-2">
+        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 pt-2">
           <div className="flex flex-col space-y-12">
             <section className="w-full">
               <Hero />

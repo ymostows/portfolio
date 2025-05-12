@@ -1,4 +1,4 @@
-import { Github, Terminal, Code, Braces, MousePointer, ChevronsRight, Sparkles, Waves } from 'lucide-react';
+import { Github, Terminal, Code, Braces, MousePointer, ChevronsRight, Sparkles, Waves, Square } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 import { useTheme } from '../hooks/useTheme';
 import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
@@ -833,13 +833,13 @@ export function Hero() {
   return (
     <section 
       id="home" 
-      className="relative flex justify-center items-center min-h-screen pt-16 md:pt-24 lg:pt-8 z-10"
+      className="relative flex justify-center items-center min-h-screen pt-16 md:pt-24 tablet:pt-32 lg:pt-24 xl:pt-8 z-10"
     >
       {/* Animation de fond en position fixed pour couvrir toute la page */}
       <BackgroundAnimation type={animationType} />
       
       {/* Conteneur de contenu avec fond légèrement opaque pour contraste */}
-      <div className={`container relative mx-auto mt-4 pb-6 px-6 z-30 rounded-xl bg-white/80 dark:bg-black/30 backdrop-blur-sm shadow-lg border border-gray-200/50 dark:border-white/10`}>
+      <div className={`container relative mx-auto mt-8 md:mt-12 tablet:mt-16 lg:mt-6 xl:mt-4 pb-6 px-6 z-30 rounded-xl bg-white/80 dark:bg-black/30 backdrop-blur-sm shadow-lg border border-gray-200/50 dark:border-white/10`}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 pt-8">
@@ -891,9 +891,18 @@ export function Hero() {
             <div className="flex gap-4">
               <a
                 href="#projects"
-                className="px-8 py-3 rounded-lg bg-gradient-to-r from-emerald-500/80 to-green-600/80 dark:from-blue-700/80 dark:to-slate-700/80 text-white font-medium hover:shadow-lg hover:from-emerald-500/90 hover:to-green-600/90 dark:hover:from-blue-700/90 dark:hover:to-slate-700/90 backdrop-blur-sm transition-all hover:-translate-y-1"
+                className="relative px-8 py-3 rounded-lg bg-gradient-to-r from-emerald-500/90 to-green-600/90 dark:from-blue-700/90 dark:to-slate-700/90 text-white font-medium shadow-lg backdrop-blur-sm transition-all hover:-translate-y-1 overflow-hidden group z-10"
               >
-                {t('exploreExamples')}
+                {/* Effet de lueur animée */}
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-emerald-400/0 via-white/50 dark:via-blue-400/50 to-emerald-400/0 -translate-x-full animate-shimmer"></span>
+                
+                {/* Effet de pulsation */}
+                <span className="absolute -inset-1 rounded-xl bg-gradient-to-r from-emerald-400/30 to-green-500/30 dark:from-blue-400/30 dark:to-blue-600/30 blur-md animate-pulse"></span>
+                
+                {/* Effet de halo */}
+                <span className="absolute -inset-3 rounded-xl bg-gradient-to-r from-emerald-400/10 to-green-500/10 dark:from-blue-400/10 dark:to-blue-600/10 blur-xl"></span>
+                
+                <span className="relative z-10">{t('exploreExamples')}</span>
               </a>
               <a
                 href="https://github.com/ymostows/portfolio/"
@@ -1004,7 +1013,7 @@ export function Hero() {
                       }`}
                       title={t('animatedSquares')}
                     >
-                      <Waves className="w-4 h-4" />
+                      <Square className="w-4 h-4" />
                       <span className="text-sm font-medium">{t('squares')}</span>
                     </button>
                     
