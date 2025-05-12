@@ -576,6 +576,9 @@ video {
   --input: 185 50% 90%;
   --ring: 184 85% 43%;
   --radius: 0.5rem;
+  /* Padding dynamique pour le Hero */
+  --hero-padding-top: 4rem;
+  /* 16 * 0.25rem = 4rem (pt-16) */
 }
 
 .dark {
@@ -869,10 +872,6 @@ video {
 
 .mt-12 {
   margin-top: 3rem;
-}
-
-.mt-16 {
-  margin-top: 4rem;
 }
 
 .mt-2 {
@@ -1301,6 +1300,10 @@ video {
 
 .gap-1\.5 {
   gap: 0.375rem;
+}
+
+.gap-12 {
+  gap: 3rem;
 }
 
 .gap-2 {
@@ -2226,6 +2229,10 @@ video {
   padding-top: 1rem;
 }
 
+.pt-6 {
+  padding-top: 1.5rem;
+}
+
 .pt-8 {
   padding-top: 2rem;
 }
@@ -2791,6 +2798,42 @@ table {
   table {
     display: table;
   }
+}
+
+/* Media queries pour ajuster le padding du Hero */
+
+@media (min-width: 640px) {
+  :root {
+    --hero-padding-top: 5rem;
+    /* 20 * 0.25rem = 5rem (pt-20) */
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --hero-padding-top: 6rem;
+    /* 24 * 0.25rem = 6rem (pt-24) */
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --hero-padding-top: 7rem;
+    /* 28 * 0.25rem = 7rem (pt-28) */
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --hero-padding-top: 8rem;
+    /* 32 * 0.25rem = 8rem (pt-32) */
+  }
+}
+
+/* Classe utilitaire pour le padding dynamique du Hero */
+
+.hero-padding-top {
+  padding-top: var(--hero-padding-top);
 }
 
 html, body {
@@ -3782,10 +3825,6 @@ html, body {
     margin-top: 0.5rem;
   }
 
-  .sm\:mt-20 {
-    margin-top: 5rem;
-  }
-
   .sm\:mt-3 {
     margin-top: 0.75rem;
   }
@@ -4043,18 +4082,6 @@ html, body {
 }
 
 @media (min-width: 1024px) {
-  .lg\:col-span-2 {
-    grid-column: span 2 / span 2;
-  }
-
-  .lg\:col-span-3 {
-    grid-column: span 3 / span 3;
-  }
-
-  .lg\:mt-24 {
-    margin-top: 6rem;
-  }
-
   .lg\:w-1\/3 {
     width: 33.333333%;
   }
@@ -4071,16 +4098,8 @@ html, body {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .lg\:grid-cols-5 {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-
   .lg\:flex-row {
     flex-direction: row;
-  }
-
-  .lg\:gap-12 {
-    gap: 3rem;
   }
 
   .lg\:px-8 {

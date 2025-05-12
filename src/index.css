@@ -25,6 +25,9 @@
     --input: 185 50% 90%;
     --ring: 184 85% 43%;
     --radius: 0.5rem;
+    
+    /* Padding dynamique pour le Hero */
+    --hero-padding-top: 4rem; /* 16 * 0.25rem = 4rem (pt-16) */
   }
  
   .dark {
@@ -49,6 +52,36 @@
     --input: 240 30% 30%;
     --ring: 240 84% 67%;
   }
+}
+
+/* Media queries pour ajuster le padding du Hero */
+@media (min-width: 640px) {
+  :root {
+    --hero-padding-top: 5rem; /* 20 * 0.25rem = 5rem (pt-20) */
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --hero-padding-top: 6rem; /* 24 * 0.25rem = 6rem (pt-24) */
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --hero-padding-top: 7rem; /* 28 * 0.25rem = 7rem (pt-28) */
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --hero-padding-top: 8rem; /* 32 * 0.25rem = 8rem (pt-32) */
+  }
+}
+
+/* Classe utilitaire pour le padding dynamique du Hero */
+.hero-padding-top {
+  padding-top: var(--hero-padding-top);
 }
 
 html, body {
