@@ -39,7 +39,7 @@ const useDynamicPadding = (debug = false) => {
       else if (width >= 1900 && width <= 2000) {
         calculatedPadding = 0.5;
       }
-      // Pour les autres écrans, utiliser une formule fluide simplifiée
+      // Pour les autres écrans, utiliser une formule fluide simplifiée.
       else {
         // Base de calcul simplifiée par tranches
         if (width <= 1200) {
