@@ -117,7 +117,7 @@ const generateId = () => `gradient-${Math.random().toString(36).substr(2, 9)}`;
 
 export function About() {
   const { t } = useLanguage();
-  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+  const [expandedCategory, setExpandedCategory] = useState<string | null>('frontEnd');
   const { isDark } = useTheme();
   const categoryRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
   const contentRef = useRef<HTMLDivElement>(null);

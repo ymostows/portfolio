@@ -55,7 +55,7 @@ const translations: TranslationMap = {
   },
   'heroDescription': {
     en: 'I enjoy crafting complete web applications that are both interactive and intuitive.',
-    fr: 'J’aime concevoir des applications web complètes, à la fois interactives et intuitives.'
+    fr: "J'aime concevoir des applications web complètes, à la fois interactives et intuitives."
   },
   'iCode': {
     en: 'I code',
@@ -76,6 +76,18 @@ const translations: TranslationMap = {
   'interactiveReact': {
     en: 'Interactive React code examples',
     fr: 'Exemples de code React interactifs'
+  },
+  'showAnimationCode': {
+    en: 'Show Animation Code',
+    fr: 'Voir le Code d\'Animation'
+  },
+  'sourceCode': {
+    en: 'Source Code',
+    fr: 'Code Source'
+  },
+  'seeAnimationCode': {
+    en: 'View animation implementation',
+    fr: 'Voir l\'implémentation de l\'animation'
   },
   'exploreExamples': {
     en: 'My projects',

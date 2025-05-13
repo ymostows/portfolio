@@ -566,112 +566,100 @@ export function Projects() {
       
       {/* Modal de prévisualisation */}
       {isPreviewOpen && activeProject && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 md:p-8">
-          <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
-            <button 
-              onClick={closePreview}
-              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 text-gray-800 dark:text-white transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center">
+          <div className="relative bg-white/5 dark:bg-gray-900/5 rounded-2xl shadow-2xl max-w-[65vw] w-full h-[48vh] overflow-hidden flex">
+            <div className="absolute top-4 right-4 z-50 flex gap-2">
+              {activeProject.isGif && (
+                <a 
+                  href={activeProject.screenshot}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-full bg-white/20 dark:bg-gray-800/40 hover:bg-white/30 dark:hover:bg-gray-800/60 text-white transition-colors"
+                  title="Voir en plein écran"
+                >
+                  <ExternalLink className="w-5 h-5" />
+                </a>
+              )}
+              <button 
+                onClick={closePreview}
+                className="p-2 rounded-full bg-white/20 dark:bg-gray-800/40 hover:bg-white/30 dark:hover:bg-gray-800/60 text-white transition-colors"
+                title="Fermer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
             
-            <div className="max-h-[90vh] overflow-y-auto">
-              <div className="relative">
-                <div className="h-48 md:h-64 overflow-hidden bg-gray-100 dark:bg-gray-800">
-                  <img 
-                    src={activeProject.screenshot} 
-                    alt={activeProject.title} 
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                </div>
-                
-                <div className="absolute bottom-4 left-6 right-6 text-white">
-                  <h2 className="text-3xl font-bold">
+            <div className="flex-1 h-full bg-black flex items-center justify-center">
+              <img 
+                src={activeProject.screenshot} 
+                alt={activeProject.title} 
+                className="w-full h-full object-contain"
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              />
+            </div>
+            
+            <div className="w-80 bg-white dark:bg-gray-900 h-full rounded-t-none rounded-b-2xl">
+              <div className="p-4 flex flex-col h-full justify-between">
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                     {language === 'fr' && activeProject.title_fr ? activeProject.title_fr : activeProject.title}
                   </h2>
-                  {activeProject.year && (
-                    <div className="px-3 py-1 bg-gray-100/20 backdrop-blur-sm text-white text-xs font-medium rounded-full flex items-center gap-1 mt-2 w-fit">
+                  
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-1 text-gray-600 dark:text-gray-300 text-xs">
                       <Calendar className="w-3 h-3" />
-                      {activeProject.year}
+                      <span>{activeProject.year}</span>
                     </div>
-                  )}
-                </div>
-              </div>
-              
-              <div className="p-6 md:p-8">
-                <div className="flex flex-col lg:flex-row gap-8">
-                  <div className="lg:w-2/3">
-                    <div className="mb-6">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{t('aboutProject')}</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
-                        {language === 'fr' && activeProject.description_fr ? activeProject.description_fr : activeProject.description}
-                      </p>
-                    </div>
-                    
-                    <div className="mb-6">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{t('technologies')}</h3>
-                      <div className="flex flex-wrap gap-2">
-                        {activeProject.tech.map(tech => (
-                          <span 
-                            key={tech} 
-                            className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-lg text-gray-700 dark:text-gray-300 text-sm"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="flex items-center gap-1 text-gray-600 dark:text-gray-300 text-xs">
+                      <Github className="w-3 h-3" />
+                      <span>{activeProject.owner}</span>
                     </div>
                   </div>
                   
-                  <div className="lg:w-1/3 space-y-4 bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl">
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{t('projectDetails')}</h3>
-                      
-                      <div className="space-y-3">
-                        <div className="flex justify-between">
-                          <span className="text-gray-600 dark:text-gray-400">{t('owner')}</span>
-                          <span className="text-gray-900 dark:text-white font-medium">{activeProject.owner}</span>
-                        </div>
-                        
-                        <div className="flex justify-between">
-                          <span className="text-gray-600 dark:text-gray-400">{t('visibility')}</span>
-                          <span className="text-gray-900 dark:text-white font-medium">{activeProject.isPublic ? t('public') : t('private')}</span>
-                        </div>
-                        
-                        {activeProject.year && (
-                          <div className="flex justify-between">
-                            <span className="text-gray-600 dark:text-gray-400">{t('year')}</span>
-                            <span className="text-gray-900 dark:text-white font-medium">{activeProject.year}</span>
-                          </div>
-                        )}
-                        
-                        <div className="pt-4 flex flex-col gap-3">
-                          <a 
-                            href={activeProject.github} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 bg-emerald-600 dark:bg-blue-700 hover:bg-emerald-700 dark:hover:bg-blue-800 text-white rounded-lg transition-colors w-full justify-center"
-                          >
-                            <Github className="w-4 h-4" />
-                            <span>{t('viewOnGitHub')}</span>
-                          </a>
-                          
-                          {activeProject.demo && (
-                            <a 
-                              href={activeProject.demo} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-lg transition-colors border border-gray-300 dark:border-gray-600 w-full justify-center"
-                            >
-                              <ExternalLink className="w-4 h-4" />
-                              <span>{t('liveDemo')}</span>
-                            </a>
-                          )}
-                        </div>
-                      </div>
+                  <div className="mb-3">
+                    <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">{t('aboutProject')}</h3>
+                    <p className="text-gray-700 dark:text-gray-300 text-xs line-clamp-3">
+                      {language === 'fr' && activeProject.description_fr ? activeProject.description_fr : activeProject.description}
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">{t('technologies')}</h3>
+                    <div className="flex flex-wrap gap-1">
+                      {activeProject.tech.map(tech => (
+                        <span 
+                          key={tech} 
+                          className="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300 text-xs"
+                        >
+                          {tech}
+                        </span>
+                      ))}
                     </div>
                   </div>
+                </div>
+                
+                <div className="pt-3 border-t border-gray-200 dark:border-gray-800 rounded-t-lg bg-gray-50 dark:bg-gray-800/50 -mx-4 -mb-4 p-4">
+                  <a 
+                    href={activeProject.github} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-1 w-full px-3 py-1.5 bg-emerald-600 dark:bg-blue-700 hover:bg-emerald-700 dark:hover:bg-blue-800 text-white rounded-lg transition-colors mb-2 text-sm"
+                  >
+                    <Github className="w-4 h-4" />
+                    <span>{t('viewOnGitHub')}</span>
+                  </a>
+                  
+                  {activeProject.demo && (
+                    <a 
+                      href={activeProject.demo} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-1 w-full px-3 py-1.5 bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-lg transition-colors border border-gray-300 dark:border-gray-700 text-sm"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span>{t('liveDemo')}</span>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

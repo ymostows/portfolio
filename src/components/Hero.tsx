@@ -1,4 +1,4 @@
-import { Github, Terminal, Code, Braces, MousePointer, ChevronsRight, Sparkles, Waves, Square } from 'lucide-react';
+import { Github, Terminal, Code, Braces, MousePointer, ChevronsRight, Sparkles, Waves, Square, Calendar, Eye } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 import { useTheme } from '../hooks/useTheme';
 import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
@@ -407,7 +407,7 @@ console.log("Default animation")`;
   }
 };
 
-const skills = ['TypeScript', 'React', 'Node.js', 'C++', 'Docker', 'Git'];
+const skills = ['TypeScript', 'React', 'Node.js', 'C++', 'JavaScript', 'Python', 'C', 'Next.js']
 
 // Exemples de code guidés avec des animations - utilisés avec useMemo pour éviter les re-créations
 const getCodeExamples = (isDark: boolean) => [
@@ -606,7 +606,7 @@ class Symbol {
 }
 
 export function Hero() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { isDark } = useTheme();
   const [isMobile, setIsMobile] = useState(false);
   const { paddingTop, screenInfo } = useDynamicPadding(true);
@@ -954,28 +954,142 @@ export function Hero() {
             
             {/* Interactive Skill Modules */}
             <div className="grid grid-cols-2 gap-4 mb-8">
-              <div 
-                className="bg-white/70 dark:bg-gray-900/50 backdrop-blur-sm p-4 rounded-xl border border-gray-300/70 dark:border-gray-700/50 hover:border-emerald-500/40 dark:hover:border-blue-700/40 transition-all group cursor-pointer"
-                onClick={() => setAnimationType('matrix')}
-              >
-                <MousePointer className="w-6 h-6 text-emerald-600 dark:text-blue-600 mb-2" />
-                <h3 className="text-gray-900 dark:text-white font-medium mb-1">{t('interactiveBackground')}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  {t('animatedNetwork')}
-                </p>
-                <div className="h-1 w-0 bg-gradient-to-r from-emerald-500 to-green-500 dark:from-blue-800 dark:to-slate-800 mt-2 group-hover:w-full transition-all duration-500"></div>
+              {/* First Card - ft_transcendance */}
+              <div className="group relative overflow-hidden bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm rounded-xl border border-gray-300/70 dark:border-gray-700/50 shadow-sm hover:shadow-xl transition-all duration-300">
+                {/* Badge */}
+                <div className="absolute top-3 left-3 z-10 px-2 py-1 bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-xs font-medium rounded-full flex items-center gap-1">
+                  <Sparkles className="w-3 h-3" />
+                  {t('featured')}
+                </div>
+                
+                {/* Year */}
+                <div className="absolute top-3 right-3 z-10 px-2 py-1 bg-gray-100 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-full flex items-center gap-1">
+                  <Calendar className="w-3 h-3" />
+                  2025
+                </div>
+                
+                {/* Image de couverture */}
+                <div className="h-24 overflow-hidden relative">
+                  <img 
+                    src="/gifs/pong-game.gif" 
+                    alt="ft_transcendance" 
+                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                  />
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent"></div>
+                  
+                  <div className="absolute bottom-0 left-0 right-0 p-2 flex flex-col">
+                    <h3 className="text-lg font-bold text-white drop-shadow-md">
+                      ft_transcendence42
+                    </h3>
+                  </div>
+                </div>
+                
+                <div className="p-3">
+                  {/* Description */}
+                  <p className="text-gray-600 dark:text-gray-400 text-xs mb-2 line-clamp-2">
+                    {language === 'fr' 
+                      ? "Le projet final du tronc commun de 42, ft_transcendence, est le projet ultime de développement web. Il met au défi les étudiants de construire une application web Pong multijoueur en temps réel."
+                      : "The Final Boss of 42's Common Core ft_transcendence is the ultimate web development project at the end of the 42 Common Core. It challenges students to build a real-time, multiplayer Pong web application."}
+                  </p>
+                  
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-1 mb-2">
+                    <span className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300 text-xs">
+                      TypeScript
+                    </span>
+                    <span className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300 text-xs">
+                      Tailwind CSS
+                    </span>
+                    <span className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300 text-xs">
+                      NodeJS
+                    </span>
+                  </div>
+                  
+                  {/* Action button */}
+                  <div className="flex justify-between items-center mt-1">
+                    <div className="text-xs text-gray-600 dark:text-gray-400 flex items-center gap-1">
+                      <Github className="w-3 h-3" />
+                      RuddyRisselin
+                    </div>
+                    <a 
+                      href="#projects"
+                      className="inline-flex items-center gap-1 text-xs px-2 py-1 bg-blue-600/90 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                    >
+                      <Eye className="w-3 h-3" />
+                      <span>{t('view')}</span>
+                    </a>
+                  </div>
+                </div>
               </div>
               
-              <div 
-                className="bg-white/70 dark:bg-gray-900/50 backdrop-blur-sm p-4 rounded-xl border border-gray-300/70 dark:border-gray-700/50 hover:border-teal-500/40 dark:hover:border-blue-700/40 transition-all group cursor-pointer"
-                onClick={nextCodeExample}
-              >
-                <Code className="w-6 h-6 text-teal-600 dark:text-blue-500 mb-2" />
-                <h3 className="text-gray-900 dark:text-white font-medium mb-1">{t('codeDemos')}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  {t('interactiveReact')}
-                </p>
-                <div className="h-1 w-0 bg-gradient-to-r from-teal-500 to-green-500 dark:from-blue-700 dark:to-slate-800 mt-2 group-hover:w-full transition-all duration-500"></div>
+              {/* Second Card - invoice-creator */}
+              <div className="group relative overflow-hidden bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm rounded-xl border border-gray-300/70 dark:border-gray-700/50 shadow-sm hover:shadow-xl transition-all duration-300">
+                {/* Badge */}
+                <div className="absolute top-3 left-3 z-10 px-2 py-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xs font-medium rounded-full flex items-center gap-1">
+                  <Sparkles className="w-3 h-3" />
+                  {t('featured')}
+                </div>
+                
+                {/* Year */}
+                <div className="absolute top-3 right-3 z-10 px-2 py-1 bg-gray-100 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-full flex items-center gap-1">
+                  <Calendar className="w-3 h-3" />
+                  2025
+                </div>
+                
+                {/* Image de couverture */}
+                <div className="h-24 overflow-hidden relative">
+                  <img 
+                    src="/gifs/invoice-creator.gif" 
+                    alt="invoice-creator" 
+                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                  />
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent"></div>
+                  
+                  <div className="absolute bottom-0 left-0 right-0 p-2 flex flex-col">
+                    <h3 className="text-lg font-bold text-white drop-shadow-md">
+                      {language === 'fr' ? "Générateur de factures" : "InvoiceCreator"}
+                    </h3>
+                  </div>
+                </div>
+                
+                <div className="p-3">
+                  {/* Description */}
+                  <p className="text-gray-600 dark:text-gray-400 text-xs mb-2 line-clamp-2">
+                    {language === 'fr' 
+                      ? "Générateur de factures est un projet personnel construit avec React pour pratiquer et apprendre les concepts modernes du développement web."
+                      : "InvoiceCreator is a personal project built with React to practice and learn modern web development concepts."}
+                  </p>
+                  
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-1 mb-2">
+                    <span className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300 text-xs">
+                      React
+                    </span>
+                    <span className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300 text-xs">
+                      Workflow n8n
+                    </span>
+                    <span className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded-md text-gray-700 dark:text-gray-300 text-xs">
+                      Tailwind CSS
+                    </span>
+                  </div>
+                  
+                  {/* Action button */}
+                  <div className="flex justify-between items-center mt-1">
+                    <div className="text-xs text-gray-600 dark:text-gray-400 flex items-center gap-1">
+                      <Github className="w-3 h-3" />
+                      ymostows
+                    </div>
+                    <a 
+                      href="#projects"
+                      className="inline-flex items-center gap-1 text-xs px-2 py-1 bg-blue-600/90 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                    >
+                      <Eye className="w-3 h-3" />
+                      <span>{t('view')}</span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
             

@@ -10,13 +10,13 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className={`w-full rounded-b-lg py-5 relative ${
+    <footer className={`w-full rounded-t-lg py-5 relative ${
       isDark 
         ? 'bg-black/30 border border-white/10 backdrop-blur-sm dark:shadow-none'
         : 'bg-white/30 border border-gray-300 backdrop-blur-sm'
     }`} style={{ position: 'relative', zIndex: 50 }}>
       {/* Bordure supérieure */}
-      <div className={`absolute top-0 left-0 right-0 h-[1px] ${
+      <div className={`rounded-t-lg absolute top-0 left-0 right-0 h-[1px] ${
         isDark 
           ? 'bg-gray-800' 
           : 'bg-gray-200'
